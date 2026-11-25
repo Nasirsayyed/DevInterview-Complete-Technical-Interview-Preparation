@@ -120,7 +120,7 @@ public sealed class FcmPushSender : IPushNotificationSender
         _credential = new Lazy<GoogleCredential?>(() =>
             string.IsNullOrEmpty(_options.CredentialsPath) || !File.Exists(_options.CredentialsPath)
                 ? null
-                : GoogleCredential.FromFile(_options.CredentialsPath).CreateScoped("https://www.googleapis.com/auth/firebase.messaging"));
+                : CredentialFactory.FromFile<ServiceAccountCredential>(_options.CredentialsPath).ToGoogleCredential().CreateScoped("https://www.googleapis.com/auth/firebase.messaging"));
     }
 
     public bool IsConfigured => !string.IsNullOrEmpty(_options.ProjectId) && _credential.Value is not null;

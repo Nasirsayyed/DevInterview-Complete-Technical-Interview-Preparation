@@ -40,3 +40,4 @@ captures/
 node_modules/
 dist/
 *.tsbuildinfo
+scripts/DatabaseSetup/output/

@@ -1,0 +1,12 @@
+**/bin
+**/obj
+**/node_modules
+**/dist
+**/build
+**/.gradle
+android
+admin
+.git
+**/*.user
+**/appsettings.*.local.json
+backend/src/DevInterview.API/uploads

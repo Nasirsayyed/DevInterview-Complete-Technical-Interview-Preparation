@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (.NET 8)
+    runs-on: ubuntu-latest
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          # Throw-away password for the CI container only.
+          MSSQL_SA_PASSWORD: Ci_Only_Passw0rd!
+        ports: ["1433:1433"]
+        options: >-
+          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Ci_Only_Passw0rd! -Q 'SELECT 1' || exit 1"
+          --health-interval 10s --health-timeout 5s --health-retries 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release
+      - name: Test (unit + integration, including SQL Server migrations)
+        env:
+          DEVINTERVIEW_TEST_SQLSERVER: Server=localhost,1433;User Id=sa;Password=Ci_Only_Passw0rd!;TrustServerCertificate=True
+        run: dotnet test --no-build -c Release --logger "trx;LogFilePrefix=results"
+      - name: Check the EF model has no pending changes
+        run: |
+          dotnet tool restore
+          dotnet ef migrations has-pending-model-changes -p src/DevInterview.Infrastructure -s src/DevInterview.API
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-test-results
+          path: backend/tests/**/TestResults/*.trx
+
+  android:
+    name: Android
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build and unit test (JVM + Robolectric)
+        run: ./gradlew assembleDebug testDebugUnitTest :domain:test --stacktrace
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-test-reports
+          path: android/**/build/reports/tests/
+
+  admin:
+    name: Admin panel
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

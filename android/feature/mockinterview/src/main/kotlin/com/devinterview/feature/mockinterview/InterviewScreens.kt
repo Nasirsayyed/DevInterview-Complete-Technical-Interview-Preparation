@@ -57,8 +57,13 @@ private fun AiUnavailableCard(status: AiStatus?, onUpgrade: () -> Unit) {
             Icon(Icons.Filled.Info, null, tint = DiTheme.colors.warning)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
-                Text(if (!status.available) "AI features are temporarily unavailable" else "Daily AI limit reached", style = MaterialTheme.typography.titleSmall)
-                Text(status.reason ?: "Upgrade to Premium for more AI interviews and evaluations.", style = MaterialTheme.typography.bodySmall)
+                Text(when {
+                    !status.available -> "AI features are temporarily unavailable"
+                    !status.isPremium -> "AI interviews and feedback are Premium features"
+                    else -> "Today's AI limit is used up"
+                }, style = MaterialTheme.typography.titleSmall)
+                Text(status.reason ?: if (!status.isPremium) "Upgrade to practise with the AI interviewer, answer evaluator and code reviewer." else "Your limit resets tomorrow.",
+                    style = MaterialTheme.typography.bodySmall)
             }
         }
         if (status.available && !status.isPremium) TextButton(onClick = onUpgrade) { Text("See Premium") }

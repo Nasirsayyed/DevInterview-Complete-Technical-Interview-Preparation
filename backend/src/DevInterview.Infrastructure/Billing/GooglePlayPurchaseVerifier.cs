@@ -34,7 +34,7 @@ public sealed class GooglePlayPurchaseVerifier : IPurchaseVerifier
         _service = new Lazy<AndroidPublisherService?>(() =>
         {
             if (string.IsNullOrEmpty(_options.ServiceAccountPath) || !File.Exists(_options.ServiceAccountPath)) return null;
-            var credential = GoogleCredential.FromFile(_options.ServiceAccountPath).CreateScoped(AndroidPublisherService.Scope.Androidpublisher);
+            var credential = CredentialFactory.FromFile<ServiceAccountCredential>(_options.ServiceAccountPath).ToGoogleCredential().CreateScoped(AndroidPublisherService.Scope.Androidpublisher);
             return new AndroidPublisherService(new BaseClientService.Initializer { HttpClientInitializer = credential, ApplicationName = "DevInterview" });
         });
     }

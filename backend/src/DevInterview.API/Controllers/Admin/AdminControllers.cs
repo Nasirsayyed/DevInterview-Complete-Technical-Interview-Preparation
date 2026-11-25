@@ -115,7 +115,7 @@ public sealed class AdminContentController : ApiControllerBase
     public async Task<ActionResult<ApiResponse<object>>> Resolve(Guid id, ResolveReportRequest r, CancellationToken ct) { await _content.ResolveReportAsync(id, r, ct); return Done("Updated."); }
 }
 
-/// <summary>Quizzes, coding challenges & test cases, learning paths, flashcards and companies.</summary>
+/// <summary>Quizzes, coding challenges &amp; test cases, learning paths, flashcards and companies.</summary>
 [ApiVersion("1.0")]
 [Authorize(Policy = Policies.AdminPanel)]
 [Route("api/v{version:apiVersion}/admin")]
@@ -176,7 +176,7 @@ public sealed class AdminOperationsController : ApiControllerBase
     public async Task<ActionResult<ApiResponse<PagedResult<AdminUserDto>>>> Users([FromQuery] AdminUserQuery q, CancellationToken ct) => Success(await _ops.GetUsersAsync(q, ct));
 
     [HttpGet("users/{id:guid}"), Authorize(Policy = Policies.AdminOnly)]
-    public async Task<ActionResult<ApiResponse<AdminUserDto>>> User(Guid id, CancellationToken ct) => Success(await _ops.GetUserAsync(id, ct));
+    public async Task<ActionResult<ApiResponse<AdminUserDto>>> GetUser(Guid id, CancellationToken ct) => Success(await _ops.GetUserAsync(id, ct));
 
     [HttpPut("users/{id:guid}/roles"), Authorize(Policy = Policies.AdminOnly)]
     public async Task<ActionResult<ApiResponse<AdminUserDto>>> Roles(Guid id, UpdateUserRolesRequest r, CancellationToken ct) => Success(await _ops.UpdateRolesAsync(id, r, _user.RequireUserId(), ct));
