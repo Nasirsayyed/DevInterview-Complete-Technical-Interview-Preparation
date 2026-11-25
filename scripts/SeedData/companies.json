@@ -1,0 +1,877 @@
+[
+ {
+  "name": "TCS",
+  "overview": "Tata Consultancy Services is a large Indian multinational IT services and consulting company that hires many graduates each year.",
+  "industry": "IT services",
+  "website": "https://www.tcs.com",
+  "difficulty": "Beginner",
+  "premium": false,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "TCS: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "TCS: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "TCS: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Infosys",
+  "overview": "Infosys is an Indian multinational IT services, consulting and outsourcing company with a large campus hiring programme.",
+  "industry": "IT services",
+  "website": "https://www.infosys.com",
+  "difficulty": "Beginner",
+  "premium": false,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "Infosys: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Infosys: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "Infosys: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Wipro",
+  "overview": "Wipro is an Indian multinational technology services and consulting company.",
+  "industry": "IT services",
+  "website": "https://www.wipro.com",
+  "difficulty": "Beginner",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "Wipro: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Wipro: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "Wipro: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Accenture",
+  "overview": "Accenture is a global professional services company providing consulting, technology and operations services.",
+  "industry": "Consulting",
+  "website": "https://www.accenture.com",
+  "difficulty": "Intermediate",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "Accenture: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Accenture: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "Accenture: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Cognizant",
+  "overview": "Cognizant is a multinational IT services and consulting company.",
+  "industry": "IT services",
+  "website": "https://www.cognizant.com",
+  "difficulty": "Beginner",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "Cognizant: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Cognizant: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "Cognizant: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Capgemini",
+  "overview": "Capgemini is a multinational consulting, technology services and digital transformation company headquartered in France.",
+  "industry": "Consulting",
+  "website": "https://www.capgemini.com",
+  "difficulty": "Intermediate",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "Capgemini: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Capgemini: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "Capgemini: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "HCLTech",
+  "overview": "HCLTech is an Indian multinational IT services and consulting company.",
+  "industry": "IT services",
+  "website": "https://www.hcltech.com",
+  "difficulty": "Beginner",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Online assessment",
+    "description": "Aptitude (quantitative, logical reasoning, verbal) and basic programming questions in a timed online test."
+   },
+   {
+    "name": "Technical interview",
+    "description": "Programming fundamentals, OOP, DBMS/SQL, a short coding exercise and discussion of academic or work projects."
+   },
+   {
+    "name": "Managerial / HR interview",
+    "description": "Communication, teamwork, relocation and shift flexibility, career goals and situational questions."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Programming fundamentals",
+    "description": "Loops, recursion, strings and arrays in your primary language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Object-oriented programming",
+    "description": "The four pillars, SOLID basics and simple class design.",
+    "tech": "oop-design"
+   },
+   {
+    "name": "SQL and DBMS",
+    "description": "Joins, keys, normalisation and simple queries.",
+    "tech": "sql-server"
+   },
+   {
+    "name": "Web basics",
+    "description": "HTTP, REST and the request lifecycle.",
+    "tech": "web-apis"
+   }
+  ],
+  "collections": [
+   {
+    "title": "HCLTech: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "cs-001",
+     "cs-006",
+     "oo-001",
+     "oo-002",
+     "oo-005",
+     "sq-001",
+     "sq-012",
+     "sq-020",
+     "an-004",
+     "ap-001",
+     "js-002",
+     "nw-001"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "HCLTech: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-reverse-words",
+     "ch-valid-palindrome",
+     "ch-first-unique-char",
+     "ch-climbing-stairs",
+     "ch-sql-second-salary"
+    ]
+   },
+   {
+    "title": "HCLTech: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Microsoft",
+  "overview": "Microsoft is a multinational technology company known for Windows, Azure, Microsoft 365 and developer tools such as .NET and Visual Studio.",
+  "industry": "Product / Cloud",
+  "website": "https://www.microsoft.com",
+  "difficulty": "Advanced",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Recruiter screen",
+    "description": "Background, motivation, role fit and logistics."
+   },
+   {
+    "name": "Coding rounds",
+    "description": "Data structures and algorithms problems solved live, with emphasis on clarifying, complexity analysis and clean code."
+   },
+   {
+    "name": "System design (experienced roles)",
+    "description": "Design a scalable service end to end and discuss trade-offs, bottlenecks and failure handling."
+   },
+   {
+    "name": "Behavioural interview",
+    "description": "Structured questions about past situations — prepare STAR stories on ownership, conflict, failure and impact."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Data structures & algorithms",
+    "description": "Arrays, hashing, trees, graphs and dynamic programming.",
+    "tech": "dsa"
+   },
+   {
+    "name": "System design",
+    "description": "Scalability, caching, partitioning and reliability.",
+    "tech": "system-design"
+   },
+   {
+    "name": "Language depth",
+    "description": "Concurrency, memory and the runtime of your main language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Behavioural",
+    "description": "Leadership, ownership and collaboration stories.",
+    "tech": null
+   }
+  ],
+  "collections": [
+   {
+    "title": "Microsoft: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "ds-004",
+     "ds-006",
+     "ds-012",
+     "ds-014",
+     "ds-016",
+     "sd-003",
+     "sd-006",
+     "sd-009",
+     "sd-012",
+     "cs-017",
+     "cs-020",
+     "os-002"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Microsoft: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-two-sum",
+     "ch-number-of-islands",
+     "ch-merge-intervals",
+     "ch-lcs",
+     "ch-sliding-window-max",
+     "ch-shortest-path"
+    ]
+   },
+   {
+    "title": "Microsoft: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Google",
+  "overview": "Google, a subsidiary of Alphabet, builds search, advertising, Android, Google Cloud and many large-scale consumer products.",
+  "industry": "Product / Cloud",
+  "website": "https://about.google",
+  "difficulty": "Expert",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Recruiter screen",
+    "description": "Background, motivation, role fit and logistics."
+   },
+   {
+    "name": "Coding rounds",
+    "description": "Data structures and algorithms problems solved live, with emphasis on clarifying, complexity analysis and clean code."
+   },
+   {
+    "name": "System design (experienced roles)",
+    "description": "Design a scalable service end to end and discuss trade-offs, bottlenecks and failure handling."
+   },
+   {
+    "name": "Behavioural interview",
+    "description": "Structured questions about past situations — prepare STAR stories on ownership, conflict, failure and impact."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Data structures & algorithms",
+    "description": "Arrays, hashing, trees, graphs and dynamic programming.",
+    "tech": "dsa"
+   },
+   {
+    "name": "System design",
+    "description": "Scalability, caching, partitioning and reliability.",
+    "tech": "system-design"
+   },
+   {
+    "name": "Language depth",
+    "description": "Concurrency, memory and the runtime of your main language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Behavioural",
+    "description": "Leadership, ownership and collaboration stories.",
+    "tech": null
+   }
+  ],
+  "collections": [
+   {
+    "title": "Google: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "ds-004",
+     "ds-006",
+     "ds-012",
+     "ds-014",
+     "ds-016",
+     "sd-003",
+     "sd-006",
+     "sd-009",
+     "sd-012",
+     "cs-017",
+     "cs-020",
+     "os-002"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Google: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-two-sum",
+     "ch-number-of-islands",
+     "ch-merge-intervals",
+     "ch-lcs",
+     "ch-sliding-window-max",
+     "ch-shortest-path"
+    ]
+   },
+   {
+    "title": "Google: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ },
+ {
+  "name": "Amazon",
+  "overview": "Amazon is a multinational technology company spanning e-commerce, Amazon Web Services, devices and streaming.",
+  "industry": "E-commerce / Cloud",
+  "website": "https://www.amazon.jobs",
+  "difficulty": "Expert",
+  "premium": true,
+  "rounds": [
+   {
+    "name": "Recruiter screen",
+    "description": "Background, motivation, role fit and logistics."
+   },
+   {
+    "name": "Coding rounds",
+    "description": "Data structures and algorithms problems solved live, with emphasis on clarifying, complexity analysis and clean code."
+   },
+   {
+    "name": "System design (experienced roles)",
+    "description": "Design a scalable service end to end and discuss trade-offs, bottlenecks and failure handling."
+   },
+   {
+    "name": "Behavioural interview",
+    "description": "Structured questions about past situations — prepare STAR stories on ownership, conflict, failure and impact."
+   }
+  ],
+  "topics": [
+   {
+    "name": "Data structures & algorithms",
+    "description": "Arrays, hashing, trees, graphs and dynamic programming.",
+    "tech": "dsa"
+   },
+   {
+    "name": "System design",
+    "description": "Scalability, caching, partitioning and reliability.",
+    "tech": "system-design"
+   },
+   {
+    "name": "Language depth",
+    "description": "Concurrency, memory and the runtime of your main language.",
+    "tech": "csharp"
+   },
+   {
+    "name": "Behavioural",
+    "description": "Leadership, ownership and collaboration stories.",
+    "tech": null
+   }
+  ],
+  "collections": [
+   {
+    "title": "Amazon: technical fundamentals practice",
+    "description": "Practice questions matching the topics this interview style emphasises.",
+    "kind": "Technical",
+    "questions": [
+     "ds-004",
+     "ds-006",
+     "ds-012",
+     "ds-014",
+     "ds-016",
+     "sd-003",
+     "sd-006",
+     "sd-009",
+     "sd-012",
+     "cs-017",
+     "cs-020",
+     "os-002"
+    ],
+    "challenges": []
+   },
+   {
+    "title": "Amazon: coding practice",
+    "description": "Coding challenges at the difficulty this interview style typically targets.",
+    "kind": "Coding",
+    "questions": [],
+    "challenges": [
+     "ch-two-sum",
+     "ch-number-of-islands",
+     "ch-merge-intervals",
+     "ch-lcs",
+     "ch-sliding-window-max",
+     "ch-shortest-path"
+    ]
+   },
+   {
+    "title": "Amazon: HR & behavioural preparation",
+    "description": "Use the AI mock interview (HR type) with these themes: motivation, teamwork, conflict, learning from failure.",
+    "kind": "Hr",
+    "questions": [],
+    "challenges": []
+   }
+  ]
+ }
+]

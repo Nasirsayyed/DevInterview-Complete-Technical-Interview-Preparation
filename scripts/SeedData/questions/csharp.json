@@ -1,0 +1,1199 @@
+[
+ {
+  "key": "cs-001",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Value types in C#",
+  "body": "Which of the following is a **value type** in C#?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "string",
+    "c": false,
+    "e": "string is a reference type (with value-like equality)."
+   },
+   {
+    "t": "int[]",
+    "c": false,
+    "e": "Arrays are always reference types, even arrays of value types."
+   },
+   {
+    "t": "DateTime",
+    "c": true,
+    "e": "DateTime is a struct, so it is a value type."
+   },
+   {
+    "t": "object",
+    "c": false,
+    "e": "object is the root reference type."
+   }
+  ],
+  "answer": "DateTime — it is a struct.",
+  "explanation": "Value types (structs, enums and the built-in numeric types) hold their data directly and are copied on assignment. Reference types (classes, arrays, delegates, string, object) hold a reference to an object on the managed heap. `DateTime`, `Guid`, `TimeSpan` and `decimal` are common BCL structs.",
+  "reference": null,
+  "tags": [
+   "types",
+   "struct"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-002",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "String immutability",
+  "body": "What does this code print?",
+  "code": "string a = \"hello\";\nstring b = a;\nb += \" world\";\nConsole.WriteLine(a);",
+  "lang": "csharp",
+  "options": [
+   {
+    "t": "hello",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "hello world",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It does not compile",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "An empty line",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "hello",
+  "explanation": "Strings are immutable. `b += \" world\"` creates a **new** string and assigns it to `b`; `a` still refers to the original \"hello\" instance. This is why repeated concatenation in loops should use `StringBuilder`.",
+  "reference": null,
+  "tags": [
+   "string",
+   "immutability"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-003",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "const vs readonly",
+  "body": "Which statement correctly describes `const` and `readonly` fields?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Both are evaluated at runtime and can be set in any method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "const values are compile-time constants copied into calling assemblies; readonly fields are assigned at runtime in their declaration or a constructor",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "readonly fields are implicitly static and const fields are per-instance",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "const can hold any reference type initialised with new",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "const = compile-time constant (implicitly static, baked into callers); readonly = set once at runtime (declaration or constructor).",
+  "explanation": "`const` must be a compile-time constant of a primitive, enum or string type and is implicitly static. Because its value is embedded into the IL of consuming assemblies, changing a public const requires recompiling consumers. `readonly` fields can be instance or static, can hold any type, and are assigned in the declaration or a constructor — useful for values known only at runtime such as configuration or injected dependencies.",
+  "reference": null,
+  "tags": [
+   "const",
+   "readonly"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-004",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "TrueFalse",
+  "difficulty": "Intermediate",
+  "title": "Parameterless struct constructors",
+  "body": "True or false: since C# 10 a `struct` may declare an explicit parameterless constructor.",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "True",
+    "c": true,
+    "e": "C# 10 added explicit parameterless constructors and field initializers for structs."
+   },
+   {
+    "t": "False",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "True.",
+  "explanation": "Before C# 10 structs always had an implicit parameterless constructor that zero-initialised all fields. C# 10 allows declaring one explicitly. Note that `default(MyStruct)` and array elements still bypass it and are zero-initialised.",
+  "reference": null,
+  "tags": [
+   "struct",
+   "csharp10"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cs-005",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Comparing strings with ==",
+  "body": "What does `==` compare when both operands are of type `string`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The memory addresses of the two strings",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Their character content, because string overloads the == operator",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Only their lengths",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Their hash codes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Their content — `string` overloads `==` to perform an ordinal value comparison.",
+  "explanation": "For most reference types `==` compares references, but `System.String` overloads `==` and `!=` to compare values (ordinal, case-sensitive). If one operand is typed as `object`, the overload is not used and the comparison becomes a reference comparison — a classic bug. Use `string.Equals(a, b, StringComparison.OrdinalIgnoreCase)` for case-insensitive checks.",
+  "reference": null,
+  "tags": [
+   "string",
+   "equality"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-006",
+  "tech": "csharp",
+  "category": "OOP in C#",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Interfaces vs abstract classes",
+  "body": "Which statement is true in modern C# (8.0 and later)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A class can inherit from several abstract classes",
+    "c": false,
+    "e": "C# supports single class inheritance only."
+   },
+   {
+    "t": "Interfaces can provide default method implementations but cannot declare instance fields",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Abstract classes cannot have constructors",
+    "c": false,
+    "e": "They can; constructors run when a derived class is instantiated."
+   },
+   {
+    "t": "Interface members are private by default",
+    "c": false,
+    "e": "Interface members are public by default."
+   }
+  ],
+  "answer": "Interfaces may have default implementations (C# 8+) but no instance state; a class inherits from one base class.",
+  "explanation": "Use an abstract class when related types share state and implementation; use interfaces to describe capabilities that unrelated types can implement (a class can implement many). Default interface methods help evolve interfaces without breaking implementers, but interfaces still cannot hold instance fields.",
+  "reference": null,
+  "tags": [
+   "interface",
+   "abstract-class"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-007",
+  "tech": "csharp",
+  "category": "OOP in C#",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "override vs new",
+  "body": "What does this program print?",
+  "code": "class A { public virtual string Name() => \"A\"; }\nclass B : A { public override string Name() => \"B\"; }\nclass C : A { public new string Name() => \"C\"; }\n\nA b = new B();\nA c = new C();\nConsole.WriteLine(b.Name() + c.Name());",
+  "lang": "csharp",
+  "options": [
+   {
+    "t": "BA",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "BC",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "AA",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "AC",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "BA",
+  "explanation": "`B.Name` **overrides** the virtual method, so a call through an `A` reference dispatches to `B` at runtime. `C.Name` uses `new`, which **hides** the base method: the call is bound at compile time to the static type `A`, so `A.Name` runs. Hiding with `new` rarely expresses the intent and usually indicates a design smell.",
+  "reference": null,
+  "tags": [
+   "polymorphism",
+   "virtual"
+  ],
+  "seconds": 90,
+  "premium": false
+ },
+ {
+  "key": "cs-008",
+  "tech": "csharp",
+  "category": "Collections & Generics",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Dictionary lookup complexity",
+  "body": "What is the average time complexity of `Dictionary<TKey, TValue>.TryGetValue`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "O(1)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n log n)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(1) on average.",
+  "explanation": "`Dictionary` is a hash table: the key's `GetHashCode` selects a bucket and `Equals` resolves collisions. With a good hash distribution lookups are O(1) on average; many colliding keys degrade it towards O(n). `SortedDictionary` (a red-black tree) gives O(log n) with ordered keys.",
+  "reference": null,
+  "tags": [
+   "dictionary",
+   "complexity"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cs-009",
+  "tech": "csharp",
+  "category": "Collections & Generics",
+  "type": "MultipleSelect",
+  "difficulty": "Intermediate",
+  "title": "Collections that enforce uniqueness",
+  "body": "Which collections **reject duplicate elements**? Select all that apply.",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "HashSet<T>",
+    "c": true,
+    "e": "Add returns false for duplicates."
+   },
+   {
+    "t": "SortedSet<T>",
+    "c": true,
+    "e": "Also a set, kept in sorted order."
+   },
+   {
+    "t": "List<T>",
+    "c": false,
+    "e": "Lists allow duplicates."
+   },
+   {
+    "t": "Queue<T>",
+    "c": false,
+    "e": "Queues allow duplicates."
+   }
+  ],
+  "answer": "HashSet<T> and SortedSet<T>.",
+  "explanation": "Set types model mathematical sets: `Add` returns `false` instead of inserting a duplicate. `HashSet<T>` offers O(1) average membership tests; `SortedSet<T>` keeps elements ordered with O(log n) operations. Dictionary keys are also unique.",
+  "reference": null,
+  "tags": [
+   "hashset",
+   "collections"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "cs-010",
+  "tech": "csharp",
+  "category": "Collections & Generics",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Generic variance",
+  "body": "Why does `IEnumerable<object> items = new List<string>();` compile, while `List<object> items = new List<string>();` does not?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "List<T> is a class and classes can never be converted",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "IEnumerable<T> is declared covariant (out T); List<T> is invariant because it also accepts T as input",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Because string is sealed",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The first line compiles only with an explicit cast",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "IEnumerable<out T> is covariant; List<T> is invariant.",
+  "explanation": "Covariance (`out T`) is safe when T only flows **out** of the type — you can read strings as objects. `List<T>` also lets you **write** T (`Add`), so treating a `List<string>` as `List<object>` would allow adding an `int`. Variance is supported only on interfaces and delegates, and only for reference type arguments.",
+  "reference": null,
+  "tags": [
+   "generics",
+   "covariance"
+  ],
+  "seconds": 90,
+  "premium": false
+ },
+ {
+  "key": "cs-011",
+  "tech": "csharp",
+  "category": "LINQ",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Deferred execution",
+  "body": "What does this code print?",
+  "code": "var numbers = new List<int> { 1, 2, 3 };\nvar query = numbers.Where(n => n > 1);\nnumbers.Add(4);\nConsole.WriteLine(query.Count());",
+  "lang": "csharp",
+  "options": [
+   {
+    "t": "2",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "3",
+    "c": true,
+    "e": "The query runs at Count(), after 4 was added: 2, 3, 4."
+   },
+   {
+    "t": "4",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "1",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "3",
+  "explanation": "Most LINQ operators (`Where`, `Select`, …) use **deferred execution**: they build a query that runs when enumerated. `Count()` enumerates after `4` was added, so the result is 3 (values 2, 3, 4). Call `ToList()` to snapshot results, and beware of enumerating an expensive query multiple times.",
+  "reference": null,
+  "tags": [
+   "linq",
+   "deferred-execution"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "cs-012",
+  "tech": "csharp",
+  "category": "LINQ",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Single() semantics",
+  "body": "What happens when `Single()` is called on a sequence that contains more than one element?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It returns the first element",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It returns the default value",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws InvalidOperationException",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It returns the last element",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "It throws InvalidOperationException.",
+  "explanation": "`Single()` asserts the sequence has **exactly one** element and throws if it is empty or has more. `SingleOrDefault()` returns default for an empty sequence but still throws for more than one. `First()` / `FirstOrDefault()` just take the first match. Use `Single` when duplicates would indicate a data bug you want to surface.",
+  "reference": null,
+  "tags": [
+   "linq"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-013",
+  "tech": "csharp",
+  "category": "LINQ",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "IQueryable vs IEnumerable",
+  "body": "What is the key difference between `IQueryable<T>` and `IEnumerable<T>`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "IQueryable is always faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "IQueryable builds an expression tree that a provider (e.g. EF Core) translates, such as into SQL; IEnumerable operators run as in-memory delegates",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "IEnumerable cannot be used with LINQ",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "IQueryable executes immediately while IEnumerable is deferred",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "IQueryable carries expression trees for a query provider to translate; IEnumerable executes LINQ in memory.",
+  "explanation": "With `IQueryable`, filters like `Where` become part of the SQL sent to the database. Calling `AsEnumerable()` or `ToList()` too early switches to LINQ-to-Objects, so subsequent filtering happens in memory after loading more rows than needed. Both are deferred.",
+  "reference": null,
+  "tags": [
+   "linq",
+   "ef-core",
+   "iqueryable"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-014",
+  "tech": "csharp",
+  "category": "Delegates & Events",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "What the event keyword adds",
+  "body": "Compared with a public delegate field, what does declaring a member with the `event` keyword change?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Events can only have one subscriber",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Outside code can only subscribe (+=) and unsubscribe (-=); only the declaring type can raise or reassign it",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Events are invoked asynchronously",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Events cannot be static",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "It encapsulates the delegate: external code may only += / -=.",
+  "explanation": "With a public delegate field, any caller could overwrite all subscribers with `=` or invoke the delegate. `event` restricts external access to add/remove accessors, enforcing the publisher/subscriber contract. Remember to unsubscribe from long-lived publishers to avoid memory leaks.",
+  "reference": null,
+  "tags": [
+   "events",
+   "delegates"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-015",
+  "tech": "csharp",
+  "category": "Delegates & Events",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Func delegate signature",
+  "body": "What does `Func<int, int, string>` represent?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A method taking a string and returning two ints",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A method taking two int parameters and returning a string",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A method taking three parameters and returning void",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "An event with three handlers",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Two int inputs, string return value — the last type argument of Func is the return type.",
+  "explanation": "`Func<..., TResult>` delegates return a value (last type parameter); `Action<...>` delegates return void; `Predicate<T>` returns bool. Lambdas like `(a, b) => (a + b).ToString()` convert to these delegate types.",
+  "reference": null,
+  "tags": [
+   "delegates",
+   "func"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cs-016",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "What await does",
+  "body": "When execution reaches `await` on a task that has **not** completed, what happens?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The current thread blocks until the task completes",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The method returns to its caller and the remainder runs as a continuation when the task completes",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A new thread is always created to run the rest of the method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "An exception is thrown",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Control returns to the caller; the rest of the method is scheduled as a continuation.",
+  "explanation": "`await` does not block. The compiler turns the method into a state machine; if the awaitable is incomplete, the method returns an incomplete Task and resumes later (on the captured SynchronizationContext if any, otherwise the thread pool). This frees the thread to serve other work — the main benefit for I/O-bound server code.",
+  "reference": null,
+  "tags": [
+   "async",
+   "await"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-017",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Sync-over-async deadlock",
+  "body": "Why can calling `.Result` on an incomplete task deadlock in a UI app or classic ASP.NET (with a synchronization context)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Because .Result is not thread-safe",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The blocked thread owns the synchronization context that the awaited continuation needs to resume on, so neither can proceed",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Because the task is garbage collected",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Because .Result always starts the task twice",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The continuation waits for the context the blocked thread is holding.",
+  "explanation": "The async method captured a single-threaded SynchronizationContext. `.Result` blocks that thread; when the awaited operation completes, the continuation is posted to the same context and never runs. ASP.NET Core has no SynchronizationContext, but blocking still wastes thread-pool threads and can cause starvation. Prefer async all the way; `ConfigureAwait(false)` in libraries.",
+  "reference": null,
+  "tags": [
+   "async",
+   "deadlock"
+  ],
+  "seconds": 90,
+  "premium": false
+ },
+ {
+  "key": "cs-018",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Running independent calls concurrently",
+  "body": "Which approach runs three independent I/O-bound calls concurrently?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "await each call one after another",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Start all three tasks, then await Task.WhenAll(t1, t2, t3)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Call .Wait() on each task in a loop",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Wrap each await in Task.Run",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Start the tasks first, then `await Task.WhenAll(...)`.",
+  "explanation": "Awaiting sequentially makes total latency the sum of all calls. Creating the tasks first lets the I/O overlap, so latency becomes roughly the slowest call. `Task.Run` is for CPU-bound work and adds nothing for I/O. Handle failures: `await Task.WhenAll` throws the first exception; inspect each task for details, and pass a CancellationToken.",
+  "reference": null,
+  "tags": [
+   "async",
+   "task-whenall"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "cs-019",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "When async void is acceptable",
+  "body": "When is an `async void` method appropriate?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "For any method that does not return a value",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Only for event handlers, because callers cannot await it or catch its exceptions",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "For CPU-bound work",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "For library entry points",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Event handlers only.",
+  "explanation": "An `async void` method cannot be awaited, so the caller cannot know when it completes, and exceptions are raised on the SynchronizationContext (often crashing the process). Use `async Task` everywhere else.",
+  "reference": null,
+  "tags": [
+   "async"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "cs-020",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "await inside lock",
+  "body": "Why does the compiler reject `await` inside a `lock` block?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "lock statements are deprecated",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Monitor-based locks are thread-affine; after await the continuation may run on another thread that does not own the lock",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Because await always throws inside try blocks",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It is allowed; the compiler accepts it",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Monitor locks must be released by the acquiring thread; await may resume elsewhere (error CS1996).",
+  "explanation": "Holding a lock across an await could also block other threads for unbounded time. For async mutual exclusion use `SemaphoreSlim(1, 1)` with `await WaitAsync()` and release in `finally`.",
+  "reference": null,
+  "tags": [
+   "async",
+   "lock",
+   "semaphore"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-021",
+  "tech": "csharp",
+  "category": "Memory Management",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Large Object Heap",
+  "body": "Which objects are allocated on the Large Object Heap (LOH) in .NET?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Objects of 85,000 bytes or more",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "All arrays",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Objects that survive generation 1",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "All strings",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Objects of at least 85,000 bytes.",
+  "explanation": "The LOH holds large objects (≥ 85,000 bytes, typically big arrays/strings). It is collected with generation 2 and is not compacted by default, so frequent large allocations cause fragmentation and expensive gen-2 GCs. Pool buffers with `ArrayPool<T>` to reduce LOH pressure.",
+  "reference": null,
+  "tags": [
+   "gc",
+   "loh"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "cs-022",
+  "tech": "csharp",
+  "category": "Memory Management",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "using declarations",
+  "body": "What does a `using` statement or declaration guarantee for an `IDisposable`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The object is garbage collected immediately",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Dispose is called when the scope exits, even if an exception is thrown",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The object can no longer be referenced",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The object's finalizer is suppressed automatically",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Dispose runs at scope exit (compiled to try/finally).",
+  "explanation": "`using` compiles to a try/finally that calls `Dispose()`. It releases unmanaged resources (file handles, sockets, DB connections) deterministically; it does not free managed memory. Use `await using` for `IAsyncDisposable`.",
+  "reference": null,
+  "tags": [
+   "idisposable",
+   "using"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-023",
+  "tech": "csharp",
+  "category": "Memory Management",
+  "type": "TrueFalse",
+  "difficulty": "Advanced",
+  "title": "GC and Dispose",
+  "body": "True or false: the garbage collector automatically calls `Dispose()` on unreachable objects that implement `IDisposable`.",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "True",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "False",
+    "c": true,
+    "e": "The GC only runs finalizers; Dispose must be called explicitly."
+   }
+  ],
+  "answer": "False.",
+  "explanation": "The GC knows nothing about `IDisposable`. It may run a **finalizer** (`~ClassName`) on objects that declare one, at an unpredictable time. The dispose pattern calls `GC.SuppressFinalize(this)` in `Dispose` so the finalizer is skipped when cleanup already happened.",
+  "reference": null,
+  "tags": [
+   "gc",
+   "idisposable"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cs-024",
+  "tech": "csharp",
+  "category": "Exception Handling",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "throw vs throw ex",
+  "body": "In a catch block, what is the difference between `throw;` and `throw ex;`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`throw;` rethrows preserving the original stack trace; `throw ex;` resets the stack trace to the current location",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "`throw ex;` is required to rethrow",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`throw;` swallows the exception",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "`throw;` preserves the original stack trace.",
+  "explanation": "Use `throw;` to rethrow. `throw ex;` loses where the exception originated, making diagnostics hard. To wrap, throw a new exception with the original as `InnerException`. `ExceptionDispatchInfo.Capture(ex).Throw()` preserves the trace across threads.",
+  "reference": null,
+  "tags": [
+   "exceptions"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-025",
+  "tech": "csharp",
+  "category": "Exception Handling",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "finally blocks",
+  "body": "Which statement about a `finally` block is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It runs only when no exception occurs",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It runs whether or not an exception is thrown, including when try contains a return statement",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It runs before the catch block",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It can change the value already returned by return in try for value types",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "It always runs when control leaves the try (normal exit, return or exception).",
+  "explanation": "finally is for cleanup. Exceptions: it may not run if the process terminates (e.g. `Environment.FailFast`, stack overflow).",
+  "reference": null,
+  "tags": [
+   "exceptions",
+   "finally"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cs-026",
+  "tech": "csharp",
+  "category": "Reflection & Extension Methods",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Extension method requirements",
+  "body": "What is required to declare an extension method?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "An instance method marked with [Extension]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A static method in a non-generic static class whose first parameter is prefixed with `this`",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A method in a partial class",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Inheriting from the extended type",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Static method, static (non-nested, non-generic) class, `this` modifier on the first parameter.",
+  "explanation": "Extension methods are syntactic sugar for static calls; they only see public members and are resolved at compile time when their namespace is imported. Instance methods always win over extensions with the same signature.",
+  "reference": null,
+  "tags": [
+   "extension-methods"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "cs-027",
+  "tech": "csharp",
+  "category": "Reflection & Extension Methods",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Cost of reflection",
+  "body": "What is the main performance cost of reflection-based member access?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Reflection cannot access public members",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Runtime metadata lookup and late-bound invocation are much slower than compiled calls",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Reflection forces garbage collection",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Reflection disables JIT compilation",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Metadata lookups and late-bound invocation are slow compared with direct calls.",
+  "explanation": "Cache `MethodInfo`/`PropertyInfo`, or compile delegates/expression trees once and reuse them. Source generators eliminate runtime reflection entirely and are trim/AOT-friendly (e.g. System.Text.Json source generation).",
+  "reference": null,
+  "tags": [
+   "reflection",
+   "performance"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "cs-028",
+  "tech": "csharp",
+  "category": "C# Fundamentals",
+  "type": "WrittenAnswer",
+  "difficulty": "Intermediate",
+  "title": "Boxing and unboxing",
+  "body": "Explain **boxing** and **unboxing** in C#. When do they happen, what do they cost, and how can you avoid them?",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "Boxing wraps a value type in a heap object (e.g. assigning int to object); unboxing copies it back with an explicit cast.",
+  "explanation": "**Boxing** allocates an object on the heap and copies the value into it when a value type is converted to `object` or an interface it implements (e.g. `object o = 42;`, passing a struct to a non-generic `ArrayList`, calling `string.Format(\"{0}\", 42)` in older APIs). **Unboxing** is the explicit cast back (`int i = (int)o;`) which checks the type and copies the value.\n\nCosts: a heap allocation, a copy and extra GC pressure — significant in hot loops.\n\nAvoid it with generics (`List<int>` instead of `ArrayList`), generic constraints, overloads that take the value type, and by implementing `IEquatable<T>` on structs so `Equals(T)` does not box.",
+  "reference": "Boxing converts a value type instance to object or to an interface type it implements by allocating a heap object and copying the value. Unboxing is the explicit conversion back, which verifies the runtime type and copies the value out. Boxing costs an allocation and GC work; it happens implicitly with non-generic collections, object parameters and interface calls on structs. Generics, typed overloads and IEquatable<T> avoid it.",
+  "tags": [
+   "boxing",
+   "performance"
+  ],
+  "seconds": 240,
+  "premium": false
+ },
+ {
+  "key": "cs-029",
+  "tech": "csharp",
+  "category": "Async & Multithreading",
+  "type": "ScenarioBased",
+  "difficulty": "Advanced",
+  "title": "Reducing latency of chained service calls",
+  "body": "An ASP.NET Core endpoint calls three independent downstream services **sequentially**; each takes ~300 ms. Describe how you would reduce the endpoint's latency and what failure cases you would handle.",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "Run the calls concurrently with Task.WhenAll, propagate CancellationToken, add timeouts/retries via resilience policies, and decide how partial failures are handled.",
+  "explanation": "1. Start all three calls without awaiting, then `await Task.WhenAll(...)`: latency drops from ~900 ms to ~300 ms.\n2. Use typed `HttpClient`s from `IHttpClientFactory` with timeouts, retries with jitter and a circuit breaker (Microsoft.Extensions.Http.Resilience / Polly).\n3. Pass the request's `CancellationToken` so abandoned requests stop work.\n4. Decide on partial failure: fail fast, or return degraded data for optional calls (catch per task).\n5. Consider caching results that change rarely, and measure with distributed tracing before and after.",
+  "reference": "Execute independent I/O concurrently (Task.WhenAll), use IHttpClientFactory with timeout, retry with backoff and circuit breaker, flow CancellationToken, handle partial failures explicitly (fallbacks for optional data), cache stable data, and verify with tracing/metrics.",
+  "tags": [
+   "async",
+   "performance",
+   "resilience"
+  ],
+  "seconds": 300,
+  "premium": true
+ },
+ {
+  "key": "cs-030",
+  "tech": "csharp",
+  "category": "Collections & Generics",
+  "type": "Debugging",
+  "difficulty": "Intermediate",
+  "title": "Modifying a list while iterating",
+  "body": "What happens when this code runs, and how would you fix it?",
+  "code": "var list = new List<int> { 1, 2, 3, 4 };\nforeach (var n in list)\n{\n    if (n % 2 == 0) list.Remove(n);\n}",
+  "lang": "csharp",
+  "options": [
+   {
+    "t": "It removes 2 and 4 successfully",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws InvalidOperationException: Collection was modified",
+    "c": true,
+    "e": "List<T> enumerators detect modification and throw."
+   },
+   {
+    "t": "It removes only 2",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It loops forever",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "InvalidOperationException; use `list.RemoveAll(n => n % 2 == 0)` or iterate backwards with a for loop.",
+  "explanation": "`List<T>` tracks a version number; modifying the list invalidates active enumerators and the next `MoveNext` throws. Fixes: `list.RemoveAll(predicate)`, a reverse `for` loop, or build a new list with LINQ (`list.Where(n => n % 2 != 0).ToList()`).",
+  "reference": null,
+  "tags": [
+   "collections",
+   "debugging"
+  ],
+  "seconds": 75,
+  "premium": false
+ }
+]

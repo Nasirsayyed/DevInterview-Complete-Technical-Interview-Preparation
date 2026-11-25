@@ -1,0 +1,278 @@
+[
+ {
+  "slug": "csharp",
+  "name": "C#",
+  "group": "Languages",
+  "description": "Modern, type-safe language for .NET.",
+  "icon": "csharp",
+  "categories": [
+   "C# Fundamentals",
+   "OOP in C#",
+   "Collections & Generics",
+   "LINQ",
+   "Delegates & Events",
+   "Async & Multithreading",
+   "Memory Management",
+   "Exception Handling",
+   "Reflection & Extension Methods"
+  ]
+ },
+ {
+  "slug": "aspnet-core",
+  "name": "ASP.NET Core",
+  "group": ".NET",
+  "description": "Cross-platform framework for web APIs and web apps.",
+  "icon": "dotnet",
+  "categories": [
+   "Fundamentals & Hosting",
+   "Middleware",
+   "Dependency Injection",
+   "Web API",
+   "Filters",
+   "Authentication & Authorization",
+   "Minimal APIs",
+   "SignalR",
+   "Performance Optimization"
+  ]
+ },
+ {
+  "slug": "ef-core",
+  "name": "Entity Framework Core & ADO.NET",
+  "group": ".NET",
+  "description": "Data access in .NET: EF Core ORM and ADO.NET.",
+  "icon": "database",
+  "categories": [
+   "EF Core Fundamentals",
+   "Querying & Performance",
+   "ADO.NET"
+  ]
+ },
+ {
+  "slug": "sql-server",
+  "name": "SQL Server",
+  "group": "Databases",
+  "description": "Microsoft SQL Server and T-SQL.",
+  "icon": "database",
+  "categories": [
+   "Joins",
+   "Subqueries & CTEs",
+   "Window Functions",
+   "Stored Procedures, Functions & Triggers",
+   "Indexes & Execution Plans",
+   "Transactions & Isolation Levels",
+   "Query Optimization",
+   "Database Design"
+  ]
+ },
+ {
+  "slug": "databases",
+  "name": "MySQL & PostgreSQL",
+  "group": "Databases",
+  "description": "Open-source relational databases.",
+  "icon": "database",
+  "categories": [
+   "Relational Databases"
+  ]
+ },
+ {
+  "slug": "javascript",
+  "name": "JavaScript",
+  "group": "Frontend",
+  "description": "The language of the web.",
+  "icon": "javascript",
+  "categories": [
+   "JavaScript Fundamentals",
+   "Closures & Scope",
+   "Asynchronous JavaScript",
+   "Prototypes & this",
+   "Browser Internals"
+  ]
+ },
+ {
+  "slug": "typescript",
+  "name": "TypeScript",
+  "group": "Frontend",
+  "description": "Typed superset of JavaScript.",
+  "icon": "typescript",
+  "categories": [
+   "Type System",
+   "Generics & Utility Types"
+  ]
+ },
+ {
+  "slug": "react",
+  "name": "React",
+  "group": "Frontend",
+  "description": "Component-based UI library.",
+  "icon": "react",
+  "categories": [
+   "React Fundamentals",
+   "React Hooks",
+   "State Management & Redux",
+   "React Router",
+   "Performance Optimization"
+  ]
+ },
+ {
+  "slug": "html",
+  "name": "HTML",
+  "group": "Frontend",
+  "description": "Structure and semantics of web pages.",
+  "icon": "html",
+  "categories": [
+   "Semantics & Accessibility",
+   "Forms & Media"
+  ]
+ },
+ {
+  "slug": "css",
+  "name": "CSS",
+  "group": "Frontend",
+  "description": "Styling and layout of web pages.",
+  "icon": "css",
+  "categories": [
+   "Cascade & Specificity",
+   "Layout: Flexbox & Grid",
+   "Responsive Design"
+  ]
+ },
+ {
+  "slug": "dsa",
+  "name": "Data Structures & Algorithms",
+  "group": "Computer Science",
+  "description": "Core algorithms and data structures.",
+  "icon": "algorithm",
+  "categories": [
+   "Complexity Analysis",
+   "Arrays & Strings",
+   "Linked Lists",
+   "Stacks & Queues",
+   "Trees & Graphs",
+   "Sorting & Searching",
+   "Dynamic Programming",
+   "Hashing"
+  ]
+ },
+ {
+  "slug": "system-design",
+  "name": "System Design",
+  "group": "Architecture",
+  "description": "Designing scalable, reliable systems.",
+  "icon": "architecture",
+  "categories": [
+   "Scalability",
+   "Caching",
+   "Data & Storage",
+   "Messaging & Async",
+   "Reliability"
+  ]
+ },
+ {
+  "slug": "oop-design",
+  "name": "OOP & Design Principles",
+  "group": "Architecture",
+  "description": "Object-oriented design, SOLID and design patterns.",
+  "icon": "pattern",
+  "categories": [
+   "OOP Concepts",
+   "SOLID Principles",
+   "Design Patterns",
+   "Software Architecture"
+  ]
+ },
+ {
+  "slug": "web-apis",
+  "name": "REST APIs & Microservices",
+  "group": "Architecture",
+  "description": "API design and distributed services.",
+  "icon": "api",
+  "categories": [
+   "REST",
+   "Microservices"
+  ]
+ },
+ {
+  "slug": "java",
+  "name": "Java",
+  "group": "Languages",
+  "description": "General-purpose JVM language.",
+  "icon": "java",
+  "categories": [
+   "Core Java"
+  ]
+ },
+ {
+  "slug": "python",
+  "name": "Python",
+  "group": "Languages",
+  "description": "Readable, batteries-included language.",
+  "icon": "python",
+  "categories": [
+   "Core Python"
+  ]
+ },
+ {
+  "slug": "kotlin",
+  "name": "Kotlin",
+  "group": "Languages",
+  "description": "Concise JVM and Android language.",
+  "icon": "kotlin",
+  "categories": [
+   "Core Kotlin"
+  ]
+ },
+ {
+  "slug": "cpp",
+  "name": "C++",
+  "group": "Languages",
+  "description": "Systems programming with zero-cost abstractions.",
+  "icon": "cpp",
+  "categories": [
+   "Core C++"
+  ]
+ },
+ {
+  "slug": "devops",
+  "name": "Docker, Kubernetes & CI/CD",
+  "group": "DevOps",
+  "description": "Containers, orchestration, Git and delivery pipelines.",
+  "icon": "cloud",
+  "categories": [
+   "Docker",
+   "Kubernetes",
+   "Git",
+   "CI/CD"
+  ]
+ },
+ {
+  "slug": "cs-fundamentals",
+  "name": "OS & Networking",
+  "group": "Computer Science",
+  "description": "Operating systems and computer networks.",
+  "icon": "network",
+  "categories": [
+   "Operating Systems",
+   "Computer Networks"
+  ]
+ },
+ {
+  "slug": "security",
+  "name": "Security Fundamentals",
+  "group": "Security",
+  "description": "Application security essentials.",
+  "icon": "shield",
+  "categories": [
+   "Web Security"
+  ]
+ },
+ {
+  "slug": "cloud",
+  "name": "Cloud Computing",
+  "group": "DevOps",
+  "description": "Cloud service models and architecture.",
+  "icon": "cloud",
+  "categories": [
+   "Cloud Fundamentals"
+  ]
+ }
+]

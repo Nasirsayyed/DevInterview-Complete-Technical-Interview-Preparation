@@ -1,0 +1,293 @@
+[
+ {
+  "key": "ht-001",
+  "tech": "html",
+  "category": "Semantics & Accessibility",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Navigation landmark",
+  "body": "Which element should wrap a site's main navigation links?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "<div class=\"nav\">",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "<nav>",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "<menu>",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "<header>",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "<nav>.",
+  "explanation": "Semantic elements (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`) create landmarks that screen-reader users can jump between.",
+  "reference": null,
+  "tags": [
+   "semantics"
+  ],
+  "seconds": 25,
+  "premium": false
+ },
+ {
+  "key": "ht-002",
+  "tech": "html",
+  "category": "Semantics & Accessibility",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "alt text for decorative images",
+  "body": "How should a purely decorative image be marked up?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Omit the alt attribute",
+    "c": false,
+    "e": "Missing alt makes screen readers announce the file name."
+   },
+   {
+    "t": "alt=\"\"",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "alt=\"image\"",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "alt=\"decorative\"",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "An empty alt attribute.",
+  "explanation": "Informative images need concise alt text describing their purpose; decorative ones use alt=\"\" (or CSS backgrounds) so assistive tech skips them.",
+  "reference": null,
+  "tags": [
+   "accessibility",
+   "images"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "ht-003",
+  "tech": "html",
+  "category": "Semantics & Accessibility",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "button vs clickable div",
+  "body": "Why prefer `<button>` over `<div onclick>` for actions?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Buttons load faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Buttons are focusable, keyboard-operable (Enter/Space) and expose the button role to assistive technology by default",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Divs cannot have click handlers",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Native semantics and keyboard support for free.",
+  "explanation": "A div needs role=\"button\", tabindex=\"0\" and key handlers to approximate it. Remember buttons inside forms default to type=\"submit\".",
+  "reference": null,
+  "tags": [
+   "accessibility"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ht-004",
+  "tech": "html",
+  "category": "Forms & Media",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Associating labels",
+  "body": "How do you associate a `<label>` with an `<input id=\"email\">`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "<label name=\"email\">",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "<label for=\"email\">",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "<label id=\"email\">",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Place the label after the input",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Use the for attribute (or wrap the input in the label).",
+  "explanation": "Clicking the label focuses the input and screen readers announce the label. Placeholders are not a substitute for labels.",
+  "reference": null,
+  "tags": [
+   "forms",
+   "accessibility"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ht-005",
+  "tech": "html",
+  "category": "Forms & Media",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "input type=email",
+  "body": "What does `<input type=\"email\">` provide?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Server-side validation",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Built-in format validation and an email-optimised keyboard on mobile devices",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Automatic email sending",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Encryption",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Client-side validation and better mobile keyboards.",
+  "explanation": "Client-side validation is a UX feature only; always validate on the server too.",
+  "reference": null,
+  "tags": [
+   "forms"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ht-006",
+  "tech": "html",
+  "category": "Semantics & Accessibility",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "defer vs async scripts",
+  "body": "How does `<script defer>` differ from `<script async>`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "defer scripts execute in document order after parsing completes; async scripts execute as soon as they download, in any order",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "async blocks parsing",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "defer only works for inline scripts",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "defer = ordered, after parsing; async = ASAP, unordered.",
+  "explanation": "Both download in parallel without blocking parsing. Use defer for app code with dependencies and async for independent scripts like analytics. Module scripts are deferred by default.",
+  "reference": null,
+  "tags": [
+   "performance",
+   "scripts"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ht-007",
+  "tech": "html",
+  "category": "Semantics & Accessibility",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "First rule of ARIA",
+  "body": "What is the 'first rule' of ARIA use?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Add role attributes to every element",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Use a native HTML element with the required semantics and behaviour instead of repurposing an element with ARIA whenever possible",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "ARIA replaces the need for labels",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "aria-hidden on all decorative text",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Prefer native HTML; ARIA only adds semantics, not behaviour.",
+  "explanation": "Incorrect ARIA is worse than none. Test with a screen reader and keyboard-only navigation.",
+  "reference": null,
+  "tags": [
+   "aria",
+   "accessibility"
+  ],
+  "seconds": 45,
+  "premium": false
+ }
+]

@@ -1,0 +1,209 @@
+[
+ {
+  "key": "py-001",
+  "tech": "python",
+  "category": "Core Python",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Mutable default arguments",
+  "body": "What does this print?",
+  "code": "def add(item, items=[]):\n    items.append(item)\n    return items\n\nadd(1)\nprint(add(2))",
+  "lang": "python",
+  "options": [
+   {
+    "t": "[2]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "[1, 2]",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "[]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It raises TypeError",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "[1, 2] — the default list is created once and shared between calls.",
+  "explanation": "Default values are evaluated once at function definition. Use `items=None` and create a new list inside the function.",
+  "reference": null,
+  "tags": [
+   "functions",
+   "gotchas"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "py-002",
+  "tech": "python",
+  "category": "Core Python",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "list vs tuple",
+  "body": "What is a key difference between a list and a tuple?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Tuples can only hold numbers",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tuples are immutable (and hashable if their items are), lists are mutable",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Lists are faster to create",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tuples cannot be indexed",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Tuples are immutable.",
+  "explanation": "Hashable tuples can be dictionary keys or set members; lists cannot.",
+  "reference": null,
+  "tags": [
+   "data-types"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "py-003",
+  "tech": "python",
+  "category": "Core Python",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "The GIL",
+  "body": "In standard CPython builds, what does the Global Interpreter Lock imply for CPU-bound code?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Threads run Python bytecode truly in parallel on all cores",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Only one thread executes Python bytecode at a time, so CPU-bound work should use multiprocessing (or native extensions)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Async code is disabled",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "I/O-bound threads cannot overlap",
+    "c": false,
+    "e": "Threads release the GIL during blocking I/O."
+   }
+  ],
+  "answer": "One thread runs bytecode at a time.",
+  "explanation": "Threads still help I/O-bound work. CPython 3.13 introduced an experimental free-threaded build without the GIL, but the default build keeps it.",
+  "reference": null,
+  "tags": [
+   "concurrency",
+   "gil"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "py-004",
+  "tech": "python",
+  "category": "Core Python",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Generators",
+  "body": "What is the main advantage of a generator (a function using `yield`)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It runs faster than any loop",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It produces values lazily, one at a time, without building the whole sequence in memory",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It can be indexed like a list",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It runs in parallel",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Lazy evaluation with constant memory.",
+  "explanation": "Generators are ideal for streaming large files or infinite sequences; they can be iterated only once.",
+  "reference": null,
+  "tags": [
+   "generators"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "py-005",
+  "tech": "python",
+  "category": "Core Python",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "List comprehension output",
+  "body": "What does this print?",
+  "code": "print([i * i for i in range(4) if i % 2 == 0])",
+  "lang": "python",
+  "options": [
+   {
+    "t": "[0, 1, 4, 9]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "[0, 4]",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "[1, 9]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "[4]",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "[0, 4]",
+  "explanation": "range(4) yields 0..3; the filter keeps 0 and 2; their squares are 0 and 4.",
+  "reference": null,
+  "tags": [
+   "comprehensions"
+  ],
+  "seconds": 30,
+  "premium": false
+ }
+]

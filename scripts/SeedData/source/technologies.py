@@ -1,0 +1,45 @@
+from seedlib import write
+
+TECHNOLOGIES = [
+    ("csharp", "C#", "Languages", "Modern, type-safe language for .NET.", "csharp",
+     ["C# Fundamentals", "OOP in C#", "Collections & Generics", "LINQ", "Delegates & Events", "Async & Multithreading",
+      "Memory Management", "Exception Handling", "Reflection & Extension Methods"]),
+    ("aspnet-core", "ASP.NET Core", ".NET", "Cross-platform framework for web APIs and web apps.", "dotnet",
+     ["Fundamentals & Hosting", "Middleware", "Dependency Injection", "Web API", "Filters", "Authentication & Authorization",
+      "Minimal APIs", "SignalR", "Performance Optimization"]),
+    ("ef-core", "Entity Framework Core & ADO.NET", ".NET", "Data access in .NET: EF Core ORM and ADO.NET.", "database",
+     ["EF Core Fundamentals", "Querying & Performance", "ADO.NET"]),
+    ("sql-server", "SQL Server", "Databases", "Microsoft SQL Server and T-SQL.", "database",
+     ["Joins", "Subqueries & CTEs", "Window Functions", "Stored Procedures, Functions & Triggers", "Indexes & Execution Plans",
+      "Transactions & Isolation Levels", "Query Optimization", "Database Design"]),
+    ("databases", "MySQL & PostgreSQL", "Databases", "Open-source relational databases.", "database", ["Relational Databases"]),
+    ("javascript", "JavaScript", "Frontend", "The language of the web.", "javascript",
+     ["JavaScript Fundamentals", "Closures & Scope", "Asynchronous JavaScript", "Prototypes & this", "Browser Internals"]),
+    ("typescript", "TypeScript", "Frontend", "Typed superset of JavaScript.", "typescript", ["Type System", "Generics & Utility Types"]),
+    ("react", "React", "Frontend", "Component-based UI library.", "react",
+     ["React Fundamentals", "React Hooks", "State Management & Redux", "React Router", "Performance Optimization"]),
+    ("html", "HTML", "Frontend", "Structure and semantics of web pages.", "html", ["Semantics & Accessibility", "Forms & Media"]),
+    ("css", "CSS", "Frontend", "Styling and layout of web pages.", "css", ["Cascade & Specificity", "Layout: Flexbox & Grid", "Responsive Design"]),
+    ("dsa", "Data Structures & Algorithms", "Computer Science", "Core algorithms and data structures.", "algorithm",
+     ["Complexity Analysis", "Arrays & Strings", "Linked Lists", "Stacks & Queues", "Trees & Graphs", "Sorting & Searching",
+      "Dynamic Programming", "Hashing"]),
+    ("system-design", "System Design", "Architecture", "Designing scalable, reliable systems.", "architecture",
+     ["Scalability", "Caching", "Data & Storage", "Messaging & Async", "Reliability"]),
+    ("oop-design", "OOP & Design Principles", "Architecture", "Object-oriented design, SOLID and design patterns.", "pattern",
+     ["OOP Concepts", "SOLID Principles", "Design Patterns", "Software Architecture"]),
+    ("web-apis", "REST APIs & Microservices", "Architecture", "API design and distributed services.", "api", ["REST", "Microservices"]),
+    ("java", "Java", "Languages", "General-purpose JVM language.", "java", ["Core Java"]),
+    ("python", "Python", "Languages", "Readable, batteries-included language.", "python", ["Core Python"]),
+    ("kotlin", "Kotlin", "Languages", "Concise JVM and Android language.", "kotlin", ["Core Kotlin"]),
+    ("cpp", "C++", "Languages", "Systems programming with zero-cost abstractions.", "cpp", ["Core C++"]),
+    ("devops", "Docker, Kubernetes & CI/CD", "DevOps", "Containers, orchestration, Git and delivery pipelines.", "cloud",
+     ["Docker", "Kubernetes", "Git", "CI/CD"]),
+    ("cs-fundamentals", "OS & Networking", "Computer Science", "Operating systems and computer networks.", "network",
+     ["Operating Systems", "Computer Networks"]),
+    ("security", "Security Fundamentals", "Security", "Application security essentials.", "shield", ["Web Security"]),
+    ("cloud", "Cloud Computing", "DevOps", "Cloud service models and architecture.", "cloud", ["Cloud Fundamentals"]),
+]
+
+write("technologies.json", [
+    {"slug": s, "name": n, "group": g, "description": d, "icon": i, "categories": c} for s, n, g, d, i, c in TECHNOLOGIES
+])

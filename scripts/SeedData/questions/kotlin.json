@@ -1,0 +1,166 @@
+[
+ {
+  "key": "kt-001",
+  "tech": "kotlin",
+  "category": "Core Kotlin",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "val vs var",
+  "body": "What is the difference between `val` and `var` in Kotlin?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "val is for numbers only",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "val declares a read-only reference that cannot be reassigned; var can be reassigned",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "var is immutable",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "They are identical",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "val = read-only reference; var = mutable reference.",
+  "explanation": "`val` does not make the object immutable: a `val list = mutableListOf()` can still be modified. Prefer val by default.",
+  "reference": null,
+  "tags": [
+   "basics"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "kt-002",
+  "tech": "kotlin",
+  "category": "Core Kotlin",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Safe call and Elvis",
+  "body": "What does `name?.length ?: 0` evaluate to when `name` is null?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "null",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "0",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It throws NullPointerException",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "-1",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "0.",
+  "explanation": "`?.` returns null instead of throwing; the Elvis operator `?:` supplies a default. `!!` asserts non-null and throws if it is null.",
+  "reference": null,
+  "tags": [
+   "null-safety"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "kt-003",
+  "tech": "kotlin",
+  "category": "Core Kotlin",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "data classes",
+  "body": "What does the compiler generate for a Kotlin `data class`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Only a constructor",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "equals/hashCode, toString, copy and componentN functions based on the primary-constructor properties",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A database table",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Getters only for private fields",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Value-semantics members.",
+  "explanation": "Only properties in the primary constructor participate. `copy(...)` makes immutable updates easy, which is why data classes are common for UI state in Compose.",
+  "reference": null,
+  "tags": [
+   "data-classes"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "kt-004",
+  "tech": "kotlin",
+  "category": "Core Kotlin",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "delay vs Thread.sleep",
+  "body": "Inside a coroutine, how does `delay(1000)` differ from `Thread.sleep(1000)`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "delay suspends the coroutine without blocking the thread, freeing it for other coroutines; sleep blocks the thread",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "delay blocks the main thread",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "sleep is cancellable",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Suspension vs blocking.",
+  "explanation": "`delay` is also cancellable. Never block the main thread on Android; use suspend functions and switch blocking work to `Dispatchers.IO`.",
+  "reference": null,
+  "tags": [
+   "coroutines"
+  ],
+  "seconds": 45,
+  "premium": false
+ }
+]

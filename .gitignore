@@ -1,0 +1,42 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Secrets (never commit)
+.env
+.env.*
+!.env.example
+**/appsettings.*.local.json
+**/secrets.json
+google-services.json
+*.keystore
+*.jks
+keystore.properties
+service-account*.json
+
+# .NET
+bin/
+obj/
+*.user
+TestResults/
+coverage*/
+backend/src/DevInterview.API/uploads/
+backend/src/DevInterview.API/logs/
+
+# Android / Gradle
+.gradle/
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo

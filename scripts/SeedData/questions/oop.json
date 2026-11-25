@@ -1,0 +1,667 @@
+[
+ {
+  "key": "oo-001",
+  "tech": "oop-design",
+  "category": "OOP Concepts",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Encapsulation",
+  "body": "Which best describes encapsulation?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Inheriting behaviour from a base class",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Bundling data with the methods that operate on it and restricting direct access to internal state",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Having many forms of a method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Splitting code into files",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Hide internal state behind a controlled interface.",
+  "explanation": "Encapsulation lets an object protect its invariants (e.g. a BankAccount balance can only change through Deposit/Withdraw that validate amounts).",
+  "reference": null,
+  "tags": [
+   "encapsulation"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "oo-002",
+  "tech": "oop-design",
+  "category": "OOP Concepts",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Polymorphism",
+  "body": "What is runtime (subtype) polymorphism?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Defining two methods with the same name and different parameters",
+    "c": false,
+    "e": "That is overloading (compile-time)."
+   },
+   {
+    "t": "Calling a method through a base type reference and having the derived type's implementation execute",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Copying objects",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Using generics",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Dynamic dispatch through a common base type or interface.",
+  "explanation": "It lets code depend on abstractions (`IShape.Area()`) while behaviour varies by concrete type, which is the foundation of the Open/Closed principle.",
+  "reference": null,
+  "tags": [
+   "polymorphism"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "oo-003",
+  "tech": "oop-design",
+  "category": "OOP Concepts",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Composition over inheritance",
+  "body": "Why is composition often preferred over inheritance?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Inheritance is not supported in modern languages",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It assembles behaviour from small, replaceable collaborators, avoiding fragile deep hierarchies and tight coupling to base-class internals",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Composition is always faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Inheritance prevents polymorphism",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Looser coupling and more flexibility.",
+  "explanation": "Inheritance models a stable 'is-a' relationship; composition ('has-a') lets behaviour change at runtime and supports dependency injection and testing with fakes.",
+  "reference": null,
+  "tags": [
+   "composition"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "oo-004",
+  "tech": "oop-design",
+  "category": "OOP Concepts",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Overloading vs overriding",
+  "body": "Which statement is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Overriding is resolved at compile time",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Overloading chooses among same-named methods by parameter list at compile time; overriding replaces a virtual method's implementation, resolved at runtime",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Both require the virtual keyword",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Overloading changes the return type only",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Overloading = compile time; overriding = runtime.",
+  "explanation": "Overload resolution uses the static types of arguments; overriding uses the runtime type of the receiver.",
+  "reference": null,
+  "tags": [
+   "overloading",
+   "overriding"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "oo-005",
+  "tech": "oop-design",
+  "category": "SOLID Principles",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Single Responsibility Principle",
+  "body": "What does the Single Responsibility Principle state?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A class should have only one method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A module should have one reason to change — it should serve one actor/responsibility",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Each project should have one class",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Functions must be under ten lines",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "One reason to change.",
+  "explanation": "An `InvoiceService` that calculates totals, renders PDFs and sends emails changes for three different reasons; split it into collaborators.",
+  "reference": null,
+  "tags": [
+   "solid",
+   "srp"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "oo-006",
+  "tech": "oop-design",
+  "category": "SOLID Principles",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Open/Closed Principle",
+  "body": "Which design follows the Open/Closed Principle for adding new payment methods?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A switch statement in PaymentService that grows with every new method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "An IPaymentProcessor interface with one implementation per method, selected at runtime, so new methods are added as new classes",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Copying PaymentService for each method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Storing payment logic in the database",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Extend with new implementations instead of editing existing code.",
+  "explanation": "Open for extension, closed for modification: polymorphism (strategy pattern) and DI registration let you add behaviour without touching tested code.",
+  "reference": null,
+  "tags": [
+   "solid",
+   "ocp"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "oo-007",
+  "tech": "oop-design",
+  "category": "SOLID Principles",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Liskov Substitution Principle",
+  "body": "Which is a classic LSP violation?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A Dog class inheriting from Animal",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A Square inheriting from Rectangle where setting Width also changes Height, breaking code that expects independent sides",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "An interface with two implementations",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A sealed class",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Square/Rectangle — the subtype breaks base-type expectations.",
+  "explanation": "Subtypes must honour the base contract: no stronger preconditions, no weaker postconditions, no surprising exceptions (e.g. throwing NotSupportedException from an inherited method).",
+  "reference": null,
+  "tags": [
+   "solid",
+   "lsp"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "oo-008",
+  "tech": "oop-design",
+  "category": "SOLID Principles",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Interface Segregation Principle",
+  "body": "What does the Interface Segregation Principle recommend?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "One large interface per application",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Clients should not be forced to depend on methods they do not use; prefer small, role-specific interfaces",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Avoid interfaces",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Every class implements every interface",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Small, focused interfaces.",
+  "explanation": "A `IMultiFunctionDevice` with Print/Scan/Fax forces a simple printer to stub methods; split into IPrinter, IScanner, IFax.",
+  "reference": null,
+  "tags": [
+   "solid",
+   "isp"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "oo-009",
+  "tech": "oop-design",
+  "category": "SOLID Principles",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Dependency Inversion Principle",
+  "body": "What does the Dependency Inversion Principle state?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Low-level modules should depend on high-level modules",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "High-level policy should depend on abstractions, and low-level details should implement those abstractions",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Always use a DI container",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Never use interfaces",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Depend on abstractions, not concretions.",
+  "explanation": "DIP is the principle; dependency injection is a technique to supply implementations. In clean architecture the application layer defines interfaces (e.g. IEmailSender) that infrastructure implements.",
+  "reference": null,
+  "tags": [
+   "solid",
+   "dip"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "oo-010",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Singleton pattern",
+  "body": "Which pattern ensures a class has a single instance with a global access point?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Factory",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Singleton",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Observer",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Adapter",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Singleton.",
+  "explanation": "In .NET prefer registering a service with a singleton lifetime in DI over a static Instance property: it stays testable and the lifetime is explicit. Singletons must be thread-safe.",
+  "reference": null,
+  "tags": [
+   "singleton"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "oo-011",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Strategy pattern",
+  "body": "Which pattern encapsulates interchangeable algorithms behind a common interface?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Strategy",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Decorator",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Singleton",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Facade",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Strategy.",
+  "explanation": "Example: IShippingCostStrategy with Standard/Express/Free implementations chosen at runtime. It removes conditional logic and supports the Open/Closed principle.",
+  "reference": null,
+  "tags": [
+   "strategy"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "oo-012",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Observer pattern",
+  "body": "In C#, which language feature directly implements the Observer pattern?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Events and delegates",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Attributes",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Generics",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Partial classes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Events (and IObservable<T>/Rx).",
+  "explanation": "Subjects notify subscribers without knowing their concrete types. Unsubscribe to avoid memory leaks with long-lived publishers.",
+  "reference": null,
+  "tags": [
+   "observer",
+   "events"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "oo-013",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Decorator pattern",
+  "body": "Which pattern adds behaviour to an object by wrapping it with another object implementing the same interface?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Decorator",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Builder",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Prototype",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Bridge",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Decorator.",
+  "explanation": "Examples: `BufferedStream` wrapping `FileStream`, a `CachingRepository` wrapping a repository, or HttpClient DelegatingHandlers for logging/retries. Decorators compose without subclass explosion.",
+  "reference": null,
+  "tags": [
+   "decorator"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "oo-014",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Factory Method",
+  "body": "What problem does the Factory Method pattern address?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Making objects immutable",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Letting subclasses or a dedicated method decide which concrete class to instantiate, so callers depend only on an abstraction",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Sharing one instance",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Converting interfaces",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Decouples creation from use.",
+  "explanation": "Callers ask for an `INotificationSender` and the factory returns Email/SMS/Push implementations based on configuration. Abstract Factory creates families of related objects.",
+  "reference": null,
+  "tags": [
+   "factory"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "oo-015",
+  "tech": "oop-design",
+  "category": "Design Patterns",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Unit of Work in EF Core",
+  "body": "In Entity Framework Core, which type already implements the Unit of Work pattern?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "DbSet<T>",
+    "c": false,
+    "e": "DbSet is closer to a repository."
+   },
+   {
+    "t": "DbContext",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "IQueryable<T>",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "ModelBuilder",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "DbContext.",
+  "explanation": "DbContext tracks changes across entities and commits them in one SaveChanges call (one transaction). Wrapping EF in generic repositories often adds little; use specific query services or the DbContext directly behind an application interface.",
+  "reference": null,
+  "tags": [
+   "unit-of-work",
+   "repository",
+   "ef-core"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "oo-016",
+  "tech": "oop-design",
+  "category": "Software Architecture",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Clean Architecture dependency rule",
+  "body": "What is the dependency rule in Clean Architecture?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Outer layers must not depend on inner layers",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Source-code dependencies point inward: the domain and application layers know nothing about frameworks, UI or databases",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Every layer depends on every other layer",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The database is the centre",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Dependencies point toward the domain.",
+  "explanation": "Infrastructure implements interfaces defined by the application layer, keeping business rules testable and independent of EF Core, ASP.NET Core or external services.",
+  "reference": null,
+  "tags": [
+   "clean-architecture"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]

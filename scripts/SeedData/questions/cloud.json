@@ -1,0 +1,166 @@
+[
+ {
+  "key": "cl-001",
+  "tech": "cloud",
+  "category": "Cloud Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Cloud service models",
+  "body": "In which model does the provider manage the runtime and OS while you deploy only your application code?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "IaaS",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "PaaS",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "On-premises",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "SaaS",
+    "c": false,
+    "e": "With SaaS you use a finished application."
+   }
+  ],
+  "answer": "PaaS.",
+  "explanation": "IaaS gives VMs and networks you manage; PaaS (e.g. Azure App Service) runs your code; SaaS delivers complete software.",
+  "reference": null,
+  "tags": [
+   "cloud-models"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "cl-002",
+  "tech": "cloud",
+  "category": "Cloud Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Autoscaling",
+  "body": "What does horizontal autoscaling do?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Increases VM size during the night",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Adds or removes instances automatically based on metrics such as CPU, memory or queue length",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Backs up databases",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Changes DNS records",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Metric-driven instance count changes.",
+  "explanation": "Services must be stateless and start quickly; set min/max limits and cool-down periods.",
+  "reference": null,
+  "tags": [
+   "autoscaling"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "cl-003",
+  "tech": "cloud",
+  "category": "Cloud Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Availability zones",
+  "body": "Why deploy instances across multiple availability zones?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "To reduce latency to all users worldwide",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To survive the failure of a single data centre within a region",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It is cheaper",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To avoid backups",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Zone-level fault tolerance.",
+  "explanation": "Use multiple regions for disaster recovery or global latency; multi-AZ protects against data-centre outages.",
+  "reference": null,
+  "tags": [
+   "high-availability"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "cl-004",
+  "tech": "cloud",
+  "category": "Cloud Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Object storage",
+  "body": "Which workload is object storage (S3, Azure Blob) best suited for?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Low-latency relational transactions",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Storing large amounts of unstructured files such as images, backups and logs",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "CPU-bound computation",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "In-memory caching",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Unstructured files at scale.",
+  "explanation": "Serve user uploads via pre-signed URLs or a CDN instead of streaming them through the API.",
+  "reference": null,
+  "tags": [
+   "storage"
+  ],
+  "seconds": 30,
+  "premium": false
+ }
+]

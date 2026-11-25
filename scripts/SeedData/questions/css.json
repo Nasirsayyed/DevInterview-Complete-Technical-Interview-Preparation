@@ -1,0 +1,373 @@
+[
+ {
+  "key": "css-001",
+  "tech": "css",
+  "category": "Cascade & Specificity",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Specificity",
+  "body": "Which selector has the highest specificity?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "div p",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": ".card .title",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "#header",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "ul li a",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "#header — an ID selector (1,0,0).",
+  "explanation": "Specificity is compared as (IDs, classes/attributes/pseudo-classes, elements). `.card .title` is (0,2,0), `ul li a` is (0,0,3). Inline styles and !important override normal rules; `:where()` has zero specificity.",
+  "reference": null,
+  "tags": [
+   "specificity"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "css-002",
+  "tech": "css",
+  "category": "Cascade & Specificity",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "box-sizing: border-box",
+  "body": "With `box-sizing: border-box`, what does `width: 200px` include?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Only the content",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Content, padding and border (but not margin)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Content and margin",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Everything including margin",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Content + padding + border.",
+  "explanation": "The default `content-box` adds padding and border on top of width, which makes layouts harder to reason about; many resets apply border-box globally.",
+  "reference": null,
+  "tags": [
+   "box-model"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "css-003",
+  "tech": "css",
+  "category": "Layout: Flexbox & Grid",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Flexbox vs Grid",
+  "body": "When is CSS Grid generally a better fit than Flexbox?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "For one-dimensional alignment of items in a row",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "For two-dimensional layouts that control rows and columns together",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Grid does not support responsive design",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Never; Flexbox replaced Grid",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Grid is two-dimensional; Flexbox is one-dimensional.",
+  "explanation": "They complement each other: Grid for page/section layout, Flexbox for distributing items within a component (toolbars, button groups).",
+  "reference": null,
+  "tags": [
+   "grid",
+   "flexbox"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "css-004",
+  "tech": "css",
+  "category": "Layout: Flexbox & Grid",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Centering with Flexbox",
+  "body": "Which declarations on the parent centre a child horizontally and vertically?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "text-align: center; vertical-align: middle",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "display: flex; justify-content: center; align-items: center",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "margin: auto on the parent",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "position: center",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Flex container with justify-content and align-items set to center.",
+  "explanation": "With Grid: `display: grid; place-items: center;`. The parent needs a height for vertical centring to be visible.",
+  "reference": null,
+  "tags": [
+   "flexbox"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "css-005",
+  "tech": "css",
+  "category": "Layout: Flexbox & Grid",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Absolute positioning",
+  "body": "An element with `position: absolute` is positioned relative to…",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The viewport, always",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Its nearest positioned ancestor (position other than static), or the initial containing block if none",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Its previous sibling",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The body element's padding box",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The nearest positioned ancestor.",
+  "explanation": "Absolutely positioned elements leave normal flow. `position: fixed` is relative to the viewport (unless an ancestor has a transform); `sticky` toggles between relative and fixed.",
+  "reference": null,
+  "tags": [
+   "positioning"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "css-006",
+  "tech": "css",
+  "category": "Responsive Design",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Mobile-first media queries",
+  "body": "Which media query pattern represents a mobile-first approach?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Base styles for desktop with max-width overrides",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Base styles for small screens, then @media (min-width: …) overrides for larger screens",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Separate stylesheets per device model",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Only using px units",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Min-width breakpoints layered on mobile base styles.",
+  "explanation": "Mobile-first ships less CSS to small devices and progressively enhances. Container queries let components adapt to their container instead of the viewport.",
+  "reference": null,
+  "tags": [
+   "responsive"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "css-007",
+  "tech": "css",
+  "category": "Responsive Design",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "rem vs em",
+  "body": "What is a `rem` relative to?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The parent element's font-size",
+    "c": false,
+    "e": "That is em (for font-size)."
+   },
+   {
+    "t": "The root (html) element's font-size",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The viewport width",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The element's line-height",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The root font size.",
+  "explanation": "rem gives predictable sizing that respects user font preferences; em compounds through nested elements.",
+  "reference": null,
+  "tags": [
+   "units"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "css-008",
+  "tech": "css",
+  "category": "Cascade & Specificity",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "z-index and stacking contexts",
+  "body": "A modal with `z-index: 9999` still appears below a header with `z-index: 10`. What is the most likely cause?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "z-index maximum is 1000",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The modal is inside an ancestor that creates its own stacking context (e.g. transform, opacity < 1, or positioned with z-index) that is below the header",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "z-index only works with display: flex",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The header uses !important",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "z-index only competes within the same stacking context.",
+  "explanation": "Properties such as `transform`, `filter`, `opacity < 1`, `position: fixed`, `isolation: isolate` and positioned elements with z-index create stacking contexts. Render modals in a portal at the document root.",
+  "reference": null,
+  "tags": [
+   "z-index",
+   "stacking-context"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "css-009",
+  "tech": "css",
+  "category": "Layout: Flexbox & Grid",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Margin collapsing",
+  "body": "Two stacked block elements have `margin-bottom: 20px` and `margin-top: 30px`. What is the vertical gap between them?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "50px",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "30px",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "20px",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "0px",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "30px — adjacent vertical margins collapse to the larger one.",
+  "explanation": "Collapsing does not happen in flex or grid containers, with padding or borders in between, or for horizontal margins. Using `gap` in flex/grid layouts avoids the surprise.",
+  "reference": null,
+  "tags": [
+   "box-model"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]

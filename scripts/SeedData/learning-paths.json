@@ -1,0 +1,1149 @@
+[
+ {
+  "key": "lp-csharp",
+  "title": "Complete C# Developer Roadmap",
+  "description": "From the type system to async and memory management — everything a C# interview covers.",
+  "level": "Beginner",
+  "hours": 30,
+  "premium": false,
+  "tech": "csharp",
+  "modules": [
+   {
+    "title": "Language Foundations",
+    "description": "Types, memory model and object orientation.",
+    "lessons": [
+     {
+      "title": "Value types and reference types",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "## Value vs reference semantics\n- **Value types** (`struct`, `enum`, numeric types, `DateTime`) store data directly and are **copied** on assignment.\n- **Reference types** (`class`, `string`, arrays, delegates) store a reference to a heap object; assignment copies the reference.\n\n## Strings are special\n`string` is a reference type with **value equality** and **immutability**: every modification creates a new string.\n\n## Interview tips\n- Explain *boxing*: converting a value type to `object` allocates on the heap.\n- Know when to choose a `struct`: small (≤ 16 bytes), immutable, value-like (e.g. `Point`, `Money`).",
+      "exercise": null,
+      "questions": [
+       "cs-001",
+       "cs-002",
+       "cs-005"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Classes, inheritance and polymorphism",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "## Four pillars in C#\n- **Encapsulation** — access modifiers and properties protect invariants.\n- **Inheritance** — single class inheritance, many interfaces.\n- **Polymorphism** — `virtual`/`override` dispatches at runtime; `new` only hides.\n- **Abstraction** — abstract classes and interfaces.\n\n## Interfaces vs abstract classes\nInterfaces describe capabilities and can have default implementations (C# 8+) but no instance state. Abstract classes share state and code among related types.",
+      "exercise": null,
+      "questions": [
+       "cs-006",
+       "cs-007",
+       "oo-002"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: C# fundamentals quiz",
+      "type": "Quiz",
+      "minutes": 15,
+      "content": "Test yourself on the fundamentals before moving on.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "C# Fundamentals"
+     }
+    ]
+   },
+   {
+    "title": "Collections, Generics and LINQ",
+    "description": "Choosing collections and writing efficient queries.",
+    "lessons": [
+     {
+      "title": "Choosing the right collection",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "| Need | Collection | Complexity |\n|---|---|---|\n| Ordered list, index access | `List<T>` | O(1) index, O(1)* append |\n| Key → value lookup | `Dictionary<K,V>` | O(1) average |\n| Uniqueness | `HashSet<T>` | O(1) average |\n| Sorted keys | `SortedDictionary<K,V>` | O(log n) |\n| FIFO / LIFO | `Queue<T>` / `Stack<T>` | O(1) |\n| Priority | `PriorityQueue<T,P>` | O(log n) |\n\nGenerics avoid boxing and give compile-time type safety. Variance (`out T`) is only on interfaces and delegates.",
+      "exercise": null,
+      "questions": [
+       "cs-008",
+       "cs-009",
+       "cs-010"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "LINQ and deferred execution",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "LINQ operators like `Where` and `Select` are **deferred**: they run when enumerated. Operators like `Count()`, `ToList()` and `First()` execute immediately.\n\n- Materialise once with `ToList()` if you enumerate multiple times.\n- `IQueryable<T>` sends expression trees to a provider (EF Core → SQL); `IEnumerable<T>` runs in memory.\n- `Single()` asserts exactly one element; `First()` takes the first.",
+      "exercise": null,
+      "questions": [
+       "cs-011",
+       "cs-012",
+       "cs-013"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: refactor loops to LINQ",
+      "type": "Exercise",
+      "minutes": 20,
+      "content": "Practise expressing loops declaratively.",
+      "exercise": "Given a list of orders (Id, CustomerId, Total, CreatedAt), write LINQ queries that: (1) return the top 3 customers by total spend, (2) group orders by month with totals, (3) find customers with no orders in the last 30 days. Then explain which queries would be translated to SQL by EF Core and which would run in memory.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Async, Errors and Memory",
+    "description": "Production-grade async code and resource management.",
+    "lessons": [
+     {
+      "title": "How async/await really works",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "`await` on an incomplete task **returns to the caller** and resumes later as a continuation. No thread is blocked while I/O is in flight.\n\n**Rules**\n1. Async all the way — never `.Result`/`.Wait()` (deadlocks, thread-pool starvation).\n2. Run independent I/O concurrently with `Task.WhenAll`.\n3. `async void` only for event handlers.\n4. Pass `CancellationToken` through every async call.\n5. Use `SemaphoreSlim` instead of `lock` around `await`.",
+      "exercise": null,
+      "questions": [
+       "cs-016",
+       "cs-017",
+       "cs-018",
+       "cs-019",
+       "cs-020"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Garbage collection and IDisposable",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "The GC is generational (Gen0/1/2) plus the **Large Object Heap** for objects ≥ 85,000 bytes. It reclaims managed memory only.\n\n`IDisposable` releases **unmanaged** resources deterministically — use `using` / `await using`. The GC never calls `Dispose`; it may run finalizers.\n\nReduce allocations in hot paths with `Span<T>`, `ArrayPool<T>` and `StringBuilder`.",
+      "exercise": null,
+      "questions": [
+       "cs-021",
+       "cs-022",
+       "cs-023"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exceptions done right",
+      "type": "Reading",
+      "minutes": 10,
+      "content": "- Rethrow with `throw;` to keep the stack trace.\n- Catch specific exceptions; don't use exceptions for control flow.\n- `finally` always runs when leaving `try` (except process termination).\n- Wrap low-level exceptions with context using `InnerException`.",
+      "exercise": null,
+      "questions": [
+       "cs-024",
+       "cs-025",
+       "cs-030"
+      ],
+      "quiz": null
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-aspnet",
+  "title": "ASP.NET Core Developer Roadmap",
+  "description": "Build, secure and scale production Web APIs with ASP.NET Core.",
+  "level": "Intermediate",
+  "hours": 28,
+  "premium": false,
+  "tech": "aspnet-core",
+  "modules": [
+   {
+    "title": "Hosting, Pipeline and DI",
+    "description": "How a request flows through an ASP.NET Core app.",
+    "lessons": [
+     {
+      "title": "The request pipeline",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Middleware runs **in registration order** on the way in and in **reverse** on the way out. Typical order:\n\n1. Exception handling\n2. HTTPS redirection / HSTS\n3. Static files\n4. Routing\n5. CORS\n6. Authentication → Authorization\n7. Endpoints\n\n`app.Run` is terminal; `app.Use` can call `next`.",
+      "exercise": null,
+      "questions": [
+       "an-001",
+       "an-002",
+       "an-003"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Dependency injection lifetimes",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- **Transient** — new instance per resolution.\n- **Scoped** — one per request (DbContext).\n- **Singleton** — one per application; must be thread-safe.\n\nAvoid **captive dependencies** (singleton → scoped). In background services create scopes with `IServiceScopeFactory`.",
+      "exercise": null,
+      "questions": [
+       "an-004",
+       "an-005",
+       "an-006"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Configuration and options",
+      "type": "Reading",
+      "minutes": 10,
+      "content": "Providers override in order: appsettings.json → appsettings.{Env}.json → user secrets → environment variables → command line.\n\nBind sections to typed classes with `services.Configure<T>(config.GetSection(\"X\"))` and inject `IOptions<T>`. Keep secrets in environment variables or a vault — never in source control.",
+      "exercise": null,
+      "questions": [
+       "an-019",
+       "an-018"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Building Web APIs",
+    "description": "Controllers, minimal APIs, filters and HTTP semantics.",
+    "lessons": [
+     {
+      "title": "HTTP semantics for APIs",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- `201 Created` + Location for new resources; `204 No Content` for empty success.\n- `400` validation, `401` unauthenticated, `403` forbidden, `404` not found, `409` conflict, `429` rate limited.\n- PUT/DELETE are idempotent; make POST retries safe with idempotency keys.\n- Version your API (`/api/v1`) and return a consistent error envelope.",
+      "exercise": null,
+      "questions": [
+       "an-008",
+       "an-009",
+       "ap-002",
+       "ap-004"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Controllers, minimal APIs and filters",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "`[ApiController]` enables automatic 400 responses and binding inference. Minimal APIs (`MapGet`, `MapGroup`) are lighter for simple endpoints.\n\nFilters run inside MVC: authorization → resource → action → result, with exception filters for MVC errors. Prefer **middleware** for global exception handling.",
+      "exercise": null,
+      "questions": [
+       "an-007",
+       "an-010",
+       "an-011",
+       "an-015"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: design an orders API",
+      "type": "Exercise",
+      "minutes": 25,
+      "content": "Design endpoints for an orders service.",
+      "exercise": "Design REST endpoints for creating, listing (with filtering, sorting and cursor pagination), updating and cancelling orders. Specify routes, methods, status codes, request/response DTOs, validation rules and how you would make 'create order' safe to retry.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Security and Performance",
+    "description": "Authentication, authorization and scaling an API.",
+    "lessons": [
+     {
+      "title": "JWT authentication and refresh tokens",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "Access tokens should be **short-lived** (minutes) because self-contained JWTs can't be revoked easily. Pair them with **refresh tokens** stored hashed on the server, **rotated** on every use, with reuse detection that revokes the family.\n\nValidate signature, issuer, audience and lifetime. Use policies (`RequireRole`, `RequireClaim`) for authorization.",
+      "exercise": null,
+      "questions": [
+       "an-012",
+       "an-013",
+       "an-014",
+       "se-005"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Performance and resilience",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- Use `IHttpClientFactory` with timeouts, retries (exponential backoff + jitter) and circuit breakers.\n- Avoid sync-over-async to prevent thread-pool starvation.\n- Cache judiciously (in-memory, distributed, output caching).\n- Add rate limiting and health checks; observe with OpenTelemetry traces and metrics.",
+      "exercise": null,
+      "questions": [
+       "an-017",
+       "sd-010",
+       "sd-011"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: ASP.NET Core quiz",
+      "type": "Quiz",
+      "minutes": 15,
+      "content": "Verify your understanding of ASP.NET Core.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "ASP.NET Core Fundamentals"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-fullstack-dotnet",
+  "title": "Full Stack .NET Developer Roadmap",
+  "description": "Connect C#, ASP.NET Core, EF Core, SQL Server and React into one coherent skill set.",
+  "level": "Intermediate",
+  "hours": 40,
+  "premium": true,
+  "tech": null,
+  "modules": [
+   {
+    "title": "Data Access with EF Core and SQL",
+    "description": "From LINQ to efficient SQL.",
+    "lessons": [
+     {
+      "title": "EF Core essentials",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- `DbContext` is scoped and not thread-safe; it implements **Unit of Work**.\n- Use migrations for schema changes; generate idempotent scripts for production.\n- Prefer projections (`Select` into DTOs) and `AsNoTracking()` for reads.\n- Watch for **N+1** queries — use `Include` or projections.",
+      "exercise": null,
+      "questions": [
+       "ef-001",
+       "ef-002",
+       "ef-003",
+       "ef-005",
+       "oo-015"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Indexes every developer should know",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "A **clustered index** orders the table; **nonclustered** indexes point back to it. Make predicates **SARGable**, add **INCLUDE** columns to cover queries, and read execution plans for Key Lookups and scans.",
+      "exercise": null,
+      "questions": [
+       "sq-012",
+       "sq-013",
+       "sq-014",
+       "sq-015"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Frontend with React",
+    "description": "Modern React for .NET developers.",
+    "lessons": [
+     {
+      "title": "Components, state and effects",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Components are functions of props and state. Updates are batched; use functional updates when the next state depends on the previous. Effects synchronise with external systems and need honest dependency arrays.",
+      "exercise": null,
+      "questions": [
+       "re-002",
+       "re-004",
+       "re-005",
+       "re-008"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Calling your API from React",
+      "type": "Reading",
+      "minutes": 10,
+      "content": "- Centralise API calls with typed clients.\n- Handle loading, error and empty states explicitly.\n- Store access tokens in memory; refresh with HttpOnly cookies or a refresh endpoint.\n- Cancel requests on unmount with `AbortController`.",
+      "exercise": null,
+      "questions": [
+       "js-008",
+       "se-002",
+       "se-003"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Putting it together",
+    "description": "Architecture and delivery.",
+    "lessons": [
+     {
+      "title": "Clean architecture for full-stack apps",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Keep business rules in Domain/Application layers, implement persistence and integrations in Infrastructure, and expose DTOs from the API. Dependencies point inward, which keeps logic testable.",
+      "exercise": null,
+      "questions": [
+       "oo-016",
+       "oo-009",
+       "ap-005"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: end-to-end feature",
+      "type": "Exercise",
+      "minutes": 45,
+      "content": "Implement a feature across all layers.",
+      "exercise": "Implement 'bookmark a question': a SQL table with a unique (UserId, QuestionId) index, an EF Core configuration, an application service with validation, POST/DELETE endpoints returning proper status codes, and a React button with optimistic UI that rolls back on failure.",
+      "questions": [],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: full-stack assessment",
+      "type": "Quiz",
+      "minutes": 30,
+      "content": "A timed assessment across the stack.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "Full-Stack .NET Assessment"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-react",
+  "title": "React Developer Roadmap",
+  "description": "Components, hooks, state management, routing and performance.",
+  "level": "Beginner",
+  "hours": 25,
+  "premium": false,
+  "tech": "react",
+  "modules": [
+   {
+    "title": "React Fundamentals",
+    "description": "Thinking in components.",
+    "lessons": [
+     {
+      "title": "JSX, props and state",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- Props flow **down** and are read-only.\n- State is local; lift it to the nearest common ancestor when shared.\n- Lists need stable `key`s for reconciliation.\n- Controlled inputs keep form values in state.",
+      "exercise": null,
+      "questions": [
+       "re-001",
+       "re-002",
+       "re-015"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "How rendering works",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "State change → render (pure) → reconciliation (diff by type and key) → commit (DOM updates) → effects. Rendering may be interrupted in concurrent mode; commits are synchronous.",
+      "exercise": null,
+      "questions": [
+       "re-016"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Hooks in Depth",
+    "description": "useState, useEffect, useRef, useMemo and custom hooks.",
+    "lessons": [
+     {
+      "title": "The rules and the classic pitfalls",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "1. Call hooks at the top level only.\n2. Effects capture the render's props/state — beware **stale closures**.\n3. `useRef` stores mutable values without re-rendering.\n4. `useMemo` caches values; `useCallback` caches function identity.",
+      "exercise": null,
+      "questions": [
+       "re-003",
+       "re-006",
+       "re-007",
+       "re-008"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: build a useDebounce hook",
+      "type": "Exercise",
+      "minutes": 20,
+      "content": "Write a reusable custom hook.",
+      "exercise": "Implement `useDebounce(value, delayMs)` that returns the value only after it stops changing for delayMs. Use it in a search box that fetches results with AbortController so outdated requests are cancelled. Write a test with fake timers.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "State, Routing and Performance",
+    "description": "Scaling React apps.",
+    "lessons": [
+     {
+      "title": "State management options",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Local state → lifted state → context (low-frequency global data) → stores like Redux Toolkit or Zustand for complex, high-frequency state. Reducers must be pure; RTK uses Immer for safe 'mutations'.",
+      "exercise": null,
+      "questions": [
+       "re-009",
+       "re-010"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Routing and performance",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Use `<Link>` for client-side navigation and `useParams` for route data. For performance: measure with the Profiler, memoise selectively with `React.memo`, virtualise long lists and split code with `lazy`.",
+      "exercise": null,
+      "questions": [
+       "re-011",
+       "re-012",
+       "re-013",
+       "re-014"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: React quiz",
+      "type": "Quiz",
+      "minutes": 15,
+      "content": "Review React fundamentals.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "React Fundamentals"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-sql",
+  "title": "SQL Server Developer Roadmap",
+  "description": "Write correct, fast T-SQL and design solid schemas.",
+  "level": "Intermediate",
+  "hours": 24,
+  "premium": false,
+  "tech": "sql-server",
+  "modules": [
+   {
+    "title": "Querying",
+    "description": "Joins, subqueries and CTEs.",
+    "lessons": [
+     {
+      "title": "Joins without surprises",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "- INNER returns matches only; LEFT keeps all left rows.\n- Filtering the right table in WHERE turns a LEFT JOIN into an INNER JOIN — put such predicates in ON.\n- CROSS JOIN = Cartesian product.",
+      "exercise": null,
+      "questions": [
+       "sq-001",
+       "sq-002",
+       "sq-003"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Subqueries, NULLs and CTEs",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "`NOT IN` with a NULL in the list returns no rows — use `NOT EXISTS`. CTEs improve readability and enable recursion but are not materialised.",
+      "exercise": null,
+      "questions": [
+       "sq-004",
+       "sq-005",
+       "sq-006",
+       "sq-022"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Analytics with Window Functions",
+    "description": "Ranking, running totals and top-N per group.",
+    "lessons": [
+     {
+      "title": "Window functions",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "`ROW_NUMBER`, `RANK`, `DENSE_RANK`, `LAG/LEAD` and aggregates with `OVER (PARTITION BY … ORDER BY … ROWS …)`. They are evaluated after WHERE, so filter on them in an outer query or CTE.",
+      "exercise": null,
+      "questions": [
+       "sq-007",
+       "sq-008",
+       "sq-009"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: top earners per department",
+      "type": "Exercise",
+      "minutes": 20,
+      "content": "Solve a classic interview problem with SQL.",
+      "exercise": "Solve the 'Top Earner per Department' and 'Second Highest Salary' SQL coding challenges. Then rewrite each with a different approach (window function vs. aggregate/subquery) and compare their execution plans.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Performance and Transactions",
+    "description": "Indexes, plans, isolation and locking.",
+    "lessons": [
+     {
+      "title": "Indexes and execution plans",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Read actual plans; look for scans on large tables, Key Lookups, spills and estimate errors. Make predicates SARGable and add covering indexes. Beware parameter sniffing.",
+      "exercise": null,
+      "questions": [
+       "sq-012",
+       "sq-013",
+       "sq-014",
+       "sq-015",
+       "sq-019"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Transactions and isolation",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "READ COMMITTED (default) prevents dirty reads; REPEATABLE READ and SERIALIZABLE prevent more anomalies with more locking. RCSI/SNAPSHOT use row versions so readers don't block writers. Handle deadlock victims (error 1205) with retries.",
+      "exercise": null,
+      "questions": [
+       "sq-016",
+       "sq-017",
+       "sq-018"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: SQL Server quiz",
+      "type": "Quiz",
+      "minutes": 15,
+      "content": "Validate your SQL Server knowledge.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "SQL Server Fundamentals"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-javascript",
+  "title": "JavaScript Developer Roadmap",
+  "description": "The language, the event loop and the browser.",
+  "level": "Beginner",
+  "hours": 22,
+  "premium": false,
+  "tech": "javascript",
+  "modules": [
+   {
+    "title": "Core Language",
+    "description": "Types, scope and functions.",
+    "lessons": [
+     {
+      "title": "Types and equality",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Primitive types vs objects, `typeof null === 'object'`, floating-point precision, and why to prefer `===`. `const` prevents reassignment, not mutation.",
+      "exercise": null,
+      "questions": [
+       "js-001",
+       "js-002",
+       "js-003",
+       "js-012"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Scope, hoisting and closures",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "`var` is function-scoped; `let`/`const` are block-scoped with a TDZ. Closures capture variables, not values — the classic `var` loop prints 3 3 3.",
+      "exercise": null,
+      "questions": [
+       "js-004",
+       "js-005",
+       "js-006"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Asynchronous JavaScript",
+    "description": "Promises, async/await and the event loop.",
+    "lessons": [
+     {
+      "title": "The event loop",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "Synchronous code → microtasks (promises) → render → next macrotask (timers, events). Long tasks block the UI.",
+      "exercise": null,
+      "questions": [
+       "js-007",
+       "js-018"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Promises and async/await",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "`async` functions return promises. Use `Promise.all` for fail-fast concurrency, `allSettled` when partial failure is fine, and `try/catch` with `await` for errors.",
+      "exercise": null,
+      "questions": [
+       "js-008",
+       "js-009"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Objects and the Browser",
+    "description": "Prototypes, this and DOM performance.",
+    "lessons": [
+     {
+      "title": "Prototypes and this",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Property lookup walks the prototype chain. `this` depends on the call site, except in arrow functions, which capture it lexically.",
+      "exercise": null,
+      "questions": [
+       "js-010",
+       "js-011"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Browser internals",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Event delegation, reflow vs repaint, and storage choices (cookies vs Web Storage). Animate `transform` and `opacity`, debounce input handlers.",
+      "exercise": null,
+      "questions": [
+       "js-014",
+       "js-015",
+       "js-016",
+       "js-017"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: JavaScript quiz",
+      "type": "Quiz",
+      "minutes": 15,
+      "content": "Test your JavaScript knowledge.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "JavaScript Fundamentals"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-dsa",
+  "title": "Data Structures and Algorithms",
+  "description": "The patterns behind most coding interview problems.",
+  "level": "Intermediate",
+  "hours": 45,
+  "premium": false,
+  "tech": "dsa",
+  "modules": [
+   {
+    "title": "Complexity and Arrays",
+    "description": "Big-O and array techniques.",
+    "lessons": [
+     {
+      "title": "Big-O analysis",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Count dominant operations, drop constants. Know common classes: O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ). Amortised analysis explains O(1) appends.",
+      "exercise": null,
+      "questions": [
+       "ds-001",
+       "ds-002",
+       "ds-003"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Two pointers and sliding windows",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Sorted arrays → two pointers from both ends. Contiguous subarrays → sliding window or Kadane's algorithm. These turn O(n²) brute force into O(n).",
+      "exercise": null,
+      "questions": [
+       "ds-004",
+       "ds-005"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Practice: arrays and strings",
+      "type": "Exercise",
+      "minutes": 40,
+      "content": "Solve challenges to apply the techniques.",
+      "exercise": "Solve 'Two Sum', 'Reverse Words', 'Valid Palindrome' and 'Sliding Window Maximum' in the coding section. For each, state the brute-force complexity and your optimised complexity.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Linked Structures and Trees",
+    "description": "Lists, stacks, queues, trees and heaps.",
+    "lessons": [
+     {
+      "title": "Linked lists, stacks and queues",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Pointer manipulation (reverse, merge, cycle detection), stacks for matching/undo, queues for BFS. Know their complexities and trade-offs versus arrays.",
+      "exercise": null,
+      "questions": [
+       "ds-006",
+       "ds-007",
+       "ds-008",
+       "ds-009"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Trees and heaps",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "BST in-order traversal is sorted; balance matters (O(log n) vs O(n)). Heaps give O(1) min and O(log n) updates — the basis of priority queues and top-K problems.",
+      "exercise": null,
+      "questions": [
+       "ds-010",
+       "ds-011",
+       "ds-019"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Graphs, Sorting and DP",
+    "description": "Advanced patterns.",
+    "lessons": [
+     {
+      "title": "Graph algorithms",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "BFS (unweighted shortest path), DFS (connectivity, cycle detection), topological sort (DAGs), Dijkstra (non-negative weights).",
+      "exercise": null,
+      "questions": [
+       "ds-012",
+       "ds-013"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Sorting and dynamic programming",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "Merge sort is stable O(n log n); quicksort is fast on average but O(n²) worst case. DP needs overlapping subproblems and optimal substructure; choose memoisation or tabulation.",
+      "exercise": null,
+      "questions": [
+       "ds-014",
+       "ds-015",
+       "ds-016",
+       "ds-017"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Checkpoint: DSA quiz",
+      "type": "Quiz",
+      "minutes": 20,
+      "content": "Check your algorithmic knowledge.",
+      "exercise": null,
+      "questions": [],
+      "quiz": "Data Structures & Algorithms Fundamentals"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-system-design",
+  "title": "System Design",
+  "description": "Scalability, caching, data and reliability for system design interviews.",
+  "level": "Advanced",
+  "hours": 30,
+  "premium": true,
+  "tech": "system-design",
+  "modules": [
+   {
+    "title": "Foundations",
+    "description": "A framework for any design question.",
+    "lessons": [
+     {
+      "title": "How to approach a design interview",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "1. Clarify requirements (functional + non-functional).\n2. Estimate scale (QPS, storage, bandwidth).\n3. Define APIs and the data model.\n4. Draw a high-level design.\n5. Deep-dive bottlenecks: caching, sharding, queues.\n6. Discuss trade-offs, failure modes and monitoring.",
+      "exercise": null,
+      "questions": [
+       "sd-001",
+       "sd-002"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Caching strategies",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Cache-aside, read-through, write-through, write-behind; TTLs and invalidation; stampede protection with request coalescing and jitter.",
+      "exercise": null,
+      "questions": [
+       "sd-003",
+       "sd-004",
+       "sd-005"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Data at Scale",
+    "description": "Replication, partitioning and consistency.",
+    "lessons": [
+     {
+      "title": "Replication and consistency",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Read replicas scale reads but introduce lag. CAP: choose consistency or availability during partitions. Provide read-your-writes where users expect it.",
+      "exercise": null,
+      "questions": [
+       "sd-006",
+       "sd-008"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Partitioning",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Shard by a well-distributed key; avoid monotonic keys that create hotspots. Consistent hashing minimises data movement when nodes change.",
+      "exercise": null,
+      "questions": [
+       "sd-007",
+       "sd-012"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Reliability and Practice",
+    "description": "Async processing, resilience and a full design.",
+    "lessons": [
+     {
+      "title": "Queues and resilience",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Queues decouple producers and consumers; at-least-once delivery requires idempotent consumers. Protect dependencies with timeouts, retries with jitter, circuit breakers and rate limiting.",
+      "exercise": null,
+      "questions": [
+       "sd-009",
+       "sd-010",
+       "sd-011"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Practice: design a URL shortener",
+      "type": "Exercise",
+      "minutes": 45,
+      "content": "Apply the framework end to end.",
+      "exercise": "Design a URL shortener for 100M links/month. Produce estimates, API definitions, ID generation strategy, storage choice, caching, analytics pipeline and failure handling. Then compare your design with the reference answer and run it as an AI mock interview.",
+      "questions": [
+       "sd-013"
+      ],
+      "quiz": null
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-senior",
+  "title": "Senior Software Engineer Preparation",
+  "description": "Design principles, architecture and leadership topics for senior interviews.",
+  "level": "Expert",
+  "hours": 35,
+  "premium": true,
+  "tech": "oop-design",
+  "modules": [
+   {
+    "title": "Design Principles",
+    "description": "SOLID and patterns that senior engineers apply daily.",
+    "lessons": [
+     {
+      "title": "SOLID with real examples",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "SRP: one reason to change. OCP: extend via new implementations. LSP: subtypes keep the base contract. ISP: small role interfaces. DIP: depend on abstractions owned by the policy layer.",
+      "exercise": null,
+      "questions": [
+       "oo-005",
+       "oo-006",
+       "oo-007",
+       "oo-008",
+       "oo-009"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Patterns that matter",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Strategy, Decorator, Factory, Observer — know when *not* to use a pattern. Prefer composition; keep abstractions earning their keep.",
+      "exercise": null,
+      "questions": [
+       "oo-010",
+       "oo-011",
+       "oo-012",
+       "oo-013",
+       "oo-014"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Architecture",
+    "description": "Monoliths, microservices and boundaries.",
+    "lessons": [
+     {
+      "title": "Architectural styles",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "Clean/hexagonal architecture, modular monoliths, microservices with database-per-service, sagas and the outbox pattern. Choose based on team size, domain stability and operational maturity.",
+      "exercise": null,
+      "questions": [
+       "oo-016",
+       "ap-005",
+       "ap-006",
+       "ap-007"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: architecture decision record",
+      "type": "Exercise",
+      "minutes": 30,
+      "content": "Practise communicating trade-offs.",
+      "exercise": "Write an Architecture Decision Record (context, decision, alternatives, consequences) for splitting a notification feature out of a monolith. Include data ownership, failure handling, deployment and how you would measure success.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "Leading Technically",
+    "description": "Quality, delivery and behavioural interviews.",
+    "lessons": [
+     {
+      "title": "Code review, testing and delivery",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Review for correctness, readability and risk; test business rules at the unit level and integrations at the boundaries; deliver safely with feature flags, blue-green or canary releases and backward-compatible migrations.",
+      "exercise": null,
+      "questions": [
+       "do-008",
+       "do-006"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Behavioural stories with STAR",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "Prepare 6–8 stories using **Situation, Task, Action, Result**: conflict, failure, influence without authority, mentoring, a hard technical decision and a delivery under pressure. Quantify results and reflect on what you'd change.",
+      "exercise": null,
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "key": "lp-android",
+  "title": "Android Developer Preparation",
+  "description": "Kotlin, coroutines and the Android architecture questions interviewers ask.",
+  "level": "Intermediate",
+  "hours": 20,
+  "premium": false,
+  "tech": "kotlin",
+  "modules": [
+   {
+    "title": "Kotlin Essentials",
+    "description": "Language features used every day on Android.",
+    "lessons": [
+     {
+      "title": "Null safety and data classes",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Kotlin distinguishes nullable (`String?`) and non-null types. Use `?.`, `?:` and avoid `!!`. Data classes generate equals/hashCode/copy — ideal for immutable UI state.",
+      "exercise": null,
+      "questions": [
+       "kt-001",
+       "kt-002",
+       "kt-003"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Coroutines and Flow",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "`suspend` functions suspend without blocking threads. Use structured concurrency (`viewModelScope`), switch to `Dispatchers.IO` for blocking work, and expose state with `StateFlow`. Cancel work tied to lifecycles.",
+      "exercise": null,
+      "questions": [
+       "kt-004"
+      ],
+      "quiz": null
+     }
+    ]
+   },
+   {
+    "title": "App Architecture",
+    "description": "MVVM, unidirectional data flow and offline-first.",
+    "lessons": [
+     {
+      "title": "MVVM with Jetpack Compose",
+      "type": "Reading",
+      "minutes": 15,
+      "content": "ViewModels expose immutable `UiState` via `StateFlow`; composables render state and send events up. Repositories combine network and Room caches. Hilt provides dependencies.",
+      "exercise": null,
+      "questions": [
+       "oo-009",
+       "oo-016"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Offline-first data",
+      "type": "Reading",
+      "minutes": 12,
+      "content": "Treat the local database as the source of truth, sync in the background with WorkManager, resolve conflicts deterministically (e.g. last-writer-wins with timestamps), and show sync status to users.",
+      "exercise": null,
+      "questions": [
+       "sd-008",
+       "sd-009"
+      ],
+      "quiz": null
+     },
+     {
+      "title": "Exercise: design an offline notes feature",
+      "type": "Exercise",
+      "minutes": 30,
+      "content": "Apply MVVM and offline sync.",
+      "exercise": "Design a notes feature that works offline: Room entities with a pending-sync flag, a repository that writes locally then enqueues a WorkManager sync, a conflict rule, and a Compose screen showing sync state. Describe the tests you would write.",
+      "questions": [],
+      "quiz": null
+     }
+    ]
+   }
+  ]
+ }
+]

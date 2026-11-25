@@ -1,0 +1,791 @@
+[
+ {
+  "key": "ds-001",
+  "tech": "dsa",
+  "category": "Complexity Analysis",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Binary search complexity",
+  "body": "What is the time complexity of binary search on a sorted array of n elements?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "O(n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(log n)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(n log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(1)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(log n).",
+  "explanation": "Each comparison halves the search space, so at most ⌊log₂ n⌋ + 1 comparisons are needed. It requires random access and sorted data.",
+  "reference": null,
+  "tags": [
+   "binary-search",
+   "big-o"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ds-002",
+  "tech": "dsa",
+  "category": "Complexity Analysis",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Nested loop complexity",
+  "body": "What is the time complexity of this code?",
+  "code": "for (int i = 0; i < n; i++)\n    for (int j = 0; j < i; j++)\n        count++;",
+  "lang": "csharp",
+  "options": [
+   {
+    "t": "O(n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n²)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(2ⁿ)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(n²).",
+  "explanation": "The inner loop runs 0 + 1 + … + (n−1) = n(n−1)/2 times, which is Θ(n²) — constant factors and lower-order terms are dropped.",
+  "reference": null,
+  "tags": [
+   "big-o"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ds-003",
+  "tech": "dsa",
+  "category": "Complexity Analysis",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Amortised dynamic array append",
+  "body": "Why is appending to a dynamic array (List<T>, ArrayList) O(1) amortised?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Arrays never resize",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Capacity grows geometrically (e.g. doubles), so the occasional O(n) copy is spread over many cheap appends",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Each append allocates a new array",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Because of hashing",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Geometric growth makes total copying cost O(n) for n appends.",
+  "explanation": "Doubling means each element is copied a constant number of times on average. Pre-size the list when the final size is known to avoid reallocations.",
+  "reference": null,
+  "tags": [
+   "amortized-analysis"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ds-004",
+  "tech": "dsa",
+  "category": "Arrays & Strings",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Pair sum in a sorted array",
+  "body": "What is the most efficient way to find whether two numbers in a **sorted** array sum to a target?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Check every pair: O(n²)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Two pointers from both ends moving inward: O(n) time, O(1) space",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Sort again then binary search each: O(n² log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Recursion over all subsets",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Two pointers.",
+  "explanation": "If the sum is too small move the left pointer right, if too large move the right pointer left. For unsorted input use a hash set of complements in O(n) time and space.",
+  "reference": null,
+  "tags": [
+   "two-pointers"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ds-005",
+  "tech": "dsa",
+  "category": "Arrays & Strings",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Maximum subarray",
+  "body": "Which algorithm finds the maximum-sum contiguous subarray in O(n)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Dijkstra's algorithm",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Kadane's algorithm",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Merge sort",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Floyd–Warshall",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Kadane's algorithm.",
+  "explanation": "Track `best = max(best, current = max(x, current + x))` in one pass. Handle all-negative arrays by initialising with the first element.",
+  "reference": null,
+  "tags": [
+   "kadane",
+   "arrays"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ds-006",
+  "tech": "dsa",
+  "category": "Linked Lists",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Cycle detection in a linked list",
+  "body": "How can you detect a cycle in a singly linked list using O(1) extra space?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Store visited nodes in a hash set",
+    "c": false,
+    "e": "Works, but uses O(n) space."
+   },
+   {
+    "t": "Floyd's tortoise and hare: move one pointer by 1 and another by 2; they meet if there is a cycle",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Reverse the list twice",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Count nodes until null",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Fast and slow pointers.",
+  "explanation": "If fast reaches null there is no cycle. After they meet, resetting one pointer to head and advancing both by one finds the cycle start.",
+  "reference": null,
+  "tags": [
+   "linked-list",
+   "two-pointers"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "ds-007",
+  "tech": "dsa",
+  "category": "Linked Lists",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Indexed access in a linked list",
+  "body": "What is the time complexity of accessing the k-th element of a singly linked list?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "O(1)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(k), i.e. O(n) in the worst case",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n²)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(n) — you must walk from the head.",
+  "explanation": "Linked lists trade indexed access for O(1) insertion/removal at a known node. Arrays offer O(1) indexing and better cache locality, which often makes them faster in practice.",
+  "reference": null,
+  "tags": [
+   "linked-list"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ds-008",
+  "tech": "dsa",
+  "category": "Stacks & Queues",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Balanced brackets",
+  "body": "Which data structure is the natural choice to check whether brackets like `({[]})` are balanced?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Queue",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Stack",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Heap",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Hash map only",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A stack.",
+  "explanation": "Push opening brackets; on a closing bracket pop and verify it matches. The string is balanced if the stack is empty at the end. O(n) time.",
+  "reference": null,
+  "tags": [
+   "stack"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ds-009",
+  "tech": "dsa",
+  "category": "Stacks & Queues",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "BFS data structure",
+  "body": "Breadth-first search uses which data structure to decide the next node to visit?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Stack",
+    "c": false,
+    "e": "A stack gives depth-first order."
+   },
+   {
+    "t": "Queue",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Priority queue",
+    "c": false,
+    "e": "Used by Dijkstra."
+   },
+   {
+    "t": "Set",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A FIFO queue.",
+  "explanation": "BFS visits nodes level by level, so on unweighted graphs it finds shortest paths in number of edges. Mark nodes visited when enqueued to avoid duplicates.",
+  "reference": null,
+  "tags": [
+   "bfs",
+   "queue"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ds-010",
+  "tech": "dsa",
+  "category": "Trees & Graphs",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "In-order traversal of a BST",
+  "body": "What order does an in-order traversal of a binary search tree produce?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Level order",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Ascending (sorted) order of keys",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Reverse insertion order",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Random order",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Sorted order.",
+  "explanation": "In-order visits left subtree, node, right subtree. This property is used to validate BSTs and to find the k-th smallest element.",
+  "reference": null,
+  "tags": [
+   "bst",
+   "traversal"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ds-011",
+  "tech": "dsa",
+  "category": "Trees & Graphs",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Unbalanced BST worst case",
+  "body": "What is the worst-case search time in an **unbalanced** binary search tree with n nodes?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "O(1)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(log n)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(n log n)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(n) — inserting sorted keys produces a linked-list-shaped tree.",
+  "explanation": "Self-balancing trees (AVL, red-black) guarantee O(log n) height; SortedDictionary/TreeMap use red-black trees.",
+  "reference": null,
+  "tags": [
+   "bst",
+   "balancing"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "ds-012",
+  "tech": "dsa",
+  "category": "Trees & Graphs",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Dijkstra's limitation",
+  "body": "When does Dijkstra's algorithm fail to find correct shortest paths?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "On directed graphs",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "When some edges have negative weights",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "On graphs with cycles",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "On sparse graphs",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Negative edge weights.",
+  "explanation": "Dijkstra finalises a node when it is popped from the priority queue, assuming distances never decrease later. Use Bellman–Ford for negative weights (it also detects negative cycles).",
+  "reference": null,
+  "tags": [
+   "graphs",
+   "shortest-path"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "ds-013",
+  "tech": "dsa",
+  "category": "Trees & Graphs",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Topological sort",
+  "body": "Topological sorting is only possible for which kind of graph?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Undirected graphs",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Directed acyclic graphs (DAGs)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Complete graphs",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Weighted graphs",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "DAGs.",
+  "explanation": "Kahn's algorithm repeatedly removes nodes with in-degree 0; if nodes remain, there is a cycle. Applications: build systems, course prerequisites, task scheduling.",
+  "reference": null,
+  "tags": [
+   "graphs",
+   "topological-sort"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "ds-014",
+  "tech": "dsa",
+  "category": "Sorting & Searching",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Stable O(n log n) sorting",
+  "body": "Which algorithm is stable **and** guarantees O(n log n) in the worst case?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Quicksort",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Heap sort",
+    "c": false,
+    "e": "Heap sort is O(n log n) but not stable."
+   },
+   {
+    "t": "Merge sort",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Selection sort",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Merge sort.",
+  "explanation": "Stability keeps equal keys in their original order — important when sorting by multiple criteria. Merge sort needs O(n) extra space for arrays.",
+  "reference": null,
+  "tags": [
+   "sorting",
+   "stability"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ds-015",
+  "tech": "dsa",
+  "category": "Sorting & Searching",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Quicksort worst case",
+  "body": "What is quicksort's worst-case time complexity and when does it occur?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "O(n log n), never worse",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(n²), when pivots repeatedly split the array very unevenly (e.g. first-element pivot on sorted input)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "O(n), on sorted input",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "O(log n)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "O(n²) with consistently bad pivots.",
+  "explanation": "Randomised or median-of-three pivots make this unlikely. Introsort (used by .NET's Array.Sort and C++ std::sort) switches to heap sort when recursion gets too deep.",
+  "reference": null,
+  "tags": [
+   "quicksort"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ds-016",
+  "tech": "dsa",
+  "category": "Dynamic Programming",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "When dynamic programming applies",
+  "body": "Dynamic programming is applicable when a problem has…",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "only independent subproblems",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "overlapping subproblems and optimal substructure",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "no recursive structure",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "random input",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Overlapping subproblems + optimal substructure.",
+  "explanation": "Divide and conquer (e.g. merge sort) has independent subproblems, so caching gives nothing. Classic DP problems: Fibonacci, knapsack, edit distance, longest common subsequence.",
+  "reference": null,
+  "tags": [
+   "dynamic-programming"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ds-017",
+  "tech": "dsa",
+  "category": "Dynamic Programming",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Memoisation vs tabulation",
+  "body": "What distinguishes tabulation from memoisation?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Tabulation is top-down recursion with a cache",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tabulation fills a table bottom-up iteratively; memoisation caches results of top-down recursive calls",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Only memoisation is DP",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tabulation always uses less memory",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Bottom-up table vs top-down cached recursion.",
+  "explanation": "Tabulation avoids recursion depth limits and often allows rolling-array space optimisation; memoisation computes only the states actually reached.",
+  "reference": null,
+  "tags": [
+   "dynamic-programming"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ds-018",
+  "tech": "dsa",
+  "category": "Hashing",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Hash table degradation",
+  "body": "What makes hash table operations degrade towards O(n)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Using string keys",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Many keys hashing to the same bucket (poor hash function or adversarial input)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Removing items",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Iterating the table",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Collisions concentrating keys in few buckets.",
+  "explanation": "Good hash distribution and resizing keep the load factor low. Mutable keys whose hash changes after insertion become unreachable — make dictionary keys immutable.",
+  "reference": null,
+  "tags": [
+   "hashing"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ds-019",
+  "tech": "dsa",
+  "category": "Trees & Graphs",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Fast minimum access",
+  "body": "Which structure offers O(1) access to the minimum element and O(log n) insertion and removal?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Sorted array",
+    "c": false,
+    "e": "Insertion is O(n)."
+   },
+   {
+    "t": "Binary min-heap",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Linked list",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Hash set",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A binary min-heap (priority queue).",
+  "explanation": ".NET 6+ provides `PriorityQueue<TElement, TPriority>`. Heaps power Dijkstra, scheduling and 'top K' problems.",
+  "reference": null,
+  "tags": [
+   "heap",
+   "priority-queue"
+  ],
+  "seconds": 35,
+  "premium": false
+ }
+]

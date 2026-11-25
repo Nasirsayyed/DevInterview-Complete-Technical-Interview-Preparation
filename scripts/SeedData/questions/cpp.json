@@ -1,0 +1,168 @@
+[
+ {
+  "key": "cp-001",
+  "tech": "cpp",
+  "category": "Core C++",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "References vs pointers",
+  "body": "Which statement about C++ references is true?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A reference can be null",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A reference must be initialised, cannot be null in valid code and cannot be reseated to refer to another object",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "References require manual delete",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "References are slower than pointers",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Always bound, never reseated.",
+  "explanation": "Use references for required parameters and pointers (or std::optional) when 'no object' is a valid state.",
+  "reference": null,
+  "tags": [
+   "references",
+   "pointers"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "cp-002",
+  "tech": "cpp",
+  "category": "Core C++",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "RAII",
+  "body": "What is RAII?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A threading library",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tying resource lifetime to object lifetime: acquire in the constructor, release in the destructor",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Runtime type identification",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A garbage collector",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Resource Acquisition Is Initialization.",
+  "explanation": "Destructors run deterministically at scope exit, even during exceptions, so smart pointers, lock_guard and file wrappers never leak.",
+  "reference": null,
+  "tags": [
+   "raii"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "cp-003",
+  "tech": "cpp",
+  "category": "Core C++",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "unique_ptr vs shared_ptr",
+  "body": "Which statement about smart pointers is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "unique_ptr can be copied",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "unique_ptr has sole ownership and can only be moved; shared_ptr uses reference counting for shared ownership",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "shared_ptr never frees memory",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Both are garbage collected",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "unique_ptr = exclusive, movable; shared_ptr = shared, ref-counted.",
+  "explanation": "Prefer unique_ptr by default (zero overhead). Break shared_ptr cycles with weak_ptr. Create them with make_unique / make_shared.",
+  "reference": null,
+  "tags": [
+   "smart-pointers"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "cp-004",
+  "tech": "cpp",
+  "category": "Core C++",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Virtual destructors",
+  "body": "Why should a polymorphic base class declare a virtual destructor?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "To make the class abstract",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Deleting a derived object through a base pointer otherwise has undefined behaviour and the derived destructor does not run",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Virtual destructors are faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To allow copying",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "So delete via a base pointer calls the derived destructor.",
+  "explanation": "Rule of thumb: if a class has any virtual functions, give it a public virtual destructor (or a protected non-virtual one).",
+  "reference": null,
+  "tags": [
+   "destructors",
+   "polymorphism"
+  ],
+  "seconds": 45,
+  "premium": false
+ }
+]

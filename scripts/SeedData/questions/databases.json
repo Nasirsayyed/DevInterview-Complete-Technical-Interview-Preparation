@@ -1,0 +1,169 @@
+[
+ {
+  "key": "db-001",
+  "tech": "databases",
+  "category": "Relational Databases",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "PostgreSQL VACUUM",
+  "body": "Why does PostgreSQL need `VACUUM`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "To rebuild all indexes nightly",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Its MVCC keeps old row versions (dead tuples) after UPDATE/DELETE; VACUUM reclaims them and prevents transaction-ID wraparound",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "To compress backups",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To refresh materialized views",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "MVCC leaves dead tuples that must be cleaned up.",
+  "explanation": "Autovacuum normally handles this; long-running transactions prevent cleanup and cause bloat. VACUUM also updates the visibility map used by index-only scans.",
+  "reference": null,
+  "tags": [
+   "postgresql",
+   "mvcc"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "db-002",
+  "tech": "databases",
+  "category": "Relational Databases",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "InnoDB storage",
+  "body": "How does MySQL's InnoDB engine physically organise table rows?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "As a heap with no order",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "In a clustered index on the primary key; secondary indexes store the primary key value",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "In separate files per row",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Only in memory",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Clustered by primary key.",
+  "explanation": "Because secondary indexes reference the primary key, a wide primary key makes every secondary index larger. Random UUID primary keys cause page splits, like random GUIDs in SQL Server.",
+  "reference": null,
+  "tags": [
+   "mysql",
+   "innodb"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "db-003",
+  "tech": "databases",
+  "category": "Relational Databases",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Limiting rows",
+  "body": "Which clause limits the number of rows returned in PostgreSQL and MySQL?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "TOP",
+    "c": false,
+    "e": "TOP is SQL Server syntax."
+   },
+   {
+    "t": "LIMIT",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "ROWNUM",
+    "c": false,
+    "e": "ROWNUM is Oracle-specific."
+   },
+   {
+    "t": "FIRST",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "LIMIT (with OFFSET for paging).",
+  "explanation": "The ANSI form `OFFSET n ROWS FETCH NEXT m ROWS ONLY` works in PostgreSQL and SQL Server. Large OFFSETs are slow; prefer keyset pagination (`WHERE id > @lastId ORDER BY id LIMIT 20`).",
+  "reference": null,
+  "tags": [
+   "pagination"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "db-004",
+  "tech": "databases",
+  "category": "Relational Databases",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Indexing JSONB",
+  "body": "Which index type is typically used to speed up containment queries (`@>`) on a PostgreSQL JSONB column?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "B-tree",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "GIN",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Hash",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "BRIN",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "GIN.",
+  "explanation": "Generalized Inverted Indexes index the keys/values inside JSONB documents (also used for arrays and full-text search). B-tree indexes on expressions such as `(data->>'email')` suit equality lookups on a single path.",
+  "reference": null,
+  "tags": [
+   "postgresql",
+   "jsonb"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]

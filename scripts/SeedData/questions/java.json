@@ -1,0 +1,210 @@
+[
+ {
+  "key": "ja-001",
+  "tech": "java",
+  "category": "Core Java",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Comparing strings in Java",
+  "body": "How should two `String` values be compared for equal content in Java?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "a == b",
+    "c": false,
+    "e": "== compares references."
+   },
+   {
+    "t": "a.equals(b)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "a.compareTo(b) == 1",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "a.hashCode() == b.hashCode()",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Use equals().",
+  "explanation": "`==` may appear to work for interned literals but fails for strings created at runtime. Use `Objects.equals(a, b)` to handle null safely.",
+  "reference": null,
+  "tags": [
+   "strings",
+   "equality"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ja-002",
+  "tech": "java",
+  "category": "Core Java",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "equals and hashCode",
+  "body": "What happens if a class overrides `equals` but not `hashCode` and is used as a HashMap key?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Nothing; it works",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Equal objects may land in different buckets, so lookups fail to find keys that are 'equal'",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Compilation fails",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "HashMap sorts the keys",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The equals/hashCode contract is broken: equal objects must have equal hash codes.",
+  "explanation": "Records generate both consistently; IDEs or `Objects.hash(...)` help implement them for classes.",
+  "reference": null,
+  "tags": [
+   "collections",
+   "hashmap"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ja-003",
+  "tech": "java",
+  "category": "Core Java",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Checked exceptions",
+  "body": "What distinguishes checked from unchecked exceptions in Java?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Checked exceptions extend RuntimeException",
+    "c": false,
+    "e": "Unchecked ones do."
+   },
+   {
+    "t": "Checked exceptions must be declared with throws or caught; unchecked exceptions (RuntimeException and Error subclasses) need not be",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Unchecked exceptions cannot be caught",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The compiler enforces handling of checked exceptions.",
+  "explanation": "Checked: IOException, SQLException. Unchecked: NullPointerException, IllegalArgumentException. Many modern APIs favour unchecked exceptions for programming errors.",
+  "reference": null,
+  "tags": [
+   "exceptions"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ja-004",
+  "tech": "java",
+  "category": "Core Java",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Why String is immutable",
+  "body": "Which is a benefit of `String` being immutable in Java?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Strings can be modified in place faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Strings can be safely shared, cached (string pool) and used as HashMap keys and across threads",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It uses less memory when concatenating in loops",
+    "c": false,
+    "e": "Use StringBuilder for that."
+   },
+   {
+    "t": "It disables garbage collection",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Safe sharing, pooling, thread-safety and stable hash codes.",
+  "explanation": "Repeated concatenation creates many objects; StringBuilder avoids that.",
+  "reference": null,
+  "tags": [
+   "strings",
+   "immutability"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ja-005",
+  "tech": "java",
+  "category": "Core Java",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "volatile",
+  "body": "What does declaring a field `volatile` guarantee in Java?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "That count++ on it is atomic",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Visibility: writes by one thread are visible to subsequent reads by other threads, with ordering guarantees",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Mutual exclusion",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "That the field is never cached by the JIT",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Visibility and ordering, not atomicity.",
+  "explanation": "`count++` is read-modify-write; use AtomicInteger or synchronized for atomic updates.",
+  "reference": null,
+  "tags": [
+   "concurrency"
+  ],
+  "seconds": 50,
+  "premium": false
+ }
+]

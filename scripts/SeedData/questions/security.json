@@ -1,0 +1,252 @@
+[
+ {
+  "key": "se-001",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Preventing SQL injection",
+  "body": "What is the primary defence against SQL injection?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Hiding error messages",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Parameterised queries / prepared statements (or an ORM that parameterises)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Client-side validation",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Using POST instead of GET",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Parameterised queries.",
+  "explanation": "Add least-privilege database accounts and input validation as defence in depth; never build SQL by string concatenation with user input.",
+  "reference": null,
+  "tags": [
+   "sql-injection",
+   "owasp"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "se-002",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Preventing XSS",
+  "body": "Which measures best prevent cross-site scripting (XSS)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Using HTTPS only",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Context-aware output encoding (as frameworks like React and Razor do by default) plus a Content Security Policy",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Storing tokens in localStorage",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Disabling cookies",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Encode output and add CSP.",
+  "explanation": "Danger zones: `dangerouslySetInnerHTML`, `innerHTML`, `Html.Raw`. Sanitise rich HTML with a vetted library and mark session cookies HttpOnly.",
+  "reference": null,
+  "tags": [
+   "xss",
+   "owasp"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "se-003",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "CSRF mitigation",
+  "body": "Which mitigates cross-site request forgery for cookie-authenticated apps?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Using JSON",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Anti-forgery tokens and SameSite cookies",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Longer passwords",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "HTTP/2",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Anti-forgery tokens + SameSite.",
+  "explanation": "CSRF abuses the browser automatically attaching cookies. APIs authenticated with bearer tokens in the Authorization header are not vulnerable to classic CSRF.",
+  "reference": null,
+  "tags": [
+   "csrf",
+   "owasp"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "se-004",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Storing passwords",
+  "body": "How should passwords be stored?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Encrypted with AES so they can be recovered",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Hashed with a slow, salted algorithm such as PBKDF2, bcrypt or Argon2",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Hashed with MD5",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "In plain text in a secure database",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Slow, salted password hashing.",
+  "explanation": "Fast hashes (MD5, SHA-256) are brute-forced quickly on GPUs. ASP.NET Core Identity uses PBKDF2 with a per-user salt and many iterations.",
+  "reference": null,
+  "tags": [
+   "passwords",
+   "hashing"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "se-005",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Validating JWTs",
+  "body": "Which JWT validation step is essential to prevent token forgery?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Decoding the payload",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Verifying the signature with the expected key and algorithm, plus issuer, audience and expiry",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Checking the token length",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Base64-encoding it again",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Verify signature (pinning the algorithm), issuer, audience and lifetime.",
+  "explanation": "Never accept `alg: none` or let the token choose the algorithm; reject tokens with unexpected issuers or audiences.",
+  "reference": null,
+  "tags": [
+   "jwt"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "se-006",
+  "tech": "security",
+  "category": "Web Security",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Least privilege",
+  "body": "What does the principle of least privilege mean?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Give every user admin rights to avoid support tickets",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Grant each user, service and process only the permissions required for its task",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Use the fewest servers possible",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Log less data",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Minimal necessary permissions.",
+  "explanation": "Applies to database accounts, cloud IAM roles, API scopes and container users (run as non-root).",
+  "reference": null,
+  "tags": [
+   "access-control"
+  ],
+  "seconds": 30,
+  "premium": false
+ }
+]

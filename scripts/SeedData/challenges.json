@@ -1,0 +1,1379 @@
+[
+ {
+  "key": "ch-two-sum",
+  "title": "Two Sum",
+  "category": "Arrays",
+  "difficulty": "Easy",
+  "statement": "Given an array of integers and a target, return the indices of the **two distinct elements** whose sum equals the target. Exactly one valid pair exists.",
+  "input": "Line 1: n. Line 2: n space-separated integers. Line 3: the target.",
+  "output": "Two indices i and j (0-based, i < j) separated by a space.",
+  "constraints": "2 ≤ n ≤ 10^5; −10^9 ≤ values, target ≤ 10^9",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "A brute-force double loop is O(n²). Can you remember values you've already seen?",
+   "For each value v, check whether target − v was seen before, using a hash map from value to index."
+  ],
+  "solution": "Scan once, storing each value's index in a hash map. For element i, if `target - a[i]` is in the map, print the stored index and i. This is O(n) time and O(n) space, versus O(n²) for checking every pair.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "4\n2 7 11 15\n9\n",
+    "out": "0 1",
+    "sample": true,
+    "why": "2 + 7 = 9 at indices 0 and 1."
+   },
+   {
+    "in": "5\n3 -1 4 8 6\n7\n",
+    "out": "0 2",
+    "sample": true,
+    "why": "-1 + 8 = 7."
+   },
+   {
+    "in": "2\n5 5\n10\n",
+    "out": "0 1",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "6\n1 -2 3 -4 5 -6\n-10\n",
+    "out": "3 5",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "20\n-770 344 -193 54 109 -793 -428 201 -491 367 555 209 419 -646 720 -121 -714 -567 600 687\n-295\n",
+    "out": "12 16",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "200\n795 -635 583 -643 -812 -843 234 -658 530 4280 -735 -193 -443 -723 -412 83 -872 939 899 -7 197 169 845 489 881 233 329 589 325 -983 -534 380 104 691 641 951 205 -713 226 -870 -760 7423 989 -24 -442 -296 -514 -345 611 889 269 88 -137 992 -463 -426 597 -353 562 381 194 -364 6 5165 -41 -417 -358 38 3470 -933 4769 356 -438 -392 4626 424 193 244 -642 367 -349 918 828 -184 -191 349 -625 764 266 184 545 -70 571 5638 106 -677 -312 -539 -950 -654 -154 -866 847 76 -39 566 271 -917 -871 -440 -898 454 2170 -600 -54 7916 -194 66 542 470 6773 -572 -607 212 482 548 142 -400 -605 -518 -163 523 -266 -505 -131 970 70 368 378 687 8128 114 936 346 -720 75 -391 203 -361 -64 -935 -512 -524 -348 -575 -975 -596 -94 204 506 133 -908 -1 303 415 -978 6572 814 118 -10 134 585 -13 848 -125 327 153 -109 164 270 3220 5815 554 -186 -448 -869 900 102 261 -916 -584 -874 -670 2178 3848 -214 -300 5365 455 4416\n-561\n",
+    "out": "71 107",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-reverse-words",
+  "title": "Reverse Words",
+  "category": "Strings",
+  "difficulty": "Easy",
+  "statement": "Reverse the order of the words in a sentence. Words are separated by one or more spaces; the output must use single spaces with no leading or trailing spaces.",
+  "input": "A single line of text.",
+  "output": "The words in reverse order separated by single spaces.",
+  "constraints": "1 ≤ length ≤ 10^4",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "Split on whitespace and ignore empty tokens.",
+   "Reverse the list of words and join with one space."
+  ],
+  "solution": "Split the line into tokens (collapsing repeated spaces), reverse the token list and join with a single space. In-place variants reverse the whole string and then each word.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "the sky is blue\n",
+    "out": "blue is sky the",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "  hello   world  \n",
+    "out": "world hello",
+    "sample": true,
+    "why": "Extra spaces are collapsed."
+   },
+   {
+    "in": "single\n",
+    "out": "single",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "a b c d e\n",
+    "out": "e d c b a",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "DevInterview  helps   you prepare\n",
+    "out": "prepare you helps DevInterview",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-valid-palindrome",
+  "title": "Valid Palindrome",
+  "category": "Strings",
+  "difficulty": "Easy",
+  "statement": "Determine whether a string is a palindrome considering only **alphanumeric** characters and ignoring case.",
+  "input": "A single line of text (may contain spaces and punctuation).",
+  "output": "`true` or `false`.",
+  "constraints": "1 ≤ length ≤ 2·10^5",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "hints": [
+   "Skip characters that are not letters or digits.",
+   "Compare characters from both ends with two pointers."
+  ],
+  "solution": "Use two pointers from both ends, skipping non-alphanumeric characters and comparing lowercase versions. Stop when they meet.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "A man, a plan, a canal: Panama\n",
+    "out": "true",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "race a car\n",
+    "out": "false",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": " \n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "No 'x' in Nixon\n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "0P\n",
+    "out": "false",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "abba\n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "ab_a\n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-valid-parentheses",
+  "title": "Valid Parentheses",
+  "category": "Stacks",
+  "difficulty": "Easy",
+  "statement": "Given a string containing only the characters `()[]{}`, determine whether every bracket is closed by the same type in the correct order.",
+  "input": "A single line containing the brackets.",
+  "output": "`true` or `false`.",
+  "constraints": "1 ≤ length ≤ 10^4",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "Which bracket must close next? The most recently opened one.",
+   "Push opening brackets on a stack and pop when you see a closing one."
+  ],
+  "solution": "Push every opening bracket. For a closing bracket, the stack must be non-empty and its top must be the matching opener. At the end the stack must be empty.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "()[]{}\n",
+    "out": "true",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "(]\n",
+    "out": "false",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "([{}])\n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "((\n",
+    "out": "false",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "){\n",
+    "out": "false",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "{[()()]}[]\n",
+    "out": "true",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "([)]\n",
+    "out": "false",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-reverse-list",
+  "title": "Reverse a Linked List",
+  "category": "LinkedLists",
+  "difficulty": "Easy",
+  "statement": "The values of a singly linked list are given in order. Build the list, reverse it **in place** by re-linking nodes, and print the values of the reversed list.",
+  "input": "Line 1: n (number of nodes). Line 2: n integers (omitted when n = 0).",
+  "output": "The reversed values separated by spaces, or `empty` if the list is empty.",
+  "constraints": "0 ≤ n ≤ 5000",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "hints": [
+   "Keep three references: previous, current and next.",
+   "Point current.next to previous, then advance."
+  ],
+  "solution": "Iterate with `prev = null, cur = head`: save `next = cur.next`, set `cur.next = prev`, move `prev = cur`, `cur = next`. When cur is null, prev is the new head.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "5\n1 2 3 4 5\n",
+    "out": "5 4 3 2 1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "2\n1 2\n",
+    "out": "2 1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "0\n",
+    "out": "empty",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "1\n42\n",
+    "out": "42",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "8\n10 11 12 13 14 15 16 17\n",
+    "out": "17 16 15 14 13 12 11 10",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-merge-sorted-lists",
+  "title": "Merge Two Sorted Lists",
+  "category": "LinkedLists",
+  "difficulty": "Easy",
+  "statement": "Merge two sorted linked lists into one sorted list by splicing their nodes together.",
+  "input": "Line 1: n. Line 2: n sorted integers (or empty). Line 3: m. Line 4: m sorted integers (or empty).",
+  "output": "The merged values separated by spaces, or `empty`.",
+  "constraints": "0 ≤ n, m ≤ 5000",
+  "timeComplexity": "O(n + m)",
+  "spaceComplexity": "O(1)",
+  "hints": [
+   "Use a dummy head node to simplify edge cases.",
+   "Repeatedly attach the smaller current node."
+  ],
+  "solution": "With a dummy node and a tail pointer, attach the smaller of the two current nodes and advance that list. Append the remainder at the end.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "3\n1 2 4\n3\n1 3 4\n",
+    "out": "1 1 2 3 4 4",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "0\n\n0\n\n",
+    "out": "empty",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "0\n\n1\n0\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "4\n-5 0 3 9\n2\n-6 10\n",
+    "out": "-6 -5 0 3 9 10",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "5\n1 1 1 1 1\n3\n1 1 2\n",
+    "out": "1 1 1 1 1 1 1 2",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-queue-two-stacks",
+  "title": "Queue Using Two Stacks",
+  "category": "Queues",
+  "difficulty": "Medium",
+  "statement": "Implement a FIFO queue using only two stacks. Process the operations and print the result of each `pop`, `peek` and `empty`.",
+  "input": "Line 1: q (number of operations). Next q lines: `push x`, `pop`, `peek` or `empty`.",
+  "output": "For each pop/peek, the value (or -1 if the queue is empty); for each empty, `true` or `false`. One result per line.",
+  "constraints": "1 ≤ q ≤ 10^5",
+  "timeComplexity": "O(1) amortised per operation",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "Use one stack for incoming items and one for outgoing items.",
+   "Only move items from the input stack to the output stack when the output stack is empty."
+  ],
+  "solution": "Push onto `in`. For pop/peek, if `out` is empty, pop everything from `in` into `out` (reversing order), then use `out`'s top. Each element moves at most once, giving amortised O(1).",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "5\npush 1\npush 2\npeek\npop\nempty\n",
+    "out": "1\n1\nfalse",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "4\npop\npush 7\npop\nempty\n",
+    "out": "-1\n7\ntrue",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "8\npush 3\npush 4\npop\npush 5\npop\npop\npop\nempty\n",
+    "out": "3\n4\n5\n-1\ntrue",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-level-order",
+  "title": "Binary Tree Level Order Traversal",
+  "category": "Trees",
+  "difficulty": "Medium",
+  "statement": "Given a binary tree in level-order form (with `null` for missing children), print its values level by level.",
+  "input": "A single line with node values in level order; `null` marks a missing child.",
+  "output": "One line per level with the values from left to right, or `empty` for an empty tree.",
+  "constraints": "0 ≤ nodes ≤ 2000",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(w) where w is the maximum width",
+  "hints": [
+   "Breadth-first search processes nodes level by level.",
+   "Record the queue size at the start of each level."
+  ],
+  "solution": "Use a queue. For each level, dequeue exactly the number of nodes present at the start of the level, print them, and enqueue their children.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "3 9 20 null null 15 7\n",
+    "out": "3\n9 20\n15 7",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\n",
+    "out": "1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "null\n",
+    "out": "empty",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "1 2 3 4 null null 5\n",
+    "out": "1\n2 3\n4 5",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "94 50 66 null null 53 25 null null 65 70 80 7 null null null null 15 null 75 92 85 null 9 77\n",
+    "out": "94\n50 66\n53 25\n65 70\n80 7\n15\n75 92\n85 9 77",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "78 13 75 null null 3 5 95 31 null null null 24 null 94 73 36 35 87 18 12 70 77 16 57 null 91 47 null 89 52 59 null 26 16 55 null 64 50 52 66 96 41 32 22 null 38 33 null 14 80 20\n",
+    "out": "78\n13 75\n3 5\n95 31\n24 94\n73 36 35 87\n18 12 70 77 16 57 91\n47 89 52 59 26 16 55 64 50 52 66\n96 41 32 22 38 33 14 80 20",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-number-of-islands",
+  "title": "Number of Islands",
+  "category": "Graphs",
+  "difficulty": "Medium",
+  "statement": "Given a grid of `1` (land) and `0` (water), count the islands. An island is formed by horizontally or vertically adjacent land cells.",
+  "input": "Line 1: rows and columns. Next lines: each row as a string of 0/1.",
+  "output": "The number of islands.",
+  "constraints": "1 ≤ rows, cols ≤ 300",
+  "timeComplexity": "O(rows × cols)",
+  "spaceComplexity": "O(rows × cols)",
+  "hints": [
+   "Every unvisited land cell starts a new island.",
+   "Flood-fill (DFS/BFS) from it to mark the whole island visited."
+  ],
+  "solution": "Scan the grid; when you find a `1`, increment the count and flood-fill all connected land to `0` using an explicit stack or queue (avoids recursion depth issues on large grids).",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "4 5\n11110\n11010\n11000\n00000\n",
+    "out": "1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "4 5\n11000\n11000\n00100\n00011\n",
+    "out": "3",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1 1\n0\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "3 3\n101\n010\n101\n",
+    "out": "5",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "30 40\n1000010100010100110000011000011101000100\n0100100001001011110100011001101000100110\n0011101100100010000010100000110110100100\n1101100100001110100010011010011100111001\n0100011100000001110000100101001100001000\n1100001110100110010110100010000111110100\n1010110101000010000101101101111010100001\n1101000001110010100000001001011011000011\n0110010110001010110100101100001101000000\n0111101010101100001000000101101000110101\n1110101111110101110011001000011101111100\n1101000001001001110010101010111010001011\n1011110000100011100110110100011110101010\n1110000110000100100001011111001101010101\n1100000001101000110010111010101100110110\n1001100100110010110000100101011101100111\n1110110111110110110011000111010010100111\n0001111100100101001100110110110011110001\n0011110001111100000011000101010011000001\n1101100101110010010110010101000111010100\n1001110000101111100100100101011000011110\n0010110110001011100011101000110001000001\n0010001000011011000001100101001010010110\n1011001100101111100101001101001101010000\n1010110000100100101010000111010001010011\n0010000011110110000100110010010001100010\n1010101010100001010000011100001000010111\n0101111000110111011101011011000100010011\n1000010000101000110010110101101110101000\n1010111101000100111011010110100111000110\n",
+    "out": "128",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "120 150\n110001101000111000100100000000100010000010000001000101000000010000110101011111011100000100010100011101000100000111000011001001011100101011000111100100\n011000000000010000010000100000000110011101011100101011011111000101000000000001110010001100001110000010101010011110101010001001000110100000001110100001\n110100000001010001111000000001111000010111010000000110000011111000101010101101000000100110001101100010000001100101100101000111001001000110001100010010\n011100000011110011101011100011010000000000000001111000100100110001110111100010110001001101001110000010000010010010010100000011010011010100010000001001\n000000001010010011100011000001000000011101101100011011001001010000001011100000000001001101111100001011100010010000001000001100111010111100011001000100\n110111110011000110001111010110011100010110001000111100100000111110110001001000011001101100000001011000111010011101101011101101111000010000100010000000\n011000001100111001000110001011000100101000000000011000010010010000100010010110101000000101111001000001111011010001101110000110001000110010011000010101\n000101001001101001111001010000111010010100111010011010000100111100110010011001000001101010001010011110100011110100001010011001011100111100001110000001\n101101011001000010100000101000000100100001010011011011001000010011000100111101010011010100111001100000011010000010010101000010100000110010000110011001\n100101100110000001010001001101001001100000000001001010000101100011010001011001000001101010011110000111111000110001100000111001000000000101110001000110\n010001110111001101110101111000010100101001011011000001101001110010011001000011000000111010001100000100001011010000101011111000010100000111000101000010\n011110000001100100101001001100100110101000000011100011001110100101011011100111000000001110110101111100000000111011000100000011000000001111011010010010\n010010100010001100111001001101000100100001111100111000100000001000001101010000001000100001010110001110111100101000001001000001010001011101010110001010\n101110101110101001101001000111000101111000100000000010010010010111110101010100110000001110011100010110001101010111010100101000100001000100001010111010\n001000001010000110111000110000110010110011000010011000111110110100010101110010100100011100111001000001110000001001011100010100101101100001100110011000\n111011001111110101011000111110011110010010010001101001100100101011000100010011100100100000001001110100110011000000001101100000001111111001010111101101\n000001000000010001001000100100001001010101101000001001111000001000010010110110001101010011101100001100110001101101001111011011111101100000000110100010\n010110010001111000101001100000000011100010101000100001100100101000001001001101010000011010111001011001101100110000010010010001110000100100101001011001\n101001110000000010001100000010100110111001001010000000001000001100110001001100001100000100110000010000010010101100010111100001011100110100110101011000\n000100000101010001100100000011001110100010111100010111001010000111110010010010010100010110001100000001001010001100110001101000010000000011010100101101\n100100100010001011000010000100000001000101010000110010010001001001010001001101010100100011010000000101010010101000101011010011100101101010000010100100\n110100000001000111110000000001101000000000010101010100010101101100000011000110100110101010000010010100000111011100101101110000010101001000101110001101\n110101111011100010000100000111110011101110011101101000111101011010111111000000001010001001100100001101100000010000011101110100010001010011100000111100\n000111110001100101100111010000110101010010000000110110001011011100101010001000100001001000010000110110001010111011100100111001010100101011010001111011\n010101110100001110100110011101100000000000000001000000001001011000111001000000001001011110101110111001011000110110001100011111000000011101010101001101\n010101111101001011001101001100000010000100000010101101100010011101101000000000100011010001100100000100010010011010000001001110010100000110000100000011\n000010100000100001010101010000101000000011110101010010101001111101101101010000110110000111001001000000010011111001001110101110000101000000111100001110\n010000100001000011000101000000000101110101101100000001000110000000001110111010110011101100010001001100010000100011000100000011111010000001101000001001\n010110000011001001001101111110010001100110000001101010111111011010010000010101000000100100001001001101110000100000000010110000000000001011000100101000\n011010101001011000010111110111001010000011000110011000001011010001000001010001011000111000110010111101011000010000110111111000011000100111010000001101\n010101001010100101100010000110100111010100010100110101001001101111010001110100111000010100110111100100101010101111100001010101011001100101100011111000\n010011001000010111010001100010100101010011101010111100000010011010110110000111100011000000100001010110111011111111111001001011010010110011110101100101\n001000000010001001100101111000010000000100110000000010000000110100100000101111001000010110011000101011101100001001100001010000000010011000000000000100\n010011000111110010010011001011011011010001000011001000000001000001000000011010010010111001101011100100110111010100010100100000000111100100001001001000\n001101000100111100001011010001111000010110011000011011011110110000101000000110001011100011001101101110111110010000001011100110011011010110100101010001\n111000101000010111000000011010011100101001000101000000010011100100101100100011001010010010001010110110010101111011010000011001001010010001111100011001\n000101100110101000010000101011100110001011100001000010010000001101010001011000110110010110010100011000000011011001010000101000010110011110101011000011\n110001110010000001011000000100000110100001000010000011010010000101011010000000110100001001111000111100100101111000000000100100110001111010000000001001\n010100100000001101000011100001100111010010011100101010111100101000011000011101111100100011110111100000001001011000101011011100011000001100110011100111\n011000111000001100000101100010000101011000111100011010101101111011000110010001100001000000101001101000100010111101001110110100010001100010101011101001\n100110000000000100101100110000000101101001011100001000011100110000001000010011000110100000110000010000111101010110010101111000000011001110110100010101\n001111101101010110000100100110110111001010001000011000011100000011000011110011000110010010100010010100010001101000110000101011101000000011000010011111\n100100100101011111100000000100010100010011110100100010100100000010011101110111000010111101001000101101001111000000001001110110000101110010011000010100\n101110110100001000001101100010100100010110011111000110010001011110100100011000010100010100001000000100010101001000001001100111010010100101100110000010\n110111001100001101001001110000111100000110001010010110101010110101011100001110000011000000101111001100000001011000010011010001100000000000110011101011\n000111001111100111010001001011110100100010100010011010111101000001000001000010000001111000010011101001010000000110101001101100010100101111111001101010\n000100000010101010000100011001010000000110111000111101001110010010011011000001011000000010110101000010101000011100100001000010000000001100101010001111\n001011010100011011001001010000010001010011100110000010000100001001100110101000001011101001000101110001011010011100000001010001010010101100111110110111\n010101011100000110011000000100100001101000100100101111000011000001000000101000101001011000011011101011001001111010110010000111001100010010001101101001\n000011000111010101100000000010011101011101001010101000010000111100101100000011100100101110100001010000000101010110000000010101001011001100100100001001\n000001110100110000100011000110000100110010100010000000111010101000001101011101000110101100111001000010000101000010010001000010011000000000110001111010\n010000111001000010110000001010101010001010000101001100010010110111100111001011000101011000010100110110001110011100001010000010100100011010000000010000\n010100100100000010100011010000100011010000111010101000001101100101010100111100110010010100011010010100101111011110010010001100100010010010111000101011\n101000000010110100010110100011100010000111111100001100100011001110000010100101101001100010111100001011000011010110000000000110000001000000110011011001\n110000001110001111000100111100101000100010100010011001111100000000010111100100000111000000000110011001010100010001100000101001010100010000110110000011\n110100001000000001111100000111000000000100010000101110001100010010100000110000011000010110101101011001110000010001100001110001111010000011001000000101\n000000001001000001010011101110000011000111000111011010000111011010011101111101100000010000010010100110010000001001011000000001000010110111010010000000\n110011001101000011000000010000000010101101011111010010001001100010010101000010101101000100000101010010011110011001011001000100011110100010100101101111\n011100000010010100001010010000001010000010001001000110111000000100000010001010101110001100111010011000011001011010100100010010010000000100000100100101\n111000000110111011111010100111000010100011001000001010110010100101111011101000010001100000010010000101100001010010001000111101001001000000100001001011\n100001010010000010011110100101000001101000111111111000101001100000100111000010010000000110100010110110011100110101001010100110000110011010000010000001\n100100011001010010000000010010000100000101100010010000010101111010010000000000100000001000111111100010111101111001010001100111100000000000011010010010\n110000101001000011010001101100000000011110000000001100111001110000111000101110111000000101010000101000110100010011010101011001010100001101010010001110\n001000000001100111010111010010111011100010000010010000000010011010001110011000111000010011011100001110010010000000111001110100001000000000110100110000\n100000000001001101000011111001010010111010100000010001111110011011010110100001111001010110011100000001001000000101101000110100100100100011100110101010\n100100101010011110010111101001010101010000100110110100010111000110010000100100101001011001010101100000111000110100100110000100100110101010110101001100\n110010100011110000000010001100010011100000010000001111110001010110011001001100110010110111100101011100100010000001010001001101000011001001110101000000\n011011001000110010000101000000010100000000011001100010011100000010100100110000000101000010000000000100100000010010001101001100000001001100100000000100\n001111010000100000010000001100101100110100101100010110011001000000110111101111011010001001110110001000001001001001100001111100001100000110000000000010\n011010111000010100011101100001010000101010011001011000110101100110000000100000000011000001010000111010000001010100100101111010110110010011101001000000\n010101001001001111100010111000101101000001000110011000011110010011100000001011001000101010000000100001000011010100101100010000100101100111001000111100\n100001001100000011111000000101010010000100001001010000100010000011010000011001000011010010111100011100100010000101010000101010100010000000011110011010\n001000100000110010111100001100010110110000000010011000110000100000011001011001000100011010000100010010100100100011000010010000110010001101000111001001\n001000100000000010010000110101110100101011010110000001000100010101110011010110001000001100000110000100001001101001000010100001000000101010100000011100\n001001011010101101011011010111110111000101110111000100011101010010010000001101111000000111110100010000000000111011001010100000000011011010101000101100\n001011100000001001001100011001101110011000101101000100001111010100001011010110001101111100000011000111111011010100111011110010110100000100100001010011\n111010010011010011010100010000001000111010000101100110110111110101001010000111100011100001001110000000010001010001110000000000010001001100000000100011\n101101001111011110010010000000110011010001101110011001000000110001000001111001110011100011000110010101001000101110011100000111011111111111011101101010\n100010101001011100001000100000000000000100101001000000000001111000100100100110000100000000100010001010010000010000010000001101011001000001000100111111\n011100001010101000011100001100011111001000000110000101101110111010000000001010110100001011110000001001100011100010110000001001100000000110000010110011\n010110001001001100001000000100110000101101011100100101010101010000110000111100110000000010101100100100000011000110000110011100010001100001100000000110\n000001001110110011010100011101011001110010000000110101011000100100110100110100001000100110010011100111001100111010000110000011000111010010110011010100\n110111110000010010000010001011010000100011111010001001110011110000000001110000000111001100010000101100111010101001001000100000101010010011001110000001\n000001010110001010001010101001100000010100100111010100100110000010110010011010000011000110100010110011100101011001001010110001101100001010001001001000\n010100100100011100011000010101000011010000101110000101010010001101110100110110001000000110110010110101100100100011000010010110000011111100000111000110\n100000010010111011000100111010010000101100000000000011100000100000001000100001010100000000111001000011011010001100101000101001101100011110001010110000\n001011110011000111100001010001011110000000100001010001001010011010110110100111001111010000011001110001110000110000001000111010000000001101101010001110\n100110110100100101001010101100001000100011100110010111110010010000001110110100011111011001001111100010000010100100100010110010001001111100100001100011\n101000001101010100001000100110000100100011001010100110011000000011110011101010010101001000101000100100000001111000000011100010100001101101110000100010\n100010110000100100010000001011001100000010010001001001101110101001000010110110101111011000100011000100010100000000001000000000010001001110010111110010\n000010001010000000010010100010110001000001010101100001100100010001000010110100000001100111000101100101011000110101000000111100000111101100101001010110\n100101001011010110010001100100001110001111000111100001101101000010010001001100100010000000101111000011001000010111000001000000100000001001000000100111\n110111010001010100000110011010001110111101000001000011100010111001011000110101110100010001011110001100110101011101011000101001011100011110010010100100\n000001000100000101000100000001101010001001111001101101011111101100000110001000100000100101010000001101100100000000011101000101000001000001011111111000\n110100000010100101011110100100001100000010001101001010100111011101011101110001110101110100010010100100000101011000000100101000010100000001001010101001\n010000100111010101000001100010010000001000010011000101001110100000010100000010001110110111111010011100010001101000011100100000111011001000000111011000\n001100000110100001100110001101000000110011110100100110010010001101100000000101100001000011101111111100010110100010110101110110001110000011011011100000\n111101110100110101000001000111000101000001100101101101000001000101000010001000110100000000011011000110100101101011110011101000011111000000111110010000\n010100111000001101011010010111100000100001101011110010001001110110010000011101011110100011001100101110010100100011001000010101111001011110000101111011\n101010100001110101111010000010110000011001100010000001100000100110001111000100001101000001111111100110101111110111011001011011010111001010010000000100\n000100010101010000000100101100000100000011100001000000111000000101100010101100010100000100010100011001001001101010000111110010000000011111000101011100\n011010011001000110110001001011010101000011111000100101111010100001011110100011101101100001011011000111100000101101010100101011001010000010010000111000\n000010101100011000011000011001000111000100001001100000001001000001001011101111110010000001000100010100010001100000000000011110100010010010110000001101\n100000101110100101001011100110001110001010111100001010001010000111000010010001000001000000100010111101010110000011010110001101001000010100010110001101\n010101000001001111100111011011000101000011110110101100001010000110010101010111111001110011110100100010110000001010010000000000110010111010010001110000\n100110111010010010100000001000010010100000001100101100010011010111110000001010010000100000110011101011000000110000010010100110001110001100000110100011\n010011001001100100101011011101000110010010010101000100000000010101000000001000000100000010101100111100001101010110000010000011101001001000100101010010\n010011101000001010101101110000100001000101100000001010111100011101000001000100110110100111100011001011110100000100000101100100011001000001101010100000\n010000010000010000010000111010100111010100010100110100001000001010001000000000110010101101011000111101010100111110101110110111101100001001011100111000\n010110101010000001110001100000001110010100100011000001100101000000100000101100100100101111100010011000001100010101010110001110011100100010001001000100\n000010111010000111000000000100000110101001010101010110000101010100010010101001100000000000111010001000000100101011100100100110011000101000100101010000\n000000000001001110001001001001011100000001000000101110101001000110000010010001001000101100101001001100100010000001001000000101100010011010100000100110\n000001111100000100111001000000110100101100010010001101100001010101110100000001110100000001001101110000110001111100011101011011000001000011000000100000\n111100100000000111011100000110100100010001011110001100000000110010110111100010001100010100010001110000010111010111100000010001001100001110001000000101\n011011010001001010001110000010011010111100001101001101001010000010100010001011100001000110001000101011001010110000101110011110101001001100101100001000\n000000101111001000001000000000001000001110001011100001111000111100010001010001100000001101001001110011100000010011010000001001011001111000011001000010\n011110100010001000100101010010000111100011011110000101100110110011010010010010100100010110100001111000000000001000001010101000011001111010001100010011\n011101001010110011001110000001000101001111001000000000000100010100001011110111000101100001100000000001100011101100000100000000101010001100000111100100\n010110111001001101100001010000011000000100110100110100001000100010110000000010001110101100000101000000101101000010010100000001010011000010100100011000\n001010101100001000111010000011000100111000100010001010000001000001101000000000000101111000111000011011111110100101100100110000110001101001101010100011\n",
+    "out": "1918",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-first-occurrence",
+  "title": "First Occurrence in a Sorted Array",
+  "category": "Searching",
+  "difficulty": "Easy",
+  "statement": "Given a sorted array (with possible duplicates) and a value x, return the index of the first occurrence of x, or -1.",
+  "input": "Line 1: n. Line 2: n sorted integers. Line 3: x.",
+  "output": "The 0-based index, or -1.",
+  "constraints": "1 ≤ n ≤ 10^6",
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(1)",
+  "hints": [
+   "A linear scan is O(n); the array is sorted.",
+   "When you find x, keep searching to the left."
+  ],
+  "solution": "Binary search, but when `a[mid] == x` record mid and continue with `hi = mid - 1` to find an earlier occurrence.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "7\n1 2 2 2 3 4 5\n2\n",
+    "out": "1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "5\n1 3 5 7 9\n4\n",
+    "out": "-1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\n5\n5\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "6\n4 4 4 4 4 4\n4\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "10\n5 5 11 11 12 14 19 19 20 20\n7\n",
+    "out": "-1",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "2000\n-500 -500 -500 -499 -498 -498 -497 -497 -496 -496 -495 -495 -495 -494 -494 -494 -493 -493 -492 -492 -492 -491 -491 -490 -490 -489 -489 -489 -489 -488 -488 -487 -487 -486 -486 -486 -485 -485 -485 -484 -484 -484 -483 -483 -482 -482 -482 -481 -481 -481 -480 -480 -480 -480 -480 -479 -479 -479 -478 -477 -475 -474 -474 -474 -473 -473 -473 -473 -473 -472 -472 -471 -470 -470 -469 -469 -468 -468 -468 -468 -467 -466 -466 -466 -466 -465 -465 -465 -464 -464 -463 -462 -462 -461 -461 -460 -459 -458 -458 -458 -457 -456 -452 -452 -451 -451 -451 -451 -449 -449 -449 -448 -448 -448 -447 -447 -446 -446 -445 -444 -444 -444 -443 -441 -441 -441 -440 -440 -439 -438 -438 -438 -438 -437 -437 -436 -435 -435 -434 -431 -431 -431 -430 -430 -430 -429 -428 -428 -428 -426 -425 -424 -423 -423 -421 -421 -421 -421 -421 -420 -419 -418 -418 -417 -417 -417 -417 -417 -416 -415 -415 -415 -415 -415 -414 -414 -414 -414 -413 -413 -412 -411 -411 -410 -410 -408 -408 -408 -407 -407 -407 -407 -407 -406 -406 -406 -406 -406 -405 -404 -404 -404 -404 -404 -402 -401 -401 -400 -399 -399 -399 -399 -398 -397 -396 -396 -395 -395 -395 -394 -394 -394 -393 -393 -393 -392 -391 -391 -389 -388 -388 -388 -388 -388 -387 -387 -387 -386 -385 -385 -385 -385 -384 -384 -383 -383 -383 -383 -382 -382 -381 -381 -381 -380 -379 -379 -378 -378 -378 -377 -377 -377 -377 -377 -377 -376 -375 -375 -374 -374 -374 -374 -372 -372 -371 -371 -370 -369 -368 -368 -368 -367 -367 -366 -365 -365 -365 -365 -365 -364 -364 -363 -363 -363 -363 -363 -363 -362 -361 -361 -359 -359 -358 -358 -358 -357 -356 -355 -355 -354 -353 -352 -351 -351 -350 -350 -350 -350 -349 -348 -348 -348 -348 -348 -346 -346 -345 -343 -341 -341 -341 -341 -341 -340 -340 -340 -339 -337 -337 -337 -336 -335 -335 -335 -333 -333 -332 -332 -331 -330 -330 -330 -330 -328 -328 -328 -328 -326 -326 -326 -326 -324 -323 -322 -320 -319 -318 -318 -318 -318 -318 -317 -317 -317 -317 -316 -315 -315 -312 -312 -312 -311 -311 -310 -309 -308 -307 -306 -305 -305 -304 -303 -303 -301 -301 -301 -301 -301 -301 -301 -300 -300 -300 -300 -299 -299 -298 -298 -298 -297 -296 -296 -295 -295 -293 -293 -293 -292 -291 -291 -290 -290 -290 -290 -290 -289 -289 -289 -288 -288 -285 -285 -284 -284 -284 -283 -283 -283 -282 -281 -280 -280 -279 -279 -278 -278 -278 -278 -277 -276 -273 -273 -272 -271 -271 -270 -270 -269 -269 -269 -267 -267 -267 -267 -266 -266 -266 -265 -264 -264 -264 -264 -263 -263 -263 -262 -262 -260 -257 -257 -256 -255 -255 -254 -253 -252 -251 -251 -250 -249 -249 -249 -248 -248 -247 -246 -246 -246 -246 -245 -244 -244 -244 -242 -241 -241 -241 -241 -240 -240 -240 -239 -239 -239 -238 -238 -238 -238 -236 -236 -235 -234 -234 -234 -233 -233 -232 -231 -231 -231 -231 -231 -230 -230 -228 -228 -227 -227 -226 -226 -225 -224 -224 -224 -224 -224 -223 -223 -223 -222 -222 -220 -220 -220 -220 -220 -217 -217 -217 -217 -217 -217 -216 -215 -213 -213 -209 -209 -209 -208 -205 -205 -205 -205 -205 -205 -205 -204 -203 -203 -203 -201 -200 -200 -199 -199 -198 -198 -197 -196 -195 -195 -194 -193 -192 -192 -191 -191 -191 -191 -189 -189 -188 -187 -186 -186 -185 -185 -184 -184 -183 -183 -183 -182 -182 -181 -181 -179 -178 -178 -178 -177 -177 -177 -177 -176 -176 -176 -174 -174 -173 -172 -172 -172 -172 -171 -171 -171 -169 -169 -169 -169 -168 -168 -167 -166 -166 -164 -163 -162 -162 -162 -161 -161 -160 -160 -160 -159 -159 -159 -158 -158 -157 -156 -155 -154 -154 -154 -154 -153 -152 -152 -152 -151 -150 -149 -149 -149 -148 -147 -146 -146 -146 -145 -144 -144 -144 -144 -144 -143 -143 -143 -142 -140 -140 -139 -139 -137 -137 -137 -136 -136 -135 -135 -135 -134 -134 -134 -133 -131 -130 -130 -130 -129 -128 -128 -128 -128 -128 -127 -127 -126 -125 -125 -125 -124 -124 -123 -122 -122 -121 -121 -120 -120 -119 -119 -119 -119 -118 -117 -117 -115 -115 -114 -113 -113 -112 -112 -112 -111 -111 -111 -110 -110 -110 -110 -108 -108 -108 -107 -106 -106 -105 -105 -104 -104 -104 -103 -103 -103 -101 -101 -100 -99 -99 -99 -98 -98 -98 -98 -98 -96 -96 -95 -95 -95 -95 -94 -94 -92 -91 -90 -90 -90 -89 -89 -89 -87 -87 -87 -85 -85 -84 -84 -84 -84 -82 -82 -81 -80 -78 -77 -77 -77 -77 -76 -76 -75 -75 -73 -73 -73 -73 -72 -72 -72 -72 -71 -71 -71 -69 -69 -69 -68 -67 -67 -66 -64 -64 -64 -63 -63 -62 -62 -61 -61 -60 -60 -59 -59 -59 -58 -58 -58 -58 -58 -56 -56 -56 -55 -55 -55 -54 -54 -53 -53 -52 -52 -52 -52 -51 -49 -49 -48 -48 -47 -47 -46 -46 -46 -46 -46 -45 -45 -45 -45 -45 -44 -44 -44 -44 -43 -43 -43 -43 -43 -42 -42 -42 -41 -40 -40 -40 -39 -39 -39 -39 -38 -38 -38 -38 -38 -37 -36 -36 -35 -35 -34 -34 -34 -34 -32 -32 -32 -32 -32 -31 -31 -31 -30 -30 -30 -30 -30 -29 -28 -28 -26 -25 -25 -23 -22 -20 -20 -20 -19 -19 -18 -18 -18 -17 -17 -17 -15 -14 -14 -14 -14 -13 -13 -12 -12 -10 -10 -9 -9 -9 -8 -8 -7 -5 -5 -4 -3 -3 -3 -2 -2 -2 -2 -1 -1 2 2 2 2 2 3 3 4 4 5 6 6 7 9 10 11 11 11 11 13 13 14 14 14 14 14 15 15 16 17 17 20 20 20 20 23 23 24 26 26 27 29 29 29 30 30 30 31 32 32 33 33 34 34 36 36 36 37 37 37 38 39 39 40 41 42 42 42 42 43 43 43 44 44 45 45 46 46 46 46 46 47 47 48 48 48 48 49 49 50 51 52 52 52 53 53 53 53 54 54 55 56 56 58 60 60 62 63 64 64 65 65 66 66 66 67 67 68 68 69 70 70 73 74 75 75 76 76 76 76 77 77 77 78 78 79 79 79 79 80 80 81 81 81 81 82 82 82 83 84 84 84 84 84 85 85 86 86 87 88 88 88 90 90 92 92 92 92 92 92 93 94 95 95 95 95 96 97 98 98 99 99 99 100 100 102 102 102 103 104 105 106 106 106 106 106 106 106 106 107 107 107 107 108 108 108 108 109 109 109 109 110 110 111 111 112 112 112 113 113 114 114 114 114 115 115 115 115 117 117 117 117 118 119 119 121 121 121 122 122 122 123 123 124 124 124 124 124 125 125 125 125 126 126 126 126 127 127 127 127 127 127 128 128 128 128 129 129 130 130 131 131 131 133 133 133 134 134 134 135 136 136 136 137 137 137 140 141 142 143 144 145 145 145 145 146 146 147 147 150 150 150 151 151 151 152 153 153 153 154 154 155 155 157 157 157 157 157 158 158 158 158 159 159 159 159 160 160 160 161 161 161 162 162 163 163 164 164 164 165 166 166 166 168 169 169 170 170 171 172 172 173 173 175 175 177 177 178 179 180 180 181 181 182 182 182 183 183 184 184 185 185 185 185 186 188 189 189 190 190 190 191 192 192 193 193 193 193 194 194 196 196 196 197 197 197 197 200 200 200 200 201 201 202 202 202 203 203 203 203 205 205 205 205 206 206 206 206 206 207 207 207 208 208 208 209 209 210 211 212 213 213 213 213 213 216 216 216 216 217 217 217 217 217 218 218 218 218 218 220 220 220 221 221 222 222 222 222 224 224 224 224 225 225 226 226 226 226 226 226 227 227 227 229 229 230 230 231 231 231 231 231 232 233 233 234 234 234 235 236 236 237 238 238 238 239 239 239 239 240 241 242 243 243 244 244 244 245 246 246 246 246 247 247 247 247 248 248 249 249 250 250 250 251 251 251 252 252 252 253 253 253 254 256 257 257 257 257 257 259 259 259 259 260 261 261 263 263 264 264 264 265 265 266 267 268 268 268 268 268 268 268 268 269 269 269 269 269 270 270 270 270 270 272 272 273 273 274 274 274 274 274 275 276 276 276 276 277 277 277 278 279 281 282 283 283 283 284 284 285 286 286 287 287 288 289 289 290 290 290 291 291 291 291 295 296 296 296 297 297 298 298 298 298 298 300 300 301 302 302 303 304 304 304 304 305 305 306 306 306 306 307 307 307 307 308 310 311 311 311 312 312 312 313 314 315 315 315 316 318 319 320 322 323 324 324 324 325 325 326 326 326 326 326 327 327 328 328 328 329 330 330 331 332 332 332 332 332 333 333 333 333 334 335 335 336 336 338 338 339 341 341 345 347 348 348 348 349 350 352 352 352 353 353 355 356 357 357 357 358 359 359 359 360 360 361 362 362 362 363 363 363 364 364 364 366 367 368 368 368 368 368 370 370 371 371 372 372 373 373 373 373 374 374 374 375 376 376 378 380 380 381 381 382 382 382 383 383 383 383 383 383 384 384 385 385 386 387 387 387 388 388 389 389 389 389 389 389 389 390 390 390 392 393 394 394 395 396 396 396 396 396 397 399 399 399 400 401 402 402 402 403 404 404 404 404 405 405 406 406 406 407 407 407 408 408 408 409 409 409 409 409 410 411 411 411 412 412 412 413 413 413 413 414 414 415 415 416 416 416 418 418 418 419 419 419 420 420 420 421 421 421 422 422 423 424 424 424 425 426 427 428 429 429 430 430 431 431 431 432 432 432 432 433 433 434 435 435 436 436 437 438 438 439 439 439 441 442 443 444 444 444 445 445 446 446 447 447 448 448 448 449 449 449 450 450 451 451 452 453 453 453 453 454 456 456 457 457 460 460 460 460 460 460 461 462 462 462 463 464 464 465 465 465 467 467 468 469 470 470 471 471 471 471 471 472 472 473 473 473 473 475 476 476 478 479 479 480 480 481 482 483 483 484 484 484 484 484 484 484 484 485 485 485 485 486 486 486 487 487 487 488 489 490 490 491 492 493 493 494 494 495 496 496 496 496 497 497 497 499 499 500 500 500 500 500 500 500\n123\n",
+    "out": "1223",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-merge-intervals",
+  "title": "Merge Intervals",
+  "category": "Sorting",
+  "difficulty": "Medium",
+  "statement": "Merge all overlapping intervals and print the resulting non-overlapping intervals in ascending order. Intervals that touch (e.g. [1,4] and [4,5]) overlap.",
+  "input": "Line 1: n. Then n pairs `start end`.",
+  "output": "One merged interval per line as `start end`.",
+  "constraints": "1 ≤ n ≤ 10^5; start ≤ end",
+  "timeComplexity": "O(n log n)",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "Sort the intervals by start.",
+   "Extend the last merged interval while the next one starts before (or at) its end."
+  ],
+  "solution": "Sort by start. Keep a result list; if the current interval starts at or before the end of the last result interval, extend that end with max(); otherwise append it.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "4\n1 3\n2 6\n8 10\n15 18\n",
+    "out": "1 6\n8 10\n15 18",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "2\n1 4\n4 5\n",
+    "out": "1 5",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\n5 7\n",
+    "out": "5 7",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "5\n6 8\n1 9\n2 4\n4 7\n10 12\n",
+    "out": "1 9\n10 12",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "30\n40 47\n102 106\n101 102\n0 0\n134 149\n186 192\n137 146\n72 77\n29 31\n174 185\n165 166\n170 185\n146 146\n51 65\n163 168\n150 154\n129 136\n163 171\n47 52\n10 23\n78 79\n199 206\n62 72\n129 140\n78 92\n129 133\n191 195\n199 202\n196 201\n135 136\n",
+    "out": "0 0\n10 23\n29 31\n40 77\n78 92\n101 106\n129 149\n150 154\n163 185\n186 195\n196 206",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-generate-parentheses",
+  "title": "Generate Parentheses",
+  "category": "Recursion",
+  "difficulty": "Medium",
+  "statement": "Print every well-formed combination of n pairs of parentheses in lexicographic order (`(` sorts before `)`).",
+  "input": "A single integer n.",
+  "output": "Each combination on its own line, sorted.",
+  "constraints": "1 ≤ n ≤ 10",
+  "timeComplexity": "O(4ⁿ / √n)",
+  "spaceComplexity": "O(n) recursion depth",
+  "hints": [
+   "Build strings character by character.",
+   "You may add '(' while open < n and ')' while close < open."
+  ],
+  "solution": "Backtracking: from a partial string with `open` and `close` counts, append '(' if open < n and ')' if close < open. Exploring '(' first yields lexicographic order.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "3\n",
+    "out": "((()))\n(()())\n(())()\n()(())\n()()()",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\n",
+    "out": "()",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "2\n",
+    "out": "(())\n()()",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "4\n",
+    "out": "(((())))\n((()()))\n((())())\n((()))()\n(()(()))\n(()()())\n(()())()\n(())(())\n(())()()\n()((()))\n()(()())\n()(())()\n()()(())\n()()()()",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-climbing-stairs",
+  "title": "Climbing Stairs",
+  "category": "DynamicProgramming",
+  "difficulty": "Easy",
+  "statement": "You can climb 1 or 2 steps at a time. In how many distinct ways can you reach the top of a staircase with n steps?",
+  "input": "A single integer n.",
+  "output": "The number of distinct ways.",
+  "constraints": "1 ≤ n ≤ 80 (the answer fits in 64 bits)",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "hints": [
+   "ways(n) depends on ways(n − 1) and ways(n − 2).",
+   "It is the Fibonacci sequence; keep only the last two values."
+  ],
+  "solution": "`ways(n) = ways(n-1) + ways(n-2)` with ways(0) = ways(1) = 1. Iterate keeping two variables; use 64-bit integers (n = 80 exceeds 32 bits).",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "2\n",
+    "out": "2",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "3\n",
+    "out": "3",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\n",
+    "out": "1",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "10\n",
+    "out": "89",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "45\n",
+    "out": "1836311903",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "80\n",
+    "out": "37889062373143906",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-lcs",
+  "title": "Longest Common Subsequence",
+  "category": "DynamicProgramming",
+  "difficulty": "Medium",
+  "statement": "Return the length of the longest common subsequence of two strings.",
+  "input": "Two lines, each containing a string of lowercase letters.",
+  "output": "The LCS length.",
+  "constraints": "1 ≤ lengths ≤ 1000",
+  "timeComplexity": "O(n·m)",
+  "spaceComplexity": "O(n·m), or O(min(n, m)) optimised",
+  "hints": [
+   "dp[i][j] = LCS of the first i chars of A and first j chars of B.",
+   "If A[i-1] == B[j-1] then dp[i][j] = dp[i-1][j-1] + 1, else the max of dropping one char."
+  ],
+  "solution": "Classic 2-D DP over prefixes. Only the previous row is needed, which reduces memory to O(m).",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "abcde\nace\n",
+    "out": "3",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "abc\nabc\n",
+    "out": "3",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "abc\ndef\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "bsbininm\njmjkbkjkv\n",
+    "out": "1",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "abaacbbacccabbbcababaaabbcaccbbacacbabcbaaacbccbccbcaaaaabcaaaacbbccbabccccbaacbbcbacacacccacababbaccaaacacbbbbaabaaabcabcbabccbbacbcbbabcccbcbabcbcabbccccbabaacbabcccbbbcbbbcabcbbcbcbcabcabcacabcbabbcaaaaaacbcacbcbcbbcbcccccbcbabcbbccacccccabbabcabccbaaccbaaaabbbaccbbcacbbbcbbcbbacaccbcabacbcaababc\naaacccbacaccbbbbbcbcaabcbababbcabcbcacbbacbcbbabbcaaaacbaabcaabbbccacbaccbacababacbbcaaaabbbcaabbcaabbcbcacacbccccccbbccbababbbbabbcabbccaabbccabacaccbbaabaccaacbabbbbbcbbaabbbccaccacabcaabcccaabacccbacbaacbbbabcabbcccabaccbaccaaaabccacbbcacabbaaccccccaaabbaaacacbabccbcaaabaacbbbaacabcaccbabcbbcabaa\n",
+    "out": "214",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-edit-distance",
+  "title": "Edit Distance",
+  "category": "DynamicProgramming",
+  "difficulty": "Hard",
+  "statement": "Compute the minimum number of single-character insertions, deletions or substitutions needed to turn word A into word B (Levenshtein distance).",
+  "input": "Two lines, each a non-empty lowercase word.",
+  "output": "The edit distance.",
+  "constraints": "1 ≤ lengths ≤ 2000",
+  "timeComplexity": "O(n·m)",
+  "spaceComplexity": "O(m)",
+  "hints": [
+   "Define dp[i][j] as the distance between A[:i] and B[:j].",
+   "dp[i][j] = dp[i-1][j-1] if the chars match, else 1 + min(insert, delete, substitute)."
+  ],
+  "solution": "Fill the DP table row by row: base cases dp[i][0] = i and dp[0][j] = j. Keeping two rows reduces memory to O(m).",
+  "premium": true,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "horse\nros\n",
+    "out": "3",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "intention\nexecution\n",
+    "out": "5",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "a\nabc\n",
+    "out": "2",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "same\nsame\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "kitten\nsitting\n",
+    "out": "3",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "cdddadccbabadaddbcdacaadabdbacdadadabbccdcbddacdaacddccaababddbdbdcdbaddcbdabddddbaccbabbaccccdbdddbaaacbdbabbbacbcadcccbdddbbcadcbcaccddbbddaadbbaabdddaacbadabadddbcddbacacccbadcccbcccadabadabdadadadbbdbdcbdacddcadcbddbbccbdcbaddadacbbbbcdbaababddcdbdbdabaaadbcaaabccaccdcbbdacbdabcbabaddcbaadddbcbdddccbbaccadbacddaababcbaaaabcabadbdbdbbacddcacbddabcccccbcdbacdadbdddaabdcaacbadbaabcdacddacbaccdabc\ndbbbbaaccabadcadadcdbcaacdaaacacbddbacbbdbcccbbdbaccaacdbacccccdcacccdcddcbabdbabacbbbbbbbcbbcdbddabccdbddbdbdbdcdbadaaababacbcbbddaddbbdcabccaaaddbbacdbaacacbaccdcdadacbbbabacaccbddddcaccddccbdaabcdcabacbbadbcdcdddddadccdadcbcddcabcbbbdaadadabbccbbbbcdddbabdcaddbacbccaabcdadcdbcaddccdacaabcabbbaadbadbbabdaabadbababccabdbcabcdabdacdccbbbbacbbdabcad\n",
+    "out": "207",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-first-unique-char",
+  "title": "First Unique Character",
+  "category": "Hashing",
+  "difficulty": "Easy",
+  "statement": "Return the index of the first character in a string that does not repeat, or -1 if none exists.",
+  "input": "A single string of lowercase letters.",
+  "output": "The 0-based index or -1.",
+  "constraints": "1 ≤ length ≤ 10^5",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1) (26 letters)",
+  "hints": [
+   "Count occurrences first.",
+   "Then scan again for the first character with count 1."
+  ],
+  "solution": "Two passes: count frequencies in a hash map (or a 26-element array), then return the first index whose count is 1.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "leetcode\n",
+    "out": "0",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "loveleetcode\n",
+    "out": "2",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "aabb\n",
+    "out": "-1",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "z\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "aabbccddeeffg\n",
+    "out": "12",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-group-anagrams",
+  "title": "Group Anagrams",
+  "category": "Hashing",
+  "difficulty": "Medium",
+  "statement": "Group the words that are anagrams of each other. Sort the words inside each group alphabetically, then print the groups sorted alphabetically (by their line text).",
+  "input": "Line 1: n. Line 2: n lowercase words.",
+  "output": "One group per line, words separated by spaces.",
+  "constraints": "1 ≤ n ≤ 10^4; word length ≤ 100",
+  "timeComplexity": "O(n · k log k)",
+  "spaceComplexity": "O(n · k)",
+  "hints": [
+   "Two words are anagrams if their sorted letters are equal.",
+   "Use the sorted letters (or a letter-count signature) as a hash map key."
+  ],
+  "solution": "Map each word to a canonical key (its sorted characters) and append it to that key's list. Then sort within groups and sort the group lines for deterministic output.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "6\neat tea tan ate nat bat\n",
+    "out": "ate eat tea\nbat\nnat tan",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1\na\n",
+    "out": "a",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "4\nabc bca cab xyz\n",
+    "out": "abc bca cab\nxyz",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "5\nlisten silent enlist google gogole\n",
+    "out": "enlist listen silent\ngogole google",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-count-primes",
+  "title": "Count Primes",
+  "category": "Mathematics",
+  "difficulty": "Easy",
+  "statement": "Count the prime numbers strictly less than n.",
+  "input": "A single integer n.",
+  "output": "The number of primes below n.",
+  "constraints": "0 ≤ n ≤ 5·10^6",
+  "timeComplexity": "O(n log log n)",
+  "spaceComplexity": "O(n)",
+  "hints": [
+   "Trial division for every number is too slow for large n.",
+   "Use the Sieve of Eratosthenes, starting to cross out at i·i."
+  ],
+  "solution": "Sieve of Eratosthenes: mark multiples of each prime p starting from p² as composite, only for p ≤ √n. Count the remaining marks.",
+  "premium": false,
+  "timeLimitMs": 3000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "10\n",
+    "out": "4",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "0\n",
+    "out": "0",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "2\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "100\n",
+    "out": "25",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "1000000\n",
+    "out": "78498",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "5000000\n",
+    "out": "348513",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-sliding-window-max",
+  "title": "Sliding Window Maximum",
+  "category": "Arrays",
+  "difficulty": "Hard",
+  "statement": "For every window of size k sliding from left to right over the array, output the maximum value in the window.",
+  "input": "Line 1: n and k. Line 2: n integers.",
+  "output": "The n − k + 1 window maxima separated by spaces.",
+  "constraints": "1 ≤ k ≤ n ≤ 2·10^5",
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(k)",
+  "hints": [
+   "Recomputing each window's max is O(n·k).",
+   "Keep a deque of indices whose values are decreasing; the front is the window max."
+  ],
+  "solution": "Maintain a monotonic deque of indices: pop from the back while the new value is ≥ the back's value, push the index, drop the front when it leaves the window. Each index is pushed and popped once.",
+  "premium": true,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "8 3\n1 3 -1 -3 5 3 6 7\n",
+    "out": "3 3 5 5 6 7",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1 1\n5\n",
+    "out": "5",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "5 5\n4 2 12 3 1\n",
+    "out": "12",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "6 2\n9 8 7 6 5 4\n",
+    "out": "9 8 7 6 5",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "5000 37\n-186 -7735 -5851 -1942 -2448 -7838 4648 662 7106 -2230 -1035 -7740 3969 6122 4789 6076 913 5060 6295 -3479 -9966 -6541 -8921 715 -113 4409 -231 7373 -4796 -4708 7786 -4017 2020 2450 -8045 9089 4974 -6363 6277 -718 -1864 4248 7570 6389 -4796 -6686 -1210 5624 -3618 988 -8690 -2781 -632 1388 -5941 6989 -9743 566 1705 -183 -4848 -4105 455 -7443 6163 2967 441 39 -4919 -7182 -4567 -2316 4013 3348 -9653 -3519 2472 9164 -4326 4116 2766 2416 -6307 7576 -6887 -80 -4350 1513 238 2753 -9137 -9792 -622 8166 1592 1251 -8312 5004 -9284 4901 -8711 -6254 -7009 4322 9300 4562 5738 -5192 1770 -7857 224 2184 3755 -6640 -7987 7539 -3043 -6522 -6980 -264 -1436 3045 -7893 3473 6432 -4420 6264 6470 -4973 -671 1733 4430 3942 -9581 -4595 -8605 3739 2667 689 4716 -2665 7820 2443 2723 -1217 -8063 -9624 3958 9224 -5518 -3937 1246 -8464 -1005 204 2671 -4547 708 9359 4965 3272 -2381 -6450 -6896 7293 4022 58 1567 -9400 -9530 -5250 8792 9711 -5995 -3762 223 251 -2734 2697 5430 -9170 -6921 1675 -9331 6987 -3973 -5162 -4542 -3020 -7909 8933 -4044 -8493 2603 5878 -7923 8036 3238 8033 -782 -41 -9887 -4752 -5760 6646 2523 3668 -4658 -4517 -9053 -9831 355 3734 -2426 2910 -6737 -7224 -6699 9223 -4561 8983 -3321 8309 -4943 3440 -2604 6123 -1848 -8962 7394 -7729 -1740 -3552 -7708 -8076 -3622 1074 -1267 -5743 -9367 -3014 -5185 -2863 1458 5920 -1181 9734 -7133 6162 9250 5522 9215 5556 -1609 9090 -6206 -5051 -859 -70 -3797 -1992 -3790 -1939 -6674 8610 48 -5550 -2853 3020 -16 -2362 -9419 -3502 1470 9697 1050 -2575 -4572 2650 -5983 5636 1561 9021 9882 -6817 -2060 561 -1331 -9936 9315 4643 261 -7398 -7466 1996 6848 -2083 -2939 9298 5075 -1859 950 -7462 1165 787 4210 4419 -3319 -322 5042 9255 -2981 5154 4994 4970 -2860 -8200 -408 -4269 411 -403 -8788 650 -8332 4904 5019 -8923 6362 1670 1357 -1076 -4710 7 4525 3659 -32 -5600 -2260 -7042 -7497 8914 -4452 -8750 9664 3130 -3527 9191 -877 -8550 4582 -8435 7877 -7623 7303 -2793 4039 -6970 8516 -1787 6189 -2705 -8213 -4038 3674 9653 -2554 -7817 230 -152 -8829 -473 477 1924 8324 8845 6577 1823 -2990 -3853 -6078 -2146 -8251 -3947 8270 -9002 -5264 1351 2343 -1990 2366 1955 2991 -4820 -7398 -6407 1548 4293 7654 -4834 7535 1778 -2558 -2463 8110 6364 -8376 892 1655 -1027 6121 -4897 -7569 8222 -7066 -6014 -1580 8437 4743 8963 -8188 -7672 -6564 -9317 1860 -1995 -8555 4574 -5563 -7073 9934 9996 -1184 -1047 6898 -7872 -7657 -501 1732 8561 -9370 9871 -5285 9797 -2440 2652 -4748 -9460 -2722 -8816 612 -9233 -4812 3404 -6895 -5885 3346 4196 -1841 -8065 -2235 -7985 9687 4275 -7700 -7909 -4926 -1659 3077 -8170 7632 3680 9346 3527 -7633 -7300 370 7785 -352 -995 -3140 -4336 -6011 9603 1777 1810 3544 1371 8273 -8822 -4476 1943 573 -888 1422 9346 9991 76 -8282 8494 -1963 -3670 8843 5056 -9359 6881 8222 5674 1986 4086 -4207 8986 -6537 8265 9553 -8185 -7694 3228 3708 1213 -818 -160 3446 3756 4944 -8347 4487 -6907 6195 -7456 4266 7349 -3521 620 -7847 -257 -2412 517 4915 4391 -2200 -4803 -7344 -4509 -3079 1072 -1640 -6023 5064 9523 -8925 5140 454 8263 1783 6758 9290 3746 7955 -1534 -3860 1918 -5534 -6553 92 -2417 4010 1331 -8444 -7283 2503 8154 -9441 -1004 1492 3087 3368 -9362 9888 5301 -5341 -7238 3868 8112 4729 -4780 5225 -6843 9477 -6311 -8152 -236 257 5334 -7758 1377 -4987 2713 8096 -4938 1624 -1367 3945 4846 6668 -9975 -7968 -1630 -5290 9756 -5113 4987 6657 8154 -88 7423 1273 3282 -7007 -4767 -2520 7344 4405 -9742 -4418 -5026 -3165 2438 1669 6417 3885 -5462 -625 3086 6103 8727 8195 2312 1535 -7324 7809 -7096 -8291 -7856 5417 4845 -4414 -8274 3316 -4093 -8073 1713 4790 6661 -308 7092 -3004 5439 6055 5710 1290 -9792 -1069 -9700 -1964 3715 9848 -1619 6782 -8346 284 -6188 720 -4657 2289 427 -9004 6085 2274 -5224 3751 -5409 -6404 -3818 2722 9485 -1205 976 -152 -7816 1455 3816 4884 9445 -3678 7123 9207 3815 -855 -1834 1230 -2160 -3089 4008 5665 -2740 7429 8254 6638 -995 548 -1047 -7535 7921 4866 1381 -6770 5714 -6035 -2813 508 3366 8935 -9992 4260 -7605 5073 4809 1583 -2991 9277 3803 -4167 6758 -5855 3295 -7129 -992 9995 7487 -696 -1253 -2633 -7388 5495 8455 -6636 -4565 4646 4885 -5256 -2210 9439 -1923 -9448 -7972 -649 5317 -495 9489 -6517 4585 -5528 5579 -1797 -4788 -4670 5519 -4948 7119 2478 6736 7574 -9271 -644 8115 4984 1035 -8341 -2631 -8455 -3739 -9537 -3051 9729 4175 -2016 7639 -2301 -541 1570 -7053 -6691 -266 -4894 5709 6652 419 -1453 9720 6857 -5618 -2153 -8616 -7462 4544 226 -5477 5596 -4634 3237 -3377 3586 -6212 -5740 936 -2298 988 4493 -7666 1139 1091 -9041 -5025 4045 4651 -4533 -7649 -8042 -9815 9369 -9270 1064 -4512 -8767 5639 5814 -1643 190 -4794 -165 -644 -7118 3255 -1430 -9577 5584 -9051 -6300 1834 -7407 -9971 -418 4677 -5237 1504 4333 3544 1540 8968 5229 9256 -8481 -4265 -2205 2368 1007 1953 -6141 9206 1363 -1572 909 5891 2333 -6550 -376 4535 5286 5105 8916 6391 4221 9581 -8746 8230 -5028 466 8639 4439 6436 5351 6161 1857 3268 -6042 -6358 9976 3904 7003 5882 -2300 -6493 -3750 8429 -285 -860 7233 7634 3276 -9317 -5197 -2629 8401 5622 8303 5410 -6142 8069 -8612 4644 -2968 7888 -2761 2002 -1569 599 -9340 -3779 8734 3122 -9562 -9352 -7005 -4739 -4184 4798 -3627 -6223 7346 4952 2650 8175 -6471 -3843 -3444 3026 -8564 -4917 5113 3043 -8419 6642 -254 -3020 -1376 7138 -9508 -4616 1107 -4509 9042 9783 -2179 -6187 6492 9788 -4126 -420 -9189 -8568 4946 23 -5075 580 -4112 4855 -1867 6517 -6692 1934 -1228 -5642 5609 -7849 7552 7095 3650 -89 9313 9659 -5602 -7960 2733 -3381 1489 3496 2934 -9708 5862 -4936 7416 -4941 -7508 1651 9144 772 -2245 6971 9361 9336 8576 6908 -9064 4657 4041 -2236 1636 1259 -1871 -2372 1311 5442 -6427 -6238 9797 2532 -4748 -4853 -8754 -9642 -4466 -6503 977 -1112 1353 8730 4468 8931 -5377 68 -3869 -7810 -8800 5784 3563 -6820 -4800 3801 -7282 3018 4173 -7273 -5068 3307 3844 7231 2204 674 -3770 -6934 2859 8436 -3063 -2217 -4922 -8941 6303 -5424 4230 -3045 -4366 6099 -3435 6723 573 3099 1534 9464 -4189 3129 -5417 -2815 -9 1963 2568 3206 -4972 -4543 -9123 4607 -4676 6486 8258 1122 -8363 -2850 -317 5350 2294 1552 2920 -2679 -5210 3939 -9147 -8133 -244 3504 1160 3688 -5048 2045 -5607 1627 -5383 -8910 -6619 -9396 8473 -9613 3966 -9971 1044 -755 -3516 4828 1413 -4940 6868 -2794 -498 1115 -9303 9502 3798 7103 7122 -2966 5145 9462 -7608 520 -6556 2196 -3417 7796 -1628 5543 6094 -835 6291 538 -5497 6234 132 -5202 8491 7056 5057 -4227 8890 -2624 2793 -7204 9826 6103 4681 2721 -7882 -28 9444 -2499 -6158 -436 8998 -6120 -1134 1049 -5033 7376 3582 -6712 263 -7062 8565 -3635 2709 1236 1930 -7182 -15 -3811 -5248 -9646 8249 -1970 4031 4220 3369 8627 -8269 -4441 9215 -9566 6122 -8888 -2934 -6720 -3314 4753 793 6821 -413 1527 305 -4732 -7203 5678 -6458 -9415 9399 5054 -7368 1378 -6124 -5398 -3920 9688 -149 4953 4139 1903 2771 4772 8879 7092 -1468 1547 -42 1588 -7924 -9683 3100 4112 9821 9791 7759 -422 8103 -6708 9271 -7234 -5494 -8789 3741 -9506 3749 16 6416 -3881 -5345 7456 -6747 6938 -1707 -4594 -1389 3947 6079 -1345 -5060 -4742 6072 7295 2018 8112 7244 -1825 -786 -7121 7759 -7100 -1531 -9180 -5593 820 2007 4894 7116 7580 -4386 -7979 6512 -1136 -2289 5027 -6289 2562 2775 -8895 2023 -8119 6803 -2210 1949 1471 3534 -7372 7240 -2177 5715 -9452 -8596 -1072 -4440 -7581 8255 3666 2862 9628 -9874 9921 229 6132 -3029 -2927 3569 4104 -2322 -6787 864 664 -2830 -1056 -784 -2740 -3957 -9442 4583 9348 -6575 7356 -2335 7584 1476 1103 -6936 6868 -775 -9013 2586 -6048 9088 -7783 -2480 -6180 -4716 -1434 3849 -3663 7512 5775 -5211 4763 408 8145 1263 -2464 -6367 1229 7635 -2813 107 9017 -7411 -9039 1065 5279 -5635 -2669 8986 -2216 5550 -1011 -8276 -1344 -7090 -338 -8160 -4089 2055 -2433 553 -6603 -1153 8062 8979 9534 4238 3686 7937 -8513 3631 -5294 -838 3455 -5106 5199 -6117 9631 2894 8860 665 -1887 -8081 -5387 -9762 -912 7706 8059 -9397 7643 4589 9124 649 -9241 -2005 7941 8826 2142 -2355 5993 -4475 -8500 -8855 1434 7885 -5982 -8866 1143 4429 8460 6965 -7135 -3622 -376 449 5645 708 1806 2755 -5737 -4870 8382 -460 1314 8567 6633 1008 -7616 -239 8560 947 -7222 9956 3159 5144 7614 9040 -3009 5145 -7514 -8999 8434 -5531 5227 -8680 -3417 -5117 -8769 7894 -1737 -6705 -4739 -49 -8850 -4959 -3164 -6120 -9244 -9126 -6423 -3277 -6997 -34 6801 -2826 1103 4766 -5517 -9175 -6969 2270 4017 -1277 5618 -3094 1894 9071 6436 -8063 7714 -2977 -2458 5709 2852 -3285 6491 -4545 -9091 9616 -3762 -4995 1600 166 -4628 1559 2911 -842 2939 6976 656 -3997 -3439 -9975 -768 -5964 9750 9380 1344 -2950 -6547 7249 8447 3270 3386 -8650 -6156 8164 4902 991 6829 4956 8781 -8204 -7101 -8194 3003 7004 9564 -9533 -3150 673 -54 -8973 5393 5490 -6874 -3536 8743 -2494 -1497 -54 -3793 -7028 -4367 -3886 -8990 3246 -3630 6141 2051 -4772 241 906 6286 -1747 -3899 7111 -3199 3682 -5581 163 8709 -6786 3913 -5480 -9324 4347 9515 -556 4597 4339 837 5433 5651 -7922 9568 9205 -2942 4339 88 4927 -9488 1198 -2841 -5767 -4073 -7937 2205 5647 3802 -7656 -2626 4761 -7815 -3931 6876 912 -5278 637 3461 -6453 3594 7302 5800 -9164 -8450 -3909 -2583 6932 3896 9394 6994 -6620 -3570 -5627 -5859 -4800 811 -5913 2016 -1586 -8866 1006 -9354 8900 -5936 5451 6931 606 -4546 2534 -4148 4138 -1630 -3746 5528 4216 -4754 3955 -9557 -3322 5332 -7883 -118 8873 -4265 9450 -9392 -1471 -4096 7492 -6289 4364 -4168 -1619 9677 -4612 6118 -3844 5256 -3081 1265 -1593 -3578 -1563 9527 864 -7948 -2478 -9607 -2755 4970 -350 -5215 2171 -8570 -7661 896 -1928 -7684 -7101 4142 -2045 8930 7107 -3651 -4592 -6853 4179 9553 -7288 -5112 -37 8660 -6683 -4340 -5526 -7595 5062 4189 6300 -1619 4021 -3286 -6583 -5906 1356 9349 2672 2447 -5056 -2656 -7652 9800 -7202 -3008 -4251 1583 702 -2964 -9979 -1085 6405 -7309 335 -8743 6209 2878 7257 5748 -9103 6386 -634 6556 5023 -4714 6804 8034 1015 4287 -3846 456 -8591 1177 9549 4450 -1998 -3226 5388 8264 -4629 8744 5427 -2663 3085 -1192 -3304 7191 8814 4491 -4222 3393 7315 7805 -1702 4852 -5637 -4376 8583 -7962 -2713 -3741 5598 -8491 9323 -7357 -732 1628 -9074 9343 -3273 -9128 2959 407 5896 6609 -2112 -3229 558 -9949 -809 -3097 -66 -3398 7869 -1050 -6414 -1095 -3757 -4939 2810 -1810 4471 8471 8068 398 1963 -3902 3818 -48 9200 8301 2542 -8013 8255 -4492 -3325 -574 9980 1446 5773 -829 9211 7198 6118 -5931 9689 -5992 874 4062 -7904 8176 4293 7979 6242 5987 5086 -9495 -5460 310 7373 595 -4648 -238 536 2077 -3183 -848 -3663 352 -722 -4021 -9652 3341 -9434 -4695 3201 -9283 7647 1327 9397 -2772 -3407 -9 5092 -3301 2512 445 8796 -9029 -3028 3251 9868 -2824 9801 1901 2537 -5277 4590 9525 -7693 -6623 -5391 -5115 -510 -9340 8823 -6612 -7731 2739 -2567 7216 -5295 -3860 2562 -206 8100 836 -938 -4368 -9017 4711 5311 3426 3231 8202 -1116 8012 6431 7853 -5450 9178 5351 -2282 -4912 8492 -2400 6938 4887 -1690 -1804 -8041 4483 4018 -5738 2926 3190 4930 5526 -5229 -8117 3483 2178 -2463 4154 -69 167 -5712 4873 770 2372 6715 3095 -9855 372 -254 910 858 7649 -6602 -8579 3961 -2715 -9322 4425 -4019 -190 5660 -7004 -4104 -2497 7324 9920 2082 -5741 -3100 7107 3431 4686 -1438 4490 -8988 -7020 7759 3832 3285 -3955 3183 7871 -6558 63 -8237 -9969 -1522 4467 -8273 8460 9165 -3160 -6319 -9753 8391 3519 -3627 -1949 -3793 5098 -2002 7102 5037 -5660 4313 5286 -1819 -4863 -7578 792 -5055 8065 6538 4206 -100 7217 -2093 -677 7266 -5457 -7697 3770 8016 9302 -5337 -3086 8577 -2839 -4461 -1861 9861 5331 -8980 9985 -6628 -8950 -7489 -3201 -9087 -6597 3009 6362 2234 5627 -9224 7254 -7199 -2233 -3104 9288 5127 -4474 -1485 -9373 5880 -1982 7300 7358 -6990 -3152 5667 -2729 529 -5248 4018 -5581 7610 2048 -697 124 -8835 -4697 6682 -3770 5403 6904 -5086 7904 -5041 265 2064 7823 -2630 4493 -6737 3139 9548 -3472 1355 3006 -8106 2905 -7899 -3612 30 -9384 7583 -2003 -462 -8217 470 -6278 -2299 4338 -5231 1615 9595 6260 9129 -4673 -9438 -7503 -2637 -7333 9121 4965 -907 -8176 -5438 -9368 -3958 -5114 -2603 -2174 1700 6270 914 -9883 -6068 -1614 7565 4887 7049 -8992 -847 5762 9819 -5078 6656 4615 -174 -4091 5400 8724 2690 -283 -3841 2935 -3397 6826 -2986 -5235 -1374 6392 -7030 9541 4451 2742 4916 -3537 -7570 3126 -9980 -9015 5722 -6408 -5889 9604 7066 35 -2564 4341 152 -5498 -7154 9442 2894 1381 8178 -8524 -6105 -682 -2132 5578 4448 -6982 -2095 -3562 5743 -237 -9255 8852 -9609 4752 31 -2755 -3802 -2760 1465 8848 8956 -5858 4752 -3919 -1447 7528 1424 -1036 -2945 -5674 -2897 2684 -9938 -6802 -1535 3570 -120 -8101 5644 -6582 -502 -6783 2805 4955 -3822 7851 -3343 8683 -8889 -2696 -8560 6870 -2059 -8380 -9141 8458 1135 -3102 -1324 -8029 -1677 -6260 8901 5495 -5394 1101 -9421 -3492 -8101 7005 -954 -1248 3313 -3243 9256 -9566 4022 -3183 7727 3357 8688 7609 3299 -3224 2487 171 -2091 -8731 -1220 2618 -4564 1579 5053 -2503 -2952 809 8298 -7484 -8386 3439 -7970 -6864 -2359 -5646 4828 3343 -5303 5482 -9923 -9593 793 9145 -3968 2752 -6014 9690 -8658 -7699 -9639 -3041 2299 3874 -8091 7184 3659 -3228 -5640 -2855 7439 9272 -7625 6989 -5206 1662 5286 6067 -809 9058 -3521 8125 8295 5247 4377 -3445 -9412 7100 9285 -1312 4495 -1040 -1591 2654 787 -3959 -674 2935 5653 -7897 -1573 -8791 -3682 2953 -4437 511 -8265 -8680 355 -1086 -3007 -7955 -6399 5525 -2745 4835 2025 5535 3916 -6310 -8005 9591 -8210 5156 -3731 996 4758 3818 -585 9851 4334 -127 -1296 2087 -4555 1269 -8301 -1813 -4747 -738 -3626 -5552 -2966 5325 5029 9871 4913 -9238 7764 -725 3288 6964 -1013 -1097 9710 -8851 -5407 8332 5895 -7869 -9530 9109 1829 -5445 1039 -8437 6824 -2143 3495 -3157 304 -1629 -6814 453 7878 -7045 -6821 -5240 5434 9157 8680 766 7347 1267 9506 -5514 9754 8519 2381 -2975 9115 4935 4280 8500 5711 3278 -3971 7549 331 -4913 -8989 -4750 4741 -7399 2655 -3718 279 -1850 2122 8344 5433 -2976 2316 9495 -9152 -2243 904 -7657 6793 -7603 -963 -6736 -4521 -8986 -4052 6329 -7373 -3764 -9979 -8917 -890 -1778 -9578 -7639 -6185 -9557 2204 4637 5566 8946 9654 2277 297 6333 -1043 9408 -1244 4309 6852 4410 -6323 7550 7858 2819 -7364 2156 2916 -2343 501 9701 -1541 6924 -2913 5660 -1174 9349 -1057 1330 9470 -7643 -880 8923 7672 -8332 7458 3248 -504 4305 1674 -3075 -7565 -3234 -3537 3551 -2311 -905 8514 -114 5669 9300 -953 8889 5586 -6367 8038 1917 -5198 -7065 -3460 8959 -2886 -3492 6734 -1704 4418 9308 6695 9704 -730 -4723 -1667 2116 -5551 -4351 492 -9137 6753 -4496 -5152 3325 9053 1010 -5223 1181 -5756 214 9674 6100 6535 7988 -7333 8802 9752 4754 -6985 37 -8861 5969 -1711 1731 -3053 -5456 -314 6642 -4266 3652 -5786 9253 -2991 866 1389 8177 -4151 635 -844 -3035 2299 7624 1487 -2509 5466 5351 -3894 -990 9301 -3424 6376 9443 -1347 -5799 -3008 8788 -500 7516 -6036 7888 1588 168 584 -8262 -5025 4585 -9518 -3521 7242 -2660 3922 9619 -1973 1005 6286 8547 1639 -71 -9367 -9264 8352 -7999 -2825 -9112 -1501 -5923 7744 -9245 -1231 -8815 -2531 9157 -1217 5796 6046 -2901 7784 -5458 6589 4166 -8769 8072 1856 5597 -2306 -5912 -5717 593 -3040 -3211 7717 7494 1544 -154 -8413 -8038 7110 -7734 3769 -4007 -1941 7968 -9358 -347 -8379 8495 -4497 -455 -8893 6396 7624 9479 8791 -8861 5031 8535 -2210 6739 469 9865 1133 3103 -9115 3374 6622 -6602 -786 3588 9587 2905 6210 102 -3971 -8696 9441 1338 9569 7909 5245 -275 1064 -4190 673 3626 -7552 8259 2182 -9488 8117 9351 -30 4225 1417 6551 -5665 7440 4579 -3787 5697 7511 -8914 -2669 7198 -5068 3571 -8350 -7004 -1615 -835 2724 3468 -2415 -1358 -801 267 2692 -2719 -1393 3120 7715 -8673 -97 4116 8284 2577 -1373 1811 2497 3364 7350 -9455 -6224 -4603 -2299 6250 -6089 -5169 -169 271 -3196 -3365 9174 -7997 1449 -8595 8783 -7243 -6878 4668 -8277 -3608 -8400 6848 8332 -4993 4001 7634 -2608 2966 -8131 -1017 -2955 9781 -2134 -6236 5940 6997 6132 -981 -2928 -7170 4669 -9229 4663 5885 7026 -119 -3812 3595 -3765 2664 -347 -2158 -244 -1156 6875 2426 -980 3031 9506 -758 -9435 -5996 -1763 1979 1871 -1295 -1417 -593 9558 5846 -6762 -293 -3735 8740 5004 -4705 -6983 872 -8027 -2848 -9077 -9704 5092 1510 3879 8918 481 4933 -9094 -7061 -2100 -697 -3225 -5741 1643 -2390 140 -3475 3467 -3285 7435 258 -9292 -3855 7990 -4828 -2609 1361 1404 1423 -6637 -1533 -6313 -7534 -6114 4250 318 2963 -4203 -2106 -9963 -1552 6054 5843 4119 2679 54 -1266 7059 7740 -9147 5998 2703 9583 -5269 8605 7489 5027 -4169 2784 -4496 -8731 4266 3355 6106 -5037 8360 -9087 2093 -1090 -2920 -6238 805 -6973 3090 -7636 3629 7236 -8269 5139 -4125 3164 2751 -8118 6330 -1980 4829 -2144 935 9785 7000 3974 -3539 -9404 -1034 1430 7997 4250 4150 -8429 -5673 -8772 7113 -244 7459 -5252 1693 -3257 1943 711 -8691 -7336 -3728 -2881 5036 -2220 5048 3293 -5542 4571 -7053 -9661 -1672 7906 7225 -7562 9724 -1007 -8157 5822 6499 -1745 7499 9781 6236 4482 6473 1387 -5077 3693 -8378 3746 1046 3934 2867 -3655 -4509 -2247 919 -3192 -4566 -3386 -8906 1988 6983 -2100 521 4661 -5683 -5085 -8261 -6203 -6364 -5407 -4849 -6708 -9566 -2437 5149 2521 9325 -739 -2020 -1393 1786 977 -8796 5415 -6025 6985 6043 5045 -6301 -7974 -3100 -4348 6994 -2321 4971 -9873 5745 -1208 -3508 -9824 -9652 -3315 -325 -545 -9242 -3573 -6569 8994 333 8197 -7785 -3524 -4577 -2408 -2661 -180 2843 491 -6702 54 -2999 -9369 4531 5172 584 -6283 -3033 -596 -8967 -8758 7351 -4474 -3568 -4863 -8493 -6447 1151 9186 -3428 370 3959 -9697 4778 515 -7940 3452 -2866 -1773 3269 -1025 -8293 9501 -7464 -320 1283 7956 -6142 1354 -6845 -43 3371 -3446 2834 1615 1564 3794 294 -4064 -4427 9075 7609 4312 1407 7007 7361 9041 -4969 9259 4641 1503 -1108 3737 -2141 -7105 7731 -2101 -8693 9213 -986 -1616 -9739 -5591 5208 1407 1502 7596 9593 9456 -5650 6783 9663 3475 6826 701 8249 8292 2288 5049 -6786 7551 6964 8338 -4600 9720 9128 -1221 744 6344 2293 -4728 -3232 913 2925 -7354 -1413 -4802 9600 -6346 -7142 -839 1690 647 -3863 8900 6989 -5590 8046 8060 -3516 6437 -4822 -2815 2848 -6805 4233 -2985 6890 6862 -9713 747 -8764 1332 5663 -6773 -1521 6592 2803 9603 -8163 -9333 2676 1366 -1190 -4933 3403 -2960 -4768 8665 7922 -4818 -6019 -3385 9935 -6057 -4302 -4823 -5575 -1665 -8730 7690 6790 5453 -4354 4382 -4835 7334 7331 -3773 -2602 -1350 -6197 -6731 9512 4741 -7102 8997 1327 344 2817 6662 -445 -6921 -1527 3566 -2717 5482 1277 -7175 -6178 -2264 -2976 -2578 -5 6255 67 -3183 -5276 5548 -7603 2014 -904 -5419 -9022 -1650 490 5099 6031 5681 3774 -5751 5564 -3463 2577 4195 4864 -1204 779 -6079 -1603 4942 -1043 -7157 -6575 -2934 -8905 -6879 -162 5873 3638 5250 7147 -6312 -9599 -2089 3815 7972 -4959 -9458 -729 -588 9731 8454 9274 5810 -7611 3198 -3605 -2494 7581 -8702 -9186 -397 -6360 -2050 -8736 4591 4516 4755 -3200 -9970 3218 3596 -8417 -5691 -1130 4302 -7568 -2830 -338 -5800 -4577 4579 9459 -8939 -1513 2537 -4225 9649 4454 -3582 7023 -6875 -6209 1335 -9916 -2787 2744 355 8983 9447 2807 -1337 3203 5218 5837 5653 -5345 8288 4090 8829 -6090 -2748 -9317 -4877 9352 7638 3721 -5327 8082 5910 -1771 -4464 8366 -7932 2232 -473 7605 -198 2589 5848 -9152 8309 3881 -6280 5264 -5082 1745 8092 1095 4009 -1593 -4149 -5082 -2915 -2168 8360 8855 4147 -7657 -8213 -4782 7872 505 -956 6254 6638 1908 1473 3009 6887 -341 4584 -6660 2047 5460 -4789 -75 6873 -7752 -570 -2733 -596 2815 9400 5887 -4666 6414 -6042 6107 -1498 2866 4206 -2341 -2683 -2930 5458 -5092 6206 3572 -4958 8831 427 2183 -6419 5809 -7148 1545 9132 9062 6173 -3860 1559 4511 5017 -8839 -3301 7687 -6851 2452 5804 1475 6723 -3911 7172 8673 4264 -6623 -9669 4818 947 -2979 5027 -3893 6181 -8467 -1162 5888 8153 715 1964 -8442 -8963 9818 -5526 2979 -9911 8462 -2591 2121 3564 -9800 6741 -7114 9550 6643 -442 -5399 5352 8760 3520 5787 720 -4567 1555 8483 -5454 501 -2845 -2461 544 5331 9262 -3013 -61 7765 2165 8790 -8552 5437 -6877 3780 7029 -8441 5979 -8873 -6698 -9969 -9408 -6208 -263 -2220 1470 7642 1681 -9590 -4950 -2736 8607 -5201 -2625 2021 6887 8531 -9760 -557 8589 -4227 -7817 3789 6165 -6092 -518 3375 7555 431 -7964 -7864 -4787 369 -8646 6228 -9670 -7424 3565 8213 -5338 -5713 8505 -3153 -8199 179 5878 -9668 -2755 6925 -180 -9158 7026 -138 1502 7032 1296 -2976 6489 7392 -7222 6782 8268 -212 -392 -3871 1779 9205 -5100 3874 -4226 9761 5121 904 2686 -5428 -3543 -3673 -544 -2979 -9707 1442 1003 -7938 -2452 -693 -8072 5501 2576 7976 -4106 -4078 -5193 -4281 -6188 -4840 3248 1 -2028 -7771 1285 -380 5806 9489 -1446 -5403 8189 -397 -61 5270 -3932 3292 7275 6081 5349 8239 -3727 -4744 -6815 -7455 7394 -2536 6778 -574 4722 3777 8424 6511 1341 -2633 -341 9624 6448 5015 6961 3924 350 6590 -7102 1293 4500 9825 -7770 -3296 8071 -2459 1391 -3995 4067 -3143 -252 2345 -1083 8617 4461 -4527 1749 4528 7408 -5898 2196 -6203 1499 -5613 4695 -5312 -4325 8865 3266 -570 -1305 8447 -3783 -1990 5677 -5241 7517 6986 -6966 -6392 -9928 5975 -5619 8499 6350 2594 5138 4336 6632 7313 -3903 -9730 7218 -8472 -5870 3793 4705 -2714 -9294 4040 -6477 9936 -6848 3321 9785 4220 2985 -6977 -5311 8298 5238 -5852 3093 -8886 -3539 5845 5810 -4965 1718 4620 8822 3873 1375 953 332 8922 -8965 -8762 4766 8891 -2408 -7067 5394 -2776 -1872 7203 -6959 -9712 3259 559 6960 2209 -6731 -1857 -9348 -9502 -7774 9898 2472 8243 5739 4948 2532 -7000 -373 3066 -1357 -6559 8283 -7703 6644 3923 -8358 3121 -9233 1347 -152 -3034 -8887 -4450 1844 -2799 -6064 -7037 -3164 -4682 -8041 4910 795 -1188 3161 -7564 -2751 1385 -8144 -2199 -4012 -8307 9665 762 9746 -8414 3775 -9334 -4889 2584 -1794 -5943 -7250 6064 -5412 3144 3419 -6083 -1410 5138 7162 -3955 -3692 -6747 -3114 2935 -1367 -2742 4162 5399 -2384 965 -6672 -2293 -1117 1942 4568 7621 -2488 -6191 8887 6476 -4986 201 4673 -2523 6226 -5813 1527 -7028 4521 1418 1776 -2212 6313 -6832 -9329 -7809 3469 -5560 -9036 4832 1608 7983 8903 8995 -6214 8379 -3901 -3333 -5773 2531 6177 -365 1814 1013 -716 -8118 -6797 -9252 7523 -3009 -1075 4014 483 5546 8302 -1145 -4623 2306 -8318 752 4957 -2948 26 -9604 -5522 -5852 -6026 -4881 -7960 5251 8302 -4466 -4701 5012 -2297 5772 1474 6391 -6134 751 -9904 -6716 -6539 -4255 -5089 -4695 344 -7195 3887 -8317 -489 3017 -5608 847 -8073 -1374 2907 9079 7272 8312 -5243 -1179 8850 -8690 -9324 -1863 4047 1523 1106 7001 -8829 1262 5402 -1752 -8634 9019 -7452 -6169 -4568 1041 8845 4634 -9450 -1017 1359 7461 -1296 -1920 -355 -79 -176 -2497 151 -6733 8150 2722 -4150 9630 1785 -2998 -3681 3545 -1350 6508 -3357 -396 2262 6728 2914 -3115 -262 9915 -1757 2593 4406 -5746 -3959 1952 -9217 3643 -888 8044 5936 -3454 -8695 1844 8373 -7186 -2339 -817 -6785 4276 9833 7787 -1127 -9767 -1630 5973 6269 1923 7858 -1898 4230 -3636 5495 -6389 -193 -879 3444 -1451 -8856 -9078 -7987 2648 2989 2499 232 -5820 -6818 6453 -1658 2037 8798 2387 4806 -6815 -5683 5340 2512 9412 4200 -5064 -9981 5518 -7977 -2480 -3077 8661 2286 4278 -1239 7564 -3846 6358 2964 6286 -8985 -5841 -6264 7869 8488 9124 9947 2896 1059 639 -4571 -5116 3600 5643 -6214 7220 -6871 -2838 -174 -1275 -6751 -9419 -5423 -6695 3764 1671 -5527 -1085 -3903 385 8443 -1784 161 -3354 8194 -8032 -4887 4010 6822 -355 6265 3094 810 -336 8356 4257 8822 -4171 -9563 1234 5899 5102 -9831 5781 328 -4030 -4132 1722 398 -4743 4825 -1634 4369 2876 6403 -1681 2400 6029 -8655 5714 8384 9815 2502 -177 -9450 -2977 8115 9295 -5846 2369 -1278 2523 -3729 -9086 6286 345 9985 -63 6118 1169 -1908 1296 3278 6648 8695 -1666 -2168 -8102 7343 4350 -8784 3960 -1653 -6807 8348 -6528 -4195 -1902 -9726 -6816 5037 -818 6949 -9598 -4391 7339 9016 696 1306 -3680 8983 -6368 2749 -4213 -5388 1837 4729 -1428 -3137 -3923 -9256 4604 -8613 -112 -446 6848 -3691 -613 8182 3761 -8126 -1452 9802 -5613 340 6138 -7025 -8369 1291 -5420 -3381 2563 -1937 -5276 2101 -7829 -9639 9574 -5662 -4277 -5618 -2966 6027 -8829 9973 3937 3116 -1585 2673 1526 -3786 5321 3864 -1053 -4418 6221 -1232 2616 9637 -6239 -5068 -6021 -8822 2169 -9841 -3962 8199 5111 -8049 7714 9976 8088 5439 5772 -9598 9963 9830 -3114 2676 -8086 6578 2194 -4629 5012 -3131 5577 -8511 7645 9934 9298 6095 6578 4488 -3810 -7243 -4274 7681 -2479 2177 4079 -8347 2882 1123 -5235 -4703 9691 182 237 1123 -8285 -1093 -226 -7407 3752 5581 -5657 9853 1552 -6790 -4798 -4348 9518 2220 8359 4916 4063 -6092 2025 -270 -7283 3292 -5106 -2756 -1614 2226 -3551 7991 4177 -5496 -5132 -5895 7781 -8618 -8138 98 4712 7136 8236 -9791 -7992 -6974 2678 7301 -5210 6629 5781 -2552 4878 -691 -546 9549 8071 9156 5746 5175 -7595 6097 -2646 7191 1056 6476 -7843 -8373 7847 4504 4832 -6902 2768 6093 1812 -8326 -8762 592 -6884 397 -9397 7957 8730 4806 5167 6614 9917 3673 -6319 2134 2191 8539 8184 155 -9946 7572 7486 -2951 4864 -8330 -3226 6059 547 -8141 957 76 8486 -329 -6660 8215 566 3099 6549 1096 -9721 -8057 -369 -6471 2312 7333 -5497 7389 -5120 -1326 9224 6233 9197 9296 -3884 -7671 6904 5306 -6060 7733 -4926 -5044 6816 -8588 -6078 -370 -651 -2216 -3186 -1482 -2049 -1198 -2031 1896 9059 7884 -3678 -2341 5427 -4151 2415 8151 8211 -3653 -3853 -6676 9749 -6351 8049 5289 8570 -9212 6506 34 -7550 -7761 6151 4365 8493 1410 6174 -9111 -4699 -559 8083 7627 -3095 434 -8649 -267 9070 -1557 8827 -5136 9939 7879 -7517 68 2111 -6451 -3720 -3382 -3576 5848 -8758 -3155 3772 9837 -333 1095 2882 47 -1639 2950 -1855 3818 -4235 306 -9631 7242 3812 -1686 5580 8376 -4195 8160 6290 2471 -7358 -3450 8943 4804 5721 -5612 2412 2712 -7236 -7713 -207 8809 8006 5282 6325 -9694 8520 -5346 985 -198 2203 4674 1075 -8252 4266 -8558 -4316 -7817 -4728 4544 2176 -520 -2044 3573 3080 8985 3452 -6343 6562 -9564 -2549 2528 1777 -2828 -6461 9678 -8083 -3850 301 -9183 -2948 -727 -4042 -3049 -8021 -4621 8951 204 -13 -9211 -9535 6335 -6080 -6768 -4229 6003 716 -8402 -5086 1816 3929 -8958 -3144 -5261 -373 2072 7880 -3936 3536 -7106 -2214 9124 6500 -3568 -9409 -1186 8479 -8397 3186 -7671 9691 -7609 5721 -6649 3558 5539 -5546 1046 -9561 -2368 -9455 -6979 -9111 9799 923 3613 -5859 -1099 -1690 7772 -4681 4595 2925 5310 -2155 5455 3882 -7389 8130 2111 -1477 -931 -4369 -2021 -2811 517 -7126 8292 3264 -3652 4144 5134 9509 -7990 2101 -2897 8890 7974 -517 -5963 -2569 824 6079 6866 7916 5338 -7598 -7274 7521 5399 9580 8052 1861 -3849 6729 -2299 8095 513 3415 -2055 -9269 -8878 8792 643 -9601 2108 6825 -8809 4107 2666 6196 4111 -9722 4308 2844 8935 6575 1395 5255 5132 5063 2683 3404 -2363 -1362 175 9488 -9601 -2802 -7151 5371 -8181 9453 2264 8761 725 -5632 9075 4708 692 -6019 2414 -3361 8888 699 8467 3052 5611 -5233 8033 1726 9036 1488 2050 -2765 7966 -4855 362 149 2822 2987 -8805 9941 -2065 7235 118 2034 -9015 -9331 -8199 -4206 8710 -6476 7841 -2056 4041 1878 -6220 2493 -6161 3412 -9710 6633 6666 3521 9715 -1396 -656 -756 -7306 -3583 -8062 8826 -7380 144 -7576 309 -9084 -1500 -9725 -1335 4631 5505 -2948 329 -8676 8654 8507 2556 -380 -1887 5739 -773 2469 2917 -7165 -766 -5142 -8902 7083 -6302 -5794 813 7687 3030 8138 -8778 -2241 -6469 -8177 -6499 -3016 -1483 -1173 5975 -6017 -9100 7195 -2413 -8950 7781 6669 3195 4131 2100 -694 -3133 -2738 -7232 -8791 -1429 -180 3405 5123 -4755 7337 5701 8411 9058 -5242 2002 -8096 1941 975 3137 -4456 5778 895 462 3605 -3415 -878 997 1236 9444 201 9357 -8316 9031 -2142 6773 5947 -1919 -2297 6552 3099 3134 7426 -9258 5390 -6022 8213 4806 3868 5409 -3884 9221 3270 5134 1420 -9582 1193 9913 -1886 -3585 -6015 4782 5745 -7033 -7277 1920 8128 -148 5410 -2420 -8563 -2521 3281 782 881 6799 7510 -8419 -4552 8390 -7139 6421 9475 -4708 -688 1227 4674 6342 -1100 -1338 3570 -1547 -7099 5365 -5840 -7677 -5370 -8667 9290 2575 981 -5913 -4633 5728 5753 3052 6462 5751 -8103 -6318 -1745 -6096 6571 -1312 9885 3242 5175 9451 4948 -8597 -7643 -2855 -3597 6863 -7319 9056 -3997 -307 -3760 -7506 9796 3063 930 -3899 -8406 2496 -5864 2280 -8870 9356 3052 -5132 8208 4348 2779 -6048 -4387 -8256 -7605 5414 7096\n",
+    "out": "9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 9089 7570 7570 7570 7570 7570 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9164 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 9300 7820 7820 7820 7820 7820 7820 7820 9224 9224 9224 9224 9224 9224 9224 9224 9224 9224 9359 9359 9359 9359 9359 9359 9359 9359 9359 9359 9359 9359 9359 9359 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 9711 8933 8933 8933 8933 8933 8933 8933 8933 8933 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9223 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9734 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9882 9315 9315 9315 9315 9315 9315 9298 9298 9298 9298 9298 9298 9298 9298 9298 9255 9255 9255 9255 9255 9255 9255 9255 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9664 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 9653 8845 8845 8845 8845 8845 8845 8845 8845 8845 8845 8270 8270 8270 8270 8270 8437 8437 8963 8963 8963 8963 8963 8963 8963 8963 8963 8963 8963 9934 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9996 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9797 9797 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9687 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9991 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9523 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9888 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 9756 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 8727 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9848 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9485 9445 9445 9445 9445 9445 9445 9445 9445 9277 9277 9277 9277 9277 9277 9277 9277 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9995 9489 9489 9489 9489 9489 9489 9489 9489 9489 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9729 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9369 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9581 9581 9581 9581 9581 9581 9581 9581 9581 9581 9581 9581 9581 9581 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 8734 9042 9783 9783 9783 9783 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9788 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9659 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 9797 8931 8931 8931 8931 8931 8931 8931 8931 8931 8931 8931 8931 8931 8436 8436 8436 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 9464 8258 8258 8258 8258 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 8473 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9502 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9826 9444 9444 9444 9444 9444 9444 9215 9215 9215 9215 9215 9215 9215 9215 9215 9215 9215 9215 9215 9399 9399 9399 9399 9399 9399 9399 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9688 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9821 9791 9271 9271 9271 9271 9271 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 8112 7759 7759 7759 7759 8255 8255 8255 9628 9628 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9921 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9348 9088 9088 9088 9088 9088 9088 9088 9088 9088 9088 9088 9088 9088 9017 9017 9017 9017 9017 9017 9017 9017 9534 9534 9534 9534 9534 9534 9534 9534 9534 9534 9534 9534 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9631 9124 9124 9124 9124 9124 9124 9124 9124 9124 9124 9124 9124 9124 9124 8826 8826 8826 8826 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9956 9040 9040 9040 9040 8434 8434 8434 9071 9071 9071 9071 9071 9071 9071 9071 9071 9071 9071 9071 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9616 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9750 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 9564 8743 8743 8743 9515 9515 9515 9515 9515 9515 9515 9515 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9568 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9394 9450 9450 9450 9450 9450 9450 9450 9450 9450 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9677 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9553 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9800 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9343 9200 9200 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9980 9689 9689 9689 9689 9689 9689 9689 9689 9397 9397 9397 9397 9397 9397 9397 9397 9397 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9868 9801 9801 9525 9525 9525 9525 9525 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 9178 8492 8492 8492 8492 7649 7649 7649 7649 7649 7649 7649 7649 7649 7649 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9920 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9165 9302 9302 9302 9302 9302 9302 9302 9861 9861 9861 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9288 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9548 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9595 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9819 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9604 9442 9442 9442 9442 9442 9442 9442 9442 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8956 8683 8683 8683 8683 8683 8901 8901 8901 8901 8901 8901 8901 8901 8901 8901 8901 8901 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9256 9145 9145 9145 9145 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9690 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9285 9591 9591 9591 9591 9591 9591 9591 9591 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9851 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9871 9710 9710 9710 9710 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9754 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9495 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9654 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9701 9470 9470 9470 9470 9470 9470 9470 9470 9470 9308 9308 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9704 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9752 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9443 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9619 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 9157 8495 8495 8495 9479 9479 9479 9479 9479 9479 9479 9479 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9865 9587 9587 9587 9587 9587 9587 9587 9587 9587 9569 9569 9569 9569 9569 9569 9569 9569 9351 9351 9351 9351 9351 9351 9351 9351 9351 9351 9351 9351 9351 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 8284 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9174 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 9558 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 8918 7990 7990 7990 7990 7990 7990 7990 7990 7990 7990 7990 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9583 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9785 9724 9724 9724 9724 9724 9724 9724 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9781 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 9325 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 8994 9186 9186 9186 9186 9186 9186 9186 9186 9186 9186 9186 9186 9186 9186 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9501 9259 9259 9259 9259 9259 9259 9259 9259 9593 9593 9593 9593 9663 9663 9663 9663 9663 9663 9663 9663 9663 9663 9663 9663 9663 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9720 9600 9600 9600 9600 9600 9600 9600 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9603 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9935 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 9512 8997 8997 8997 6662 6662 6662 6662 6255 6255 6255 6255 6255 6255 6255 6255 6255 6255 6255 6255 6255 6255 7147 7147 7147 7147 7147 7972 7972 7972 7972 7972 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9731 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9649 9447 9447 9447 9447 9447 9447 9447 9447 9447 9447 9447 9447 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 9352 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 8855 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9400 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9132 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9818 9550 9550 9550 9550 9550 9550 9550 9550 9550 9550 9550 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 9262 8790 8790 8790 8790 8790 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8607 8589 8589 8589 8589 8589 8589 8589 8589 8505 8505 8505 8505 8505 8505 8505 8505 8505 8505 9205 9205 9205 9205 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9761 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9489 9624 9624 9624 9624 9624 9624 9624 9624 9624 9624 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 9825 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 8865 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9936 9785 9785 9785 8922 8922 8922 8922 8922 8922 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 9898 8283 8283 8283 8283 9665 9665 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 9746 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8887 8903 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8995 8379 8379 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 8302 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9079 9019 9019 9019 9630 9630 9630 9630 9630 9630 9630 9630 9630 9630 9630 9630 9630 9630 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9915 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9833 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9412 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 9947 8443 8443 8443 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 8822 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9815 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9985 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9016 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9802 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9973 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9976 9963 9963 9963 9963 9963 9934 9934 9934 9934 9934 9934 9934 9934 9934 9934 9934 9934 9934 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9853 9518 9518 9518 9518 9518 8359 8359 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9549 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 9917 8539 9224 9224 9224 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9296 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9749 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9939 9837 9837 9837 9837 9837 9837 9837 9837 9837 9837 9837 9837 9837 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8943 8985 8985 8985 8985 8985 8985 8985 8985 8985 8985 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9678 9124 9124 9124 9124 9124 9124 9124 9124 9691 9691 9691 9691 9691 9691 9691 9691 9691 9691 9691 9691 9691 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9799 9509 9509 9509 9509 9509 9509 9509 9509 9509 9509 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9580 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9488 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9941 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 9715 8826 8826 8826 8826 8826 8826 8826 8654 8654 8654 8654 8654 8654 8654 8654 8654 8654 8654 8654 8654 8654 8507 8138 8138 8138 8138 8138 8138 8138 8138 8138 8138 8138 8138 8138 8411 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9058 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9444 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9913 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9475 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885 9885",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-shortest-path",
+  "title": "Shortest Paths from a Source",
+  "category": "Graphs",
+  "difficulty": "Hard",
+  "statement": "Given an undirected weighted graph with non-negative weights, print the shortest distance from node 1 to every node (1..n), or -1 if unreachable.",
+  "input": "Line 1: n and m. Next m lines: `u v w` edges.",
+  "output": "n distances separated by spaces.",
+  "constraints": "1 ≤ n ≤ 10^5; 0 ≤ m ≤ 2·10^5; 1 ≤ w ≤ 10^4",
+  "timeComplexity": "O((n + m) log n)",
+  "spaceComplexity": "O(n + m)",
+  "hints": [
+   "BFS works only for unweighted graphs.",
+   "Use Dijkstra's algorithm with a min-priority queue; skip stale queue entries."
+  ],
+  "solution": "Dijkstra: initialise dist[1] = 0 and push (0, 1). Pop the smallest distance; skip if it is stale; relax neighbours and push improved distances. Non-negative weights make the greedy choice correct.",
+  "premium": true,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "4 4\n1 2 1\n2 3 2\n1 3 5\n3 4 1\n",
+    "out": "0 1 3 4",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "3 1\n2 3 4\n",
+    "out": "0 -1 -1",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "1 0\n",
+    "out": "0",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "50 120\n15 39 13\n26 39 20\n46 48 63\n20 38 46\n20 47 75\n22 44 53\n23 43 10\n11 23 76\n13 17 8\n27 34 36\n8 39 18\n10 36 4\n24 35 19\n2 32 7\n18 37 23\n14 15 60\n38 46 21\n4 50 80\n41 44 80\n33 40 85\n10 38 47\n35 37 81\n7 30 2\n1 44 11\n14 17 50\n5 14 98\n3 26 100\n14 44 81\n4 43 29\n47 50 92\n24 30 6\n36 50 18\n28 46 77\n7 23 67\n11 39 24\n2 36 12\n25 47 82\n6 27 24\n6 45 11\n45 46 10\n19 27 38\n1 21 63\n27 49 59\n33 44 99\n12 15 21\n20 28 73\n21 27 26\n23 24 15\n21 36 2\n40 49 54\n12 42 68\n1 14 90\n7 9 36\n20 21 67\n26 34 5\n32 50 28\n24 46 84\n23 26 28\n29 42 8\n14 23 1\n7 48 75\n1 16 8\n28 34 66\n27 44 53\n11 36 40\n2 33 4\n19 49 94\n31 32 69\n18 32 31\n35 48 87\n21 31 9\n5 34 67\n10 39 52\n15 20 49\n26 29 76\n14 18 72\n10 14 79\n27 30 42\n20 46 93\n31 46 70\n2 10 19\n11 22 69\n5 45 83\n11 40 53\n6 19 24\n15 31 81\n21 35 36\n5 20 45\n8 37 47\n33 48 49\n18 29 69\n18 47 57\n1 6 20\n17 24 18\n14 34 46\n31 50 96\n19 30 73\n8 30 1\n37 45 58\n9 47 100\n15 26 93\n32 42 77\n7 22 81\n15 35 81\n7 31 65\n13 47 63\n7 40 74\n48 50 63\n14 27 30\n19 23 47\n28 35 99\n16 18 95\n18 24 20\n13 49 51\n5 8 25\n5 26 68\n34 44 43\n37 40 34\n6 9 60\n13 24 1\n",
+    "out": "0 77 159 114 112 20 88 87 80 69 103 113 91 74 92 8 99 103 44 108 63 64 75 90 236 59 44 118 135 86 72 84 81 54 99 65 89 62 79 123 91 143 85 11 31 41 154 104 103 83",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "800 2500\n255 784 22\n383 524 25\n68 283 65\n59 729 10\n41 186 10\n13 353 6\n391 793 65\n25 178 7\n665 767 70\n51 199 48\n160 631 82\n28 332 25\n6 722 12\n68 139 96\n60 284 61\n373 515 92\n171 646 36\n360 396 75\n104 327 52\n108 477 25\n349 423 3\n782 799 1\n162 188 3\n78 454 19\n486 657 98\n472 759 6\n173 197 47\n224 508 75\n325 560 9\n270 395 65\n161 717 100\n495 742 54\n355 439 95\n373 636 98\n660 666 54\n8 660 32\n209 650 89\n15 519 1\n677 755 6\n348 579 22\n285 788 12\n163 799 43\n259 507 78\n17 565 47\n372 384 52\n390 432 81\n468 617 96\n573 782 74\n266 402 41\n49 633 38\n47 443 4\n253 548 16\n374 429 92\n319 493 33\n4 109 91\n374 465 59\n151 536 34\n3 558 38\n218 446 34\n372 541 43\n84 632 84\n145 233 11\n133 753 83\n462 663 42\n98 795 65\n104 726 2\n165 556 21\n317 690 44\n74 703 72\n14 423 17\n648 789 61\n489 573 92\n38 637 9\n271 579 100\n9 430 88\n75 146 49\n696 722 63\n775 786 39\n144 654 32\n172 307 22\n325 406 20\n241 672 67\n140 769 46\n3 126 1\n74 186 17\n334 491 69\n223 394 90\n113 379 33\n305 729 77\n24 41 59\n356 514 10\n180 325 38\n152 226 43\n436 659 61\n10 142 45\n168 579 52\n201 613 58\n290 425 37\n629 645 34\n268 666 66\n27 460 76\n500 680 33\n347 587 22\n507 539 5\n612 741 42\n658 708 40\n63 270 12\n81 696 17\n140 782 99\n90 107 69\n357 487 68\n296 477 27\n463 654 77\n67 654 92\n763 766 14\n375 541 45\n54 306 56\n338 739 5\n233 722 47\n41 372 66\n643 706 99\n460 621 64\n257 670 65\n250 482 94\n518 562 13\n91 229 9\n409 655 64\n196 282 73\n604 714 44\n297 334 59\n48 267 54\n34 369 54\n57 581 71\n262 721 14\n322 772 7\n68 361 23\n597 711 61\n95 464 12\n11 730 6\n113 369 44\n83 755 20\n339 415 26\n6 126 14\n637 783 17\n317 513 32\n359 775 23\n62 143 7\n44 354 60\n359 366 75\n7 472 32\n62 179 15\n335 566 87\n326 634 99\n44 390 76\n71 493 33\n371 605 72\n117 609 77\n117 380 93\n370 560 75\n141 737 26\n228 476 44\n302 425 71\n13 179 91\n177 510 17\n465 797 13\n238 526 34\n168 690 81\n114 719 20\n42 322 82\n350 438 39\n351 403 59\n669 712 78\n129 210 72\n51 290 87\n149 304 47\n536 713 95\n273 748 91\n213 554 80\n420 767 65\n149 569 92\n35 547 37\n424 508 98\n53 601 62\n121 327 57\n308 333 15\n146 500 40\n373 691 51\n292 474 80\n250 328 52\n90 110 80\n272 761 84\n36 633 79\n290 549 40\n417 590 81\n322 618 26\n489 615 92\n187 393 82\n82 636 69\n234 770 15\n264 496 69\n423 520 19\n330 478 8\n556 641 8\n514 644 93\n404 772 81\n747 766 37\n24 142 77\n54 430 94\n19 701 81\n535 703 34\n74 228 18\n102 735 1\n204 603 1\n130 425 97\n691 721 71\n223 616 47\n591 783 88\n117 226 57\n340 643 36\n4 285 7\n278 408 38\n307 731 97\n384 426 79\n635 682 31\n112 641 72\n534 779 48\n392 695 71\n592 720 51\n305 398 13\n129 730 34\n241 642 22\n356 592 52\n562 697 99\n429 433 19\n185 710 46\n480 515 49\n232 413 81\n28 763 65\n183 557 77\n398 445 76\n150 380 29\n108 234 27\n118 427 12\n166 324 51\n134 637 10\n742 785 30\n474 476 39\n179 379 27\n231 718 42\n518 519 64\n15 685 12\n21 616 14\n457 652 80\n19 426 74\n33 181 45\n373 429 23\n81 486 54\n58 768 23\n228 276 32\n328 363 50\n612 796 40\n237 361 28\n450 505 26\n435 605 9\n415 776 81\n167 711 24\n94 312 48\n414 439 38\n426 642 20\n380 446 55\n147 732 71\n175 651 96\n309 651 98\n455 705 40\n105 592 66\n20 139 4\n547 559 14\n29 453 79\n70 750 99\n474 574 64\n500 712 67\n313 477 6\n259 277 11\n395 775 73\n160 643 24\n106 672 56\n272 741 50\n105 713 80\n80 799 7\n281 789 66\n368 714 46\n301 624 25\n173 438 45\n292 575 16\n646 658 10\n125 169 14\n63 423 42\n291 430 28\n41 584 15\n259 663 76\n141 262 32\n39 394 25\n247 280 40\n25 167 79\n331 502 51\n182 788 22\n378 434 88\n54 639 30\n229 491 39\n57 119 6\n221 636 78\n136 183 32\n85 626 81\n126 627 20\n421 432 41\n595 697 23\n492 721 77\n17 577 53\n478 557 11\n157 471 34\n54 495 84\n377 474 40\n363 576 84\n334 778 55\n460 545 14\n178 530 43\n149 503 17\n405 429 34\n27 397 20\n283 323 13\n79 673 86\n30 631 87\n145 618 64\n66 96 21\n97 312 7\n277 508 24\n624 652 83\n101 282 75\n420 593 100\n459 521 95\n101 547 12\n710 777 38\n160 224 43\n286 449 81\n13 211 94\n218 314 22\n483 734 86\n201 527 72\n327 486 68\n10 550 52\n512 568 17\n398 546 35\n77 231 91\n416 451 54\n286 750 31\n653 772 13\n47 59 52\n500 679 47\n217 507 8\n359 411 14\n357 630 2\n75 652 36\n212 541 5\n177 699 24\n353 516 3\n406 671 58\n305 705 32\n336 692 87\n469 727 92\n571 595 28\n160 466 50\n26 386 24\n212 433 19\n324 574 55\n439 561 36\n344 552 49\n113 656 2\n497 502 60\n133 634 42\n154 428 84\n213 514 45\n173 441 67\n298 701 32\n37 517 41\n91 637 40\n29 662 51\n128 555 99\n228 642 74\n501 657 94\n133 261 56\n71 286 81\n215 788 46\n196 546 66\n235 766 51\n9 311 94\n77 329 60\n75 256 35\n189 241 93\n327 620 88\n233 613 45\n47 157 46\n687 783 98\n380 632 17\n113 139 81\n340 410 96\n391 641 22\n592 631 91\n538 660 5\n555 749 85\n97 688 93\n120 263 16\n141 206 51\n12 321 44\n15 655 34\n103 359 95\n114 368 59\n121 264 26\n57 508 28\n173 274 14\n29 675 2\n164 454 69\n230 436 23\n117 379 69\n1 576 31\n88 581 88\n76 112 35\n255 609 29\n15 511 76\n38 760 67\n1 347 91\n344 686 93\n190 628 6\n339 342 89\n68 602 19\n202 602 47\n269 363 69\n361 775 12\n580 670 89\n212 652 7\n135 548 73\n15 223 49\n20 567 19\n561 656 74\n467 649 77\n225 707 70\n185 634 21\n297 732 86\n618 638 4\n403 484 26\n683 767 25\n555 618 84\n686 772 17\n400 415 84\n115 691 60\n258 331 95\n94 259 64\n147 234 21\n91 339 42\n601 706 19\n232 723 17\n482 489 45\n231 498 15\n115 403 88\n265 756 51\n179 195 25\n12 167 94\n15 730 96\n504 629 99\n444 498 49\n28 291 54\n569 758 38\n19 471 86\n433 605 54\n660 733 72\n177 499 50\n406 471 66\n143 506 53\n477 531 3\n346 722 92\n72 482 96\n58 584 20\n118 449 95\n49 615 41\n606 798 79\n219 501 50\n292 342 84\n72 747 98\n568 771 76\n319 704 99\n245 675 98\n566 581 49\n57 66 66\n341 499 20\n248 271 92\n44 621 26\n154 264 6\n251 462 56\n708 786 18\n147 224 39\n271 705 26\n197 490 24\n284 495 63\n478 589 54\n611 624 74\n439 518 16\n62 302 48\n113 613 81\n535 751 61\n209 321 73\n178 333 20\n725 731 19\n423 509 16\n302 548 64\n736 740 10\n247 469 12\n34 96 30\n254 328 97\n130 787 33\n598 775 6\n8 681 66\n445 569 12\n472 672 95\n303 714 57\n35 405 5\n354 716 26\n375 510 9\n128 224 9\n134 155 24\n253 484 43\n197 323 86\n115 370 100\n16 19 64\n443 501 84\n594 633 92\n11 169 54\n40 641 20\n409 624 38\n450 625 71\n47 500 81\n117 336 5\n234 363 91\n305 652 47\n251 681 75\n82 723 96\n51 390 74\n231 586 41\n58 286 46\n197 444 62\n77 528 36\n178 202 90\n238 253 98\n62 256 48\n508 751 92\n54 252 78\n486 583 21\n370 408 48\n542 600 31\n378 757 69\n693 769 39\n206 385 90\n23 300 8\n426 690 13\n139 331 14\n325 378 33\n249 468 27\n608 666 80\n213 402 12\n247 315 37\n266 557 55\n398 447 65\n564 745 61\n108 465 28\n93 485 32\n381 394 9\n252 658 81\n214 366 17\n473 477 97\n132 184 14\n49 415 97\n277 422 15\n293 775 11\n82 183 24\n146 613 54\n533 793 85\n69 658 19\n193 199 52\n458 619 40\n266 269 87\n295 592 2\n117 326 63\n370 506 80\n95 567 44\n137 384 85\n171 791 8\n432 746 23\n198 250 6\n392 530 79\n115 481 11\n169 372 8\n528 799 67\n255 412 5\n594 744 38\n14 169 81\n297 414 12\n550 594 88\n438 618 45\n497 704 100\n464 527 1\n557 718 41\n22 294 42\n96 100 75\n232 549 60\n587 597 71\n573 662 82\n362 744 46\n70 78 77\n677 756 48\n105 185 69\n300 769 64\n176 245 67\n296 655 72\n547 682 90\n18 152 16\n110 564 30\n317 714 71\n316 669 99\n89 212 27\n428 581 87\n114 125 72\n513 625 21\n164 620 73\n553 581 77\n56 300 2\n217 254 96\n73 618 35\n310 710 49\n123 475 66\n68 539 50\n557 587 88\n214 742 41\n167 667 6\n627 768 72\n178 676 54\n252 625 17\n284 694 96\n238 318 22\n417 549 85\n616 758 23\n456 540 11\n148 424 34\n3 6 29\n500 583 49\n312 383 38\n303 792 34\n465 625 79\n197 545 58\n458 586 42\n317 318 100\n476 491 23\n102 164 31\n620 764 79\n84 790 31\n218 604 45\n270 651 12\n684 785 79\n222 574 11\n677 746 94\n107 364 21\n154 296 89\n164 489 58\n98 135 88\n8 507 7\n68 143 95\n15 137 74\n41 275 68\n39 494 64\n240 484 93\n329 678 76\n35 231 31\n463 678 98\n475 732 77\n401 703 61\n78 687 31\n620 741 30\n78 458 88\n14 28 25\n144 403 54\n424 686 8\n550 682 45\n417 418 2\n293 611 23\n3 778 38\n574 630 86\n371 387 99\n374 721 92\n535 675 53\n261 435 51\n252 615 14\n86 403 30\n174 287 70\n65 380 57\n430 738 28\n658 745 54\n77 583 19\n56 411 68\n105 273 89\n62 720 88\n154 574 20\n216 369 65\n95 259 71\n528 635 62\n440 522 81\n292 544 79\n412 460 31\n11 116 51\n458 576 5\n251 363 9\n135 560 64\n125 632 85\n193 650 95\n52 382 68\n474 520 30\n103 613 68\n457 467 85\n16 87 16\n126 596 1\n151 769 18\n507 553 81\n63 513 54\n445 578 91\n63 284 56\n127 677 11\n181 568 39\n99 615 40\n582 583 76\n101 130 93\n126 452 26\n320 354 63\n152 361 28\n104 550 98\n43 454 14\n546 666 28\n121 639 29\n194 623 69\n213 722 69\n107 475 25\n601 718 100\n561 645 39\n125 609 38\n212 677 99\n533 583 11\n151 252 47\n48 654 60\n630 781 69\n43 310 3\n263 350 42\n168 341 72\n429 611 40\n61 215 52\n108 147 93\n132 504 91\n99 327 4\n9 699 95\n197 633 31\n423 567 97\n416 528 58\n43 166 2\n27 487 68\n729 759 79\n78 222 38\n293 457 58\n310 775 23\n158 269 11\n111 193 21\n490 598 87\n576 787 62\n295 359 90\n99 484 74\n399 745 23\n284 615 89\n725 766 27\n208 656 64\n230 415 18\n54 418 48\n151 759 95\n540 720 34\n224 600 8\n63 274 48\n510 734 83\n202 581 51\n228 719 56\n74 432 79\n429 480 93\n67 393 76\n486 605 23\n645 778 71\n363 800 50\n261 752 34\n290 321 76\n227 610 82\n387 748 86\n587 773 29\n662 687 60\n439 795 14\n733 747 44\n123 409 26\n162 666 64\n411 467 23\n344 377 22\n180 800 72\n62 170 93\n272 654 13\n293 411 100\n452 584 31\n462 634 83\n513 716 39\n478 758 1\n440 466 15\n104 288 5\n30 73 77\n47 162 28\n522 541 41\n333 376 91\n58 586 86\n439 543 6\n152 184 9\n670 784 51\n27 598 17\n114 337 13\n111 677 56\n92 435 46\n284 605 54\n202 715 2\n121 727 35\n162 499 2\n183 293 4\n468 542 94\n412 790 35\n65 566 73\n42 699 80\n44 214 84\n290 684 45\n202 800 79\n19 715 70\n340 621 61\n608 701 67\n540 566 5\n65 422 93\n225 411 46\n63 349 18\n335 691 66\n388 554 11\n302 514 61\n515 658 90\n207 542 51\n110 609 95\n54 565 1\n90 222 18\n494 800 14\n415 656 99\n37 741 11\n213 558 36\n467 474 98\n438 676 7\n343 524 77\n222 377 40\n462 624 43\n253 630 29\n79 743 69\n7 309 77\n246 591 19\n586 659 87\n56 201 59\n530 615 7\n107 661 67\n381 635 5\n164 786 10\n165 373 21\n76 673 42\n365 547 79\n28 633 95\n49 427 40\n390 491 50\n33 748 15\n229 394 51\n776 792 66\n320 661 50\n27 179 5\n34 75 48\n68 705 97\n706 733 71\n164 413 86\n36 264 13\n333 716 62\n79 720 40\n13 366 99\n197 446 82\n96 400 81\n67 373 46\n52 473 30\n669 670 99\n507 608 60\n189 707 18\n6 97 42\n196 603 83\n155 342 38\n761 789 62\n77 651 88\n64 303 27\n410 711 42\n243 305 70\n281 417 5\n247 690 7\n184 750 30\n279 493 96\n485 598 3\n9 754 21\n123 739 91\n347 404 29\n404 609 62\n442 492 39\n333 585 43\n378 736 17\n21 584 9\n20 539 72\n127 336 43\n22 54 77\n287 474 1\n44 567 19\n178 567 21\n84 560 49\n94 195 29\n279 735 39\n55 87 78\n233 768 75\n579 767 74\n200 447 31\n218 495 93\n75 712 16\n485 696 60\n132 163 59\n83 536 81\n151 176 18\n256 607 30\n224 246 62\n451 703 23\n415 780 56\n723 753 42\n59 444 52\n75 797 13\n252 493 56\n584 674 27\n54 365 29\n25 158 79\n285 526 33\n7 698 61\n277 522 79\n403 518 21\n242 421 5\n299 726 71\n458 719 50\n325 455 22\n331 349 95\n469 728 60\n310 326 18\n282 493 100\n93 706 99\n283 458 83\n165 582 15\n300 398 20\n659 745 39\n209 774 33\n171 253 44\n711 755 74\n406 793 77\n98 677 23\n727 736 60\n432 702 66\n685 739 14\n703 787 5\n204 286 41\n461 616 39\n133 671 12\n194 501 42\n65 765 97\n191 612 81\n44 413 7\n410 799 74\n160 215 28\n189 687 67\n159 256 92\n208 786 53\n395 792 11\n211 711 100\n467 637 75\n97 689 70\n433 495 99\n204 672 1\n96 501 18\n447 695 52\n24 741 86\n267 319 70\n246 296 53\n425 676 99\n105 177 62\n536 772 3\n376 491 50\n683 791 27\n689 722 24\n575 700 36\n286 597 91\n226 732 10\n306 575 36\n532 738 65\n43 610 71\n584 785 95\n336 683 62\n27 751 42\n313 736 65\n241 302 97\n365 746 51\n500 562 56\n192 446 11\n212 424 43\n263 735 85\n392 620 25\n244 456 57\n303 542 91\n125 127 98\n117 272 16\n39 761 94\n27 378 93\n342 390 23\n482 513 26\n459 646 96\n215 694 97\n416 684 49\n384 472 16\n494 603 88\n30 648 76\n132 516 41\n34 130 37\n378 428 92\n230 679 74\n371 389 30\n641 658 31\n201 243 92\n420 430 10\n96 455 48\n86 670 96\n455 653 99\n628 724 96\n72 506 96\n252 702 84\n200 283 62\n65 238 27\n96 720 81\n255 335 91\n642 744 5\n562 635 36\n219 790 1\n410 766 48\n129 524 78\n1 338 24\n689 712 19\n86 562 61\n34 372 91\n331 738 94\n17 319 48\n8 728 43\n608 723 33\n54 57 92\n393 426 27\n30 337 26\n111 182 15\n294 712 7\n316 471 96\n15 214 14\n350 729 91\n52 132 65\n142 291 28\n155 410 27\n340 535 43\n44 393 93\n144 480 9\n364 483 1\n323 631 88\n63 263 2\n79 765 18\n305 699 15\n210 690 69\n393 403 68\n537 676 38\n71 123 46\n538 641 32\n77 166 85\n107 454 92\n35 694 73\n269 632 81\n485 522 67\n163 471 46\n277 456 35\n450 564 7\n35 285 83\n323 343 55\n231 525 15\n277 492 81\n725 768 34\n56 115 70\n136 373 35\n503 575 50\n516 594 12\n55 119 100\n300 332 71\n325 654 59\n243 435 25\n511 515 45\n134 565 91\n283 657 91\n517 595 38\n51 679 90\n679 773 25\n298 407 72\n585 586 81\n711 725 29\n450 541 19\n630 737 89\n327 470 48\n165 408 21\n82 639 95\n33 783 92\n45 757 12\n38 718 60\n31 413 91\n259 457 39\n150 550 36\n585 707 59\n336 411 47\n69 296 65\n467 751 1\n158 490 50\n572 773 72\n435 618 75\n140 621 23\n107 444 49\n328 412 73\n238 784 91\n221 286 54\n240 299 11\n236 445 52\n144 182 4\n263 548 97\n302 768 19\n596 608 84\n268 626 38\n402 477 15\n174 619 69\n44 769 15\n56 69 100\n367 785 56\n25 756 29\n453 708 18\n540 676 93\n232 560 61\n754 785 26\n565 620 1\n108 790 36\n359 372 26\n129 733 15\n234 606 34\n481 626 75\n580 605 69\n156 686 56\n311 709 61\n331 538 76\n49 560 18\n24 387 73\n435 775 94\n320 565 20\n9 789 6\n224 677 48\n244 426 12\n110 346 95\n68 429 57\n636 770 43\n153 244 53\n133 186 2\n413 469 43\n304 562 54\n464 551 53\n180 792 35\n703 796 27\n475 560 53\n398 605 55\n2 376 11\n161 778 88\n357 424 64\n119 781 50\n355 500 67\n86 604 7\n113 329 30\n232 429 45\n465 780 29\n278 545 57\n399 426 66\n477 754 79\n56 203 13\n83 306 90\n274 282 46\n56 697 26\n217 651 72\n167 305 27\n211 491 14\n176 799 81\n25 746 30\n548 670 28\n198 637 15\n70 488 29\n210 382 42\n58 254 35\n357 401 71\n94 436 70\n293 416 44\n145 667 33\n181 324 54\n192 599 94\n185 474 62\n245 525 67\n304 431 44\n127 469 41\n395 549 4\n134 136 72\n354 517 67\n195 789 61\n349 438 100\n326 571 62\n526 745 41\n404 490 39\n16 759 31\n251 662 14\n398 595 31\n232 383 16\n3 560 76\n745 788 18\n41 443 52\n279 760 11\n214 514 82\n28 95 60\n515 591 84\n312 528 84\n70 586 44\n478 560 45\n69 541 59\n396 756 44\n89 190 100\n147 689 1\n381 627 54\n415 769 94\n561 594 65\n506 658 14\n488 610 40\n634 664 14\n33 295 93\n18 166 82\n128 712 31\n234 730 32\n61 393 69\n175 415 51\n108 325 63\n206 631 40\n361 654 98\n20 361 63\n39 374 66\n298 485 63\n105 356 2\n350 761 25\n222 575 50\n506 779 80\n5 497 41\n473 602 41\n166 451 88\n51 613 88\n264 757 20\n231 580 25\n98 316 31\n143 696 8\n324 479 64\n383 565 95\n212 423 32\n50 361 8\n516 685 56\n148 438 15\n342 389 22\n156 787 22\n277 668 92\n37 278 75\n282 783 63\n296 538 14\n555 798 26\n224 778 54\n400 595 99\n423 578 66\n250 278 60\n220 664 73\n495 603 26\n133 516 77\n53 407 33\n252 616 11\n143 709 100\n245 577 32\n339 355 73\n78 171 51\n290 499 19\n596 771 68\n316 637 4\n385 587 85\n347 481 70\n16 461 24\n430 595 25\n281 386 95\n520 668 82\n35 65 12\n694 704 26\n24 501 60\n259 633 19\n65 273 82\n485 567 47\n405 458 7\n344 591 84\n316 758 50\n14 307 35\n608 637 37\n9 723 96\n327 358 22\n379 405 20\n207 707 2\n258 789 59\n64 658 84\n459 779 92\n38 377 13\n135 718 59\n458 554 26\n235 396 65\n326 780 22\n154 179 98\n222 722 97\n243 516 82\n196 441 15\n650 760 8\n533 620 62\n117 562 47\n231 547 43\n472 610 64\n396 471 4\n478 769 93\n96 624 12\n334 761 46\n160 459 73\n407 745 18\n418 531 45\n395 627 15\n356 519 62\n223 255 10\n64 756 8\n625 680 58\n216 661 79\n64 118 93\n696 740 6\n268 442 43\n600 772 77\n77 731 34\n566 630 45\n71 279 84\n405 533 30\n293 471 40\n268 298 87\n280 538 47\n456 763 86\n200 694 58\n244 700 19\n90 642 31\n339 443 48\n255 746 100\n256 674 75\n314 795 65\n275 724 11\n376 627 46\n69 210 65\n328 699 25\n283 319 27\n140 499 15\n539 770 6\n231 766 42\n736 789 64\n9 52 25\n535 656 22\n44 647 86\n194 326 8\n515 561 22\n46 348 88\n239 248 82\n707 731 81\n215 794 4\n519 531 97\n497 629 19\n248 562 18\n150 405 67\n100 584 26\n85 684 74\n326 747 4\n299 793 83\n480 576 5\n441 468 7\n197 745 91\n3 651 97\n103 329 59\n308 469 61\n547 751 28\n178 768 16\n218 575 74\n280 407 69\n116 793 20\n108 789 37\n445 474 66\n611 735 93\n744 770 41\n124 159 92\n462 792 58\n308 734 26\n109 116 75\n458 678 31\n175 326 3\n29 766 52\n163 208 34\n400 709 44\n112 391 38\n285 462 71\n243 316 74\n481 782 20\n71 655 4\n10 788 35\n222 787 3\n438 677 10\n235 497 83\n342 709 43\n675 769 94\n425 743 95\n163 594 16\n223 608 56\n124 257 9\n462 661 74\n136 231 70\n25 480 12\n407 545 78\n565 753 94\n680 740 24\n252 442 66\n371 479 78\n344 525 16\n9 163 46\n18 620 78\n223 235 90\n291 635 26\n264 681 82\n212 491 84\n195 667 33\n429 605 81\n594 672 56\n232 585 53\n354 431 14\n404 548 74\n458 668 64\n55 543 56\n48 504 51\n302 649 93\n345 727 93\n314 739 27\n322 600 59\n29 347 17\n54 291 53\n420 497 87\n291 612 13\n153 678 89\n1 284 22\n683 727 49\n86 508 13\n372 722 24\n50 671 82\n258 471 21\n632 761 87\n5 25 6\n51 141 65\n49 68 26\n29 239 21\n616 673 67\n367 643 9\n488 753 36\n41 213 100\n421 434 100\n580 607 82\n177 482 20\n268 749 95\n60 491 88\n359 495 30\n204 621 62\n191 273 26\n182 682 78\n222 489 53\n131 636 69\n124 597 15\n57 278 39\n234 356 93\n158 626 57\n312 684 43\n250 709 34\n10 611 85\n380 559 78\n112 250 64\n446 504 18\n83 452 31\n17 98 77\n549 596 55\n146 508 24\n245 779 19\n540 776 80\n123 753 13\n64 438 49\n350 652 27\n81 756 55\n216 572 96\n598 637 38\n122 528 70\n650 684 49\n40 346 30\n119 639 62\n661 693 32\n599 718 93\n186 320 35\n78 229 48\n152 178 3\n47 650 42\n470 753 18\n304 312 9\n509 681 29\n475 539 62\n193 444 67\n168 796 23\n62 635 80\n22 562 14\n120 576 18\n479 694 72\n363 748 34\n120 612 77\n476 625 63\n92 779 10\n342 545 43\n309 368 53\n488 599 35\n230 749 96\n133 142 20\n102 563 24\n422 690 46\n44 738 42\n246 693 97\n322 423 95\n326 573 10\n149 760 1\n324 383 74\n19 650 40\n179 230 51\n256 742 82\n284 432 63\n65 128 9\n281 686 100\n102 275 67\n336 478 76\n474 677 6\n384 640 85\n470 563 36\n132 684 90\n266 684 92\n198 629 100\n431 751 18\n247 262 92\n157 368 93\n243 371 5\n48 461 4\n447 552 16\n321 476 33\n156 668 19\n217 355 50\n638 677 72\n88 390 84\n228 284 92\n551 645 13\n48 173 93\n635 644 57\n734 766 68\n225 480 10\n445 483 58\n483 775 37\n161 724 27\n450 598 43\n96 515 45\n133 662 87\n334 652 94\n328 492 11\n226 710 16\n111 494 7\n266 517 66\n231 559 29\n277 526 16\n645 693 26\n220 666 85\n221 631 71\n28 316 28\n272 713 35\n15 117 96\n117 708 35\n367 721 82\n160 471 62\n241 316 58\n59 425 34\n441 490 11\n156 766 35\n639 771 94\n89 447 84\n475 748 54\n495 726 33\n107 501 37\n756 767 32\n273 533 3\n166 178 84\n138 345 90\n202 738 46\n61 470 22\n209 405 95\n293 627 78\n181 306 58\n170 413 54\n344 449 34\n97 163 96\n3 385 12\n352 798 55\n487 614 8\n265 650 95\n453 621 75\n32 448 94\n559 639 56\n3 650 48\n237 588 24\n189 511 99\n14 430 38\n139 690 12\n26 633 46\n136 276 77\n374 593 1\n187 587 68\n318 698 33\n410 515 79\n68 257 67\n34 530 82\n75 153 35\n129 502 86\n6 431 83\n453 742 20\n250 270 2\n21 447 72\n528 772 7\n62 713 21\n77 347 100\n383 390 92\n616 741 14\n240 490 9\n366 715 75\n679 797 66\n299 396 47\n592 649 85\n28 427 13\n208 394 68\n194 230 93\n299 661 79\n126 324 53\n137 599 3\n534 564 43\n2 554 69\n42 627 85\n445 715 67\n37 103 16\n192 571 80\n167 398 65\n100 308 76\n250 741 79\n57 117 51\n197 240 66\n388 482 99\n146 540 91\n504 513 10\n335 475 67\n514 563 15\n350 720 42\n405 427 28\n123 412 77\n176 424 42\n454 777 58\n142 282 74\n30 629 99\n121 753 78\n220 237 99\n376 750 87\n619 620 29\n129 384 54\n463 638 43\n140 622 95\n335 452 97\n253 270 45\n310 395 15\n596 609 79\n74 533 36\n319 480 88\n38 467 71\n157 567 84\n631 752 5\n325 380 45\n382 685 18\n556 658 40\n112 681 49\n57 745 94\n24 568 67\n124 655 41\n181 780 26\n664 785 1\n676 759 8\n533 710 70\n540 569 86\n351 410 78\n629 763 75\n389 702 63\n134 412 64\n147 494 76\n202 430 49\n92 415 13\n519 631 29\n236 688 79\n531 642 72\n563 674 97\n473 780 82\n58 687 11\n258 483 60\n46 75 40\n103 200 56\n48 264 37\n146 507 72\n233 575 79\n78 143 81\n571 799 63\n190 204 54\n448 728 32\n469 522 58\n242 745 77\n109 481 60\n261 758 72\n129 459 63\n213 718 13\n254 719 42\n44 760 18\n125 605 36\n466 489 29\n83 608 9\n118 300 94\n757 781 79\n44 207 10\n271 435 57\n138 171 47\n229 289 78\n615 733 45\n97 627 57\n581 597 55\n3 620 66\n280 340 38\n458 755 62\n584 602 28\n97 218 89\n469 764 57\n182 442 18\n194 416 7\n80 165 65\n16 675 74\n165 389 91\n246 463 89\n101 633 79\n70 237 6\n400 786 17\n360 713 100\n555 580 88\n324 647 15\n2 367 37\n23 161 51\n316 792 37\n436 708 1\n128 363 28\n436 479 18\n119 772 14\n447 754 48\n276 347 19\n196 763 91\n197 462 78\n92 117 24\n304 445 68\n165 775 29\n141 567 65\n595 737 78\n169 220 49\n247 585 5\n33 67 35\n157 511 82\n70 214 86\n100 651 40\n276 468 32\n395 419 34\n312 650 54\n486 686 94\n430 642 49\n349 717 94\n216 453 66\n496 736 78\n51 794 98\n378 631 68\n286 368 11\n98 317 24\n563 762 93\n201 675 96\n299 752 79\n74 225 57\n178 691 22\n305 503 39\n358 658 90\n16 400 86\n303 722 45\n211 230 41\n98 173 20\n282 519 39\n68 181 87\n87 280 68\n37 688 56\n221 280 69\n70 227 82\n174 433 58\n211 351 2\n425 460 87\n74 611 77\n106 414 63\n32 385 33\n317 634 100\n337 612 48\n437 699 41\n542 572 65\n447 600 99\n15 152 60\n290 765 71\n68 423 84\n20 532 67\n191 759 44\n734 778 58\n447 456 43\n104 611 37\n600 698 63\n73 129 98\n393 485 83\n694 705 16\n612 672 46\n523 594 26\n451 575 42\n156 657 16\n491 647 98\n517 785 34\n48 306 28\n187 501 28\n42 757 38\n175 792 95\n560 603 31\n616 763 34\n30 782 68\n408 505 27\n121 183 58\n166 563 55\n245 627 28\n357 539 85\n552 598 62\n80 639 8\n163 265 96\n126 755 43\n516 532 83\n196 707 28\n370 743 58\n256 492 42\n10 171 80\n415 485 40\n37 570 66\n188 214 14\n486 774 69\n665 776 48\n464 643 36\n196 563 3\n26 789 6\n122 497 79\n321 743 72\n187 514 67\n211 462 60\n472 503 1\n458 568 67\n40 580 5\n182 255 10\n322 415 61\n192 714 42\n384 655 11\n597 619 43\n148 527 75\n576 596 39\n447 531 25\n291 692 43\n107 117 6\n22 567 31\n284 424 46\n143 448 20\n347 629 12\n100 343 31\n225 603 70\n72 244 52\n11 759 87\n456 535 65\n201 511 97\n589 772 73\n649 786 93\n213 750 5\n521 637 52\n192 547 20\n217 491 89\n37 115 51\n85 600 10\n59 548 16\n113 290 24\n74 182 72\n345 496 50\n77 336 7\n490 505 79\n147 660 75\n168 454 84\n287 411 98\n544 741 43\n284 522 100\n350 467 36\n449 589 36\n314 544 82\n378 565 60\n210 572 26\n55 698 76\n69 453 48\n495 741 66\n539 784 10\n618 668 4\n583 710 8\n156 228 55\n147 637 72\n173 546 70\n328 569 37\n151 378 23\n384 766 82\n679 763 58\n176 737 94\n243 461 66\n49 367 80\n179 333 52\n205 471 61\n305 558 5\n119 202 26\n92 185 6\n189 526 52\n76 469 54\n2 291 70\n311 372 10\n80 704 71\n21 426 12\n120 548 28\n267 567 26\n494 609 51\n634 769 54\n507 548 21\n406 645 52\n5 301 93\n84 631 69\n23 206 40\n229 311 94\n61 318 55\n489 536 9\n8 83 52\n159 481 1\n74 702 49\n275 692 5\n450 544 56\n375 779 68\n148 242 33\n714 739 8\n312 430 97\n154 667 80\n777 795 62\n454 779 58\n9 694 97\n265 354 42\n446 551 68\n281 743 62\n30 78 30\n113 378 35\n167 498 48\n49 622 57\n533 555 54\n251 348 84\n235 632 89\n127 541 24\n402 480 8\n414 720 49\n372 723 95\n158 385 2\n165 244 33\n187 677 18\n166 654 84\n122 202 32\n675 760 63\n540 715 40\n298 773 80\n298 544 18\n244 573 72\n198 277 18\n250 324 38\n21 272 88\n279 796 79\n743 751 64\n61 308 9\n132 597 64\n440 713 57\n125 738 85\n458 767 30\n183 419 28\n297 441 53\n302 519 57\n588 733 35\n284 767 27\n239 350 54\n331 433 71\n631 731 95\n376 441 80\n202 288 60\n205 559 69\n39 181 13\n423 781 20\n2 379 66\n505 591 10\n604 713 20\n262 455 98\n750 767 100\n758 771 39\n282 433 33\n333 744 96\n396 684 50\n488 538 2\n218 677 80\n176 537 11\n509 597 76\n170 722 79\n140 205 76\n211 494 18\n75 341 36\n583 631 70\n160 299 41\n33 344 28\n59 482 59\n51 770 11\n18 215 76\n492 629 33\n619 733 35\n148 739 88\n268 655 38\n129 317 28\n536 555 53\n40 239 21\n36 763 48\n417 720 74\n297 575 95\n227 739 51\n175 549 50\n139 626 54\n617 665 87\n309 549 21\n228 295 55\n70 612 53\n118 423 27\n249 763 53\n160 685 67\n33 730 73\n23 42 84\n322 604 17\n94 331 81\n669 711 58\n408 527 50\n544 796 11\n64 308 43\n42 177 58\n179 411 34\n655 669 31\n754 791 43\n305 407 64\n65 309 58\n158 208 80\n349 562 7\n293 661 34\n527 748 10\n86 368 69\n466 589 53\n157 657 41\n244 396 24\n578 650 55\n2 225 44\n162 592 46\n95 273 33\n24 658 49\n398 719 56\n210 519 56\n4 271 86\n81 374 59\n52 576 1\n261 341 32\n77 669 70\n163 709 3\n278 659 99\n700 797 71\n164 408 96\n47 497 78\n360 728 77\n40 229 2\n426 530 37\n285 554 53\n325 627 34\n625 739 98\n311 463 32\n458 482 12\n582 777 91\n173 758 88\n131 761 45\n125 538 42\n626 740 63\n44 55 98\n310 354 59\n153 636 65\n257 348 30\n234 481 65\n194 408 25\n365 784 39\n157 526 50\n183 664 40\n497 711 86\n248 644 34\n57 259 26\n589 794 56\n23 117 59\n601 768 14\n333 688 94\n13 518 54\n533 633 74\n70 85 27\n255 625 44\n388 660 68\n154 493 29\n62 230 24\n33 432 33\n189 450 82\n222 447 42\n631 652 73\n54 262 95\n312 786 49\n199 729 24\n271 525 23\n14 683 87\n35 477 61\n20 763 44\n548 653 60\n633 697 51\n196 696 69\n57 272 59\n177 188 29\n522 637 63\n135 191 100\n708 727 70\n321 467 33\n383 787 69\n124 447 53\n156 250 71\n144 770 54\n238 734 8\n18 136 90\n87 681 28\n184 205 1\n182 424 63\n103 509 65\n55 203 11\n146 587 98\n62 99 42\n172 459 89\n118 259 76\n672 782 54\n273 282 68\n14 696 23\n397 434 52\n595 598 40\n16 742 2\n200 334 27\n420 566 89\n371 561 89\n465 717 100\n403 513 32\n475 618 89\n314 435 40\n111 750 55\n227 287 25\n233 596 89\n486 776 81\n21 39 81\n123 724 64\n218 467 33\n115 720 86\n265 399 88\n190 634 57\n177 695 30\n308 626 4\n67 420 22\n225 628 77\n453 635 48\n527 584 32\n158 538 3\n501 532 95\n156 757 21\n402 669 25\n388 771 93\n190 261 1\n549 688 3\n224 748 89\n419 578 32\n23 120 13\n294 583 46\n45 373 89\n139 151 47\n5 71 92\n248 732 19\n28 320 96\n162 549 91\n68 127 23\n160 210 99\n505 659 75\n405 428 95\n162 670 8\n240 769 44\n556 597 18\n642 749 51\n127 154 47\n446 694 23\n619 765 67\n48 684 76\n208 673 29\n157 182 28\n322 515 61\n689 717 83\n675 782 4\n49 765 54\n97 576 98\n432 795 23\n229 732 41\n143 692 30\n210 453 80\n62 704 38\n76 373 4\n64 664 59\n206 568 37\n181 395 61\n492 553 41\n249 795 90\n369 711 35\n56 251 43\n530 665 71\n267 700 98\n650 730 5\n148 483 75\n73 340 6\n20 334 7\n30 607 89\n216 654 4\n84 355 6\n123 197 77\n212 769 24\n84 620 19\n524 626 54\n103 224 20\n157 689 51\n366 454 64\n604 771 6\n503 688 88\n175 365 92\n159 506 2\n352 406 8\n240 314 68\n5 182 35\n264 442 47\n275 717 11\n383 479 28\n272 419 53\n184 535 13\n705 795 24\n71 249 91\n8 229 93\n399 608 87\n164 476 37\n519 524 46\n639 706 3\n34 632 29\n491 727 60\n589 741 52\n215 234 29\n610 800 48\n717 746 95\n489 659 99\n206 679 21\n133 466 73\n258 726 67\n391 761 29\n225 549 6\n170 384 38\n120 792 66\n223 359 1\n125 727 64\n326 488 55\n699 733 28\n84 466 10\n178 244 64\n274 706 40\n236 414 38\n1 431 63\n134 403 43\n324 563 15\n732 766 52\n151 226 86\n622 751 9\n93 550 69\n215 247 75\n507 684 14\n78 507 93\n4 329 61\n64 343 15\n323 603 30\n23 162 56\n342 473 53\n105 646 37\n191 420 93\n373 460 82\n317 645 74\n22 611 24\n517 590 16\n462 654 60\n294 661 15\n141 568 6\n187 535 74\n494 686 73\n321 535 90\n89 637 74\n518 671 59\n443 497 68\n28 663 75\n451 766 81\n337 515 23\n209 595 5\n207 634 85\n89 758 42\n353 459 20\n458 661 56\n361 728 30\n45 608 23\n140 351 40\n131 760 50\n432 608 11\n410 440 61\n22 215 68\n247 599 50\n254 458 83\n84 721 93\n52 323 37\n156 560 44\n84 312 3\n363 630 61\n61 408 75\n57 703 62\n14 741 8\n65 298 75\n87 582 15\n256 274 11\n181 509 88\n659 664 79\n318 371 48\n583 754 32\n475 663 85\n224 672 41\n140 184 89\n464 690 2\n38 173 28\n450 526 12\n81 134 68\n339 658 82\n246 467 68\n91 593 77\n374 387 66\n236 682 15\n222 747 95\n304 557 12\n55 490 29\n316 796 85\n123 252 51\n217 790 72\n137 681 3\n332 511 13\n289 549 26\n3 192 22\n109 210 46\n536 655 58\n59 618 84\n118 667 31\n107 249 70\n420 480 48\n325 508 58\n560 640 95\n471 791 38\n64 287 74\n242 739 49\n47 643 82\n188 768 68\n269 427 36\n283 511 78\n51 88 36\n293 784 71\n41 569 15\n187 394 40\n247 445 44\n442 620 40\n569 724 45\n527 727 65\n418 677 91\n677 788 66\n256 349 29\n469 493 73\n227 551 85\n320 370 91\n270 778 28\n3 434 23\n8 778 95\n104 337 16\n624 781 56\n201 535 90\n295 313 97\n15 179 84\n475 509 28\n212 693 86\n118 500 22\n292 573 9\n472 769 75\n259 396 9\n284 569 9\n575 632 1\n408 604 85\n93 363 32\n55 71 36\n130 776 18\n33 169 6\n405 715 34\n171 548 73\n52 182 74\n391 551 87\n685 769 82\n589 652 15\n321 492 31\n78 585 24\n403 790 24\n449 757 26\n95 265 14\n144 795 47\n219 709 39\n339 625 34\n77 625 36\n352 415 61\n511 588 65\n51 78 54\n429 555 18\n126 746 15\n475 522 67\n495 500 58\n372 695 85\n",
+    "out": "0 90 72 90 54 85 148 103 57 106 131 154 108 105 55 112 153 74 147 95 70 106 62 105 48 69 95 84 108 134 193 117 110 154 48 127 109 111 130 109 46 126 74 95 119 156 102 127 111 94 108 32 140 107 96 72 111 81 93 83 99 105 67 85 60 151 106 108 151 120 93 144 129 73 116 104 103 107 161 115 132 132 105 105 96 88 128 144 111 114 120 127 129 144 106 130 109 127 145 87 97 140 98 120 113 157 112 84 149 165 64 139 96 106 137 178 106 83 105 49 136 111 120 130 112 71 115 69 126 126 163 81 58 112 128 135 129 156 99 103 109 78 112 45 147 125 117 102 114 110 128 58 147 120 136 115 77 86 135 110 103 86 103 142 121 76 120 148 104 138 109 162 129 145 92 110 68 55 90 102 117 49 108 67 121 56 122 83 125 115 102 79 85 97 115 119 146 87 127 118 131 79 85 100 68 102 105 137 124 103 89 111 56 69 117 81 104 78 100 153 146 96 69 78 46 101 80 91 111 129 79 112 144 111 159 95 114 87 129 124 124 78 110 94 99 139 87 110 168 81 106 95 93 116 59 114 139 122 116 -1 114 141 65 114 119 85 102 110 97 79 117 90 76 115 87 110 105 141 124 127 114 95 82 22 83 92 105 125 78 92 106 108 104 107 134 86 145 135 135 70 147 90 94 93 97 155 140 90 73 71 106 102 65 56 124 104 106 109 109 91 110 98 69 119 105 89 149 68 126 78 113 109 75 102 143 110 108 24 129 123 108 115 100 110 216 139 91 145 85 107 91 133 102 77 111 111 124 171 70 190 86 153 97 102 120 86 127 83 140 170 115 96 100 169 94 101 124 131 63 117 125 61 127 100 84 93 178 73 137 138 143 130 109 134 56 115 115 90 112 149 159 44 99 120 43 125 107 122 146 163 84 64 102 133 140 104 109 107 90 84 83 120 88 68 127 82 71 138 77 94 63 85 96 95 85 142 133 114 106 130 134 67 98 143 43 90 87 132 144 128 121 92 130 88 127 128 155 36 122 95 123 125 138 94 112 115 82 141 99 121 111 116 62 106 132 126 59 70 155 36 134 48 101 125 102 99 163 91 93 125 103 79 126 71 85 183 95 94 88 105 139 155 117 84 149 137 96 101 104 85 122 120 74 101 85 99 138 105 56 107 154 122 137 102 94 116 93 100 -1 98 62 162 73 166 80 96 121 89 91 117 116 117 112 136 109 125 85 77 52 146 147 103 120 62 95 129 81 92 99 114 107 92 116 135 106 122 76 103 31 175 147 129 99 107 124 31 131 122 123 104 130 136 84 61 92 78 113 138 124 154 158 132 170 111 119 70 119 99 126 86 85 89 99 81 76 145 144 96 88 131 117 119 166 171 105 84 206 104 76 105 121 90 166 142 95 94 71 121 103 122 85 125 115 100 128 140 102 108 107 185 121 102 130 144 137 145 134 124 159 120 91 118 106 77 89 98 118 143 128 94 92 120 159 105 119 148 114 100 69 94 70 101 146 88 110 109 104 67 123 138 132 110 74 110 43 76 92 55 118 94 77 92 124 113 98 120 98 142 92 113 163 122 98 139 116 104 107 141 106 92 127 100 101 37 77 103 98 69 86 149 148 97 129 76 105 118 123 116 103 125 124 111 111 95 141 127 135 122 29 126 98 110 145 107 89 78 93 103 153 61 81 90 127 78 98 77 131 69 117 113 125 209 118 156 143 121 49 71 110 97 87 93 142 157 93 133 130 107 118 111 108 114 119 81 104 132 93 71 63 99 101 67 158 121 92 125 125 121 115 85",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "python": "import sys\n\n\ndef main():\n    data = sys.stdin.read().split()\n    # Parse the input as described in the problem and print the answer.\n\n\nif __name__ == \"__main__\":\n    main()\n",
+   "javascript": "const data = require('fs').readFileSync(0, 'utf8').trim().split(/\\s+/);\n// Parse the input as described in the problem and print the answer with console.log.\n",
+   "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic static class Program\n{\n    public static void Main()\n    {\n        var input = Console.In.ReadToEnd();\n        // Parse the input as described in the problem and write the answer with Console.WriteLine.\n    }\n}\n",
+   "java": "import java.io.*;\nimport java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));\n        // Parse the input as described in the problem and print the answer with System.out.println.\n    }\n}\n",
+   "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    // Parse the input as described in the problem and print the answer with cout.\n    return 0;\n}\n",
+   "kotlin": "fun main() {\n    val input = generateSequence(::readLine).joinToString(\"\\n\")\n    // Parse the input as described in the problem and print the answer with println.\n}\n"
+  }
+ },
+ {
+  "key": "ch-sql-second-salary",
+  "title": "Second Highest Salary (SQL)",
+  "category": "Sql",
+  "difficulty": "Easy",
+  "statement": "Table `Employees(Id, Name, Salary, DepartmentId)`. Write a query returning the **second highest distinct salary** as a single value. Return NULL when it does not exist.",
+  "input": "The Employees table (populated per test case).",
+  "output": "One row with one column: the salary or NULL.",
+  "constraints": "Ties count once (distinct salaries).",
+  "timeComplexity": null,
+  "spaceComplexity": null,
+  "hints": [
+   "Find the maximum salary below the overall maximum.",
+   "Aggregates return NULL over an empty set — use that."
+  ],
+  "solution": "`SELECT MAX(Salary) FROM Employees WHERE Salary < (SELECT MAX(Salary) FROM Employees);` — MAX over no rows yields NULL. A DENSE_RANK() = 2 subquery wrapped in MAX also works.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nINSERT INTO Employees VALUES (1, 'Ann', 100, 1);\nINSERT INTO Employees VALUES (2, 'Bob', 200, 1);\nINSERT INTO Employees VALUES (3, 'Cy', 300, 2);\n",
+    "out": "200",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nINSERT INTO Employees VALUES (1, 'Ann', 100, 1);\n",
+    "out": "NULL",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nINSERT INTO Employees VALUES (1, 'Ann', 500, 1);\nINSERT INTO Employees VALUES (2, 'Bob', 500, 2);\nINSERT INTO Employees VALUES (3, 'Cy', 400, 2);\n",
+    "out": "400",
+    "sample": false,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nINSERT INTO Employees VALUES (1, 'Ann', 70, 1);\nINSERT INTO Employees VALUES (2, 'Bob', 70, 1);\n",
+    "out": "NULL",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "sql": "-- Write a single SELECT statement. Tables are described in the problem.\nSELECT 1;\n"
+  }
+ },
+ {
+  "key": "ch-sql-customers-no-orders",
+  "title": "Customers Without Orders (SQL)",
+  "category": "Sql",
+  "difficulty": "Easy",
+  "statement": "Tables `Customers(Id, Name)` and `Orders(Id, CustomerId, Total)`. Return the names of customers who have never placed an order, sorted by name.",
+  "input": "The Customers and Orders tables.",
+  "output": "One name per row, sorted ascending.",
+  "constraints": "Orders.CustomerId may be NULL for guest orders.",
+  "timeComplexity": null,
+  "spaceComplexity": null,
+  "hints": [
+   "Think anti-join.",
+   "NOT IN breaks when the subquery returns NULL — prefer NOT EXISTS or LEFT JOIN … IS NULL."
+  ],
+  "solution": "`SELECT c.Name FROM Customers c WHERE NOT EXISTS (SELECT 1 FROM Orders o WHERE o.CustomerId = c.Id) ORDER BY c.Name;` — NOT EXISTS is NULL-safe, unlike NOT IN.",
+  "premium": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "CREATE TABLE Customers (Id INTEGER PRIMARY KEY, Name TEXT);\nCREATE TABLE Orders (Id INTEGER PRIMARY KEY, CustomerId INTEGER, Total INTEGER);\nINSERT INTO Customers VALUES (1,'Joe'),(2,'Henry'),(3,'Sam'),(4,'Max');\nINSERT INTO Orders VALUES (1,3,50),(2,1,20);\n",
+    "out": "Henry\nMax",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Customers (Id INTEGER PRIMARY KEY, Name TEXT);\nCREATE TABLE Orders (Id INTEGER PRIMARY KEY, CustomerId INTEGER, Total INTEGER);\nINSERT INTO Customers VALUES (1,'Ava'),(2,'Ben');\nINSERT INTO Orders VALUES (1,NULL,10),(2,2,15);\n",
+    "out": "Ava",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Customers (Id INTEGER PRIMARY KEY, Name TEXT);\nCREATE TABLE Orders (Id INTEGER PRIMARY KEY, CustomerId INTEGER, Total INTEGER);\nINSERT INTO Customers VALUES (1,'Zed'),(2,'Amy'),(3,'Kim');\n",
+    "out": "Amy\nKim\nZed",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "sql": "-- Write a single SELECT statement. Tables are described in the problem.\nSELECT 1;\n"
+  }
+ },
+ {
+  "key": "ch-sql-top-earners",
+  "title": "Top Earner per Department (SQL)",
+  "category": "Sql",
+  "difficulty": "Medium",
+  "statement": "Tables `Employees(Id, Name, Salary, DepartmentId)` and `Departments(Id, Name)`. For every department, return `DepartmentName|EmployeeName|Salary` for the employee(s) with the highest salary in that department. Sort by department name, then employee name.",
+  "input": "The Employees and Departments tables.",
+  "output": "Rows formatted as Department|Employee|Salary.",
+  "constraints": "Ties: return every top earner.",
+  "timeComplexity": null,
+  "spaceComplexity": null,
+  "hints": [
+   "Rank employees within each department.",
+   "RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary DESC) = 1 keeps ties."
+  ],
+  "solution": "Use a window function in a CTE: `WITH r AS (SELECT e.*, RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary DESC) rk FROM Employees e) SELECT d.Name, r.Name, r.Salary FROM r JOIN Departments d ON d.Id = r.DepartmentId WHERE rk = 1 ORDER BY d.Name, r.Name;`",
+  "premium": true,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "tests": [
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nCREATE TABLE Departments (Id INTEGER PRIMARY KEY, Name TEXT);\nINSERT INTO Departments VALUES (1,'IT'),(2,'Sales');\nINSERT INTO Employees VALUES (1, 'Joe', 70000, 1);\nINSERT INTO Employees VALUES (2, 'Jim', 90000, 1);\nINSERT INTO Employees VALUES (3, 'Henry', 80000, 2);\nINSERT INTO Employees VALUES (4, 'Sam', 60000, 2);\nINSERT INTO Employees VALUES (5, 'Max', 90000, 1);\n",
+    "out": "IT|Jim|90000\nIT|Max|90000\nSales|Henry|80000",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nCREATE TABLE Departments (Id INTEGER PRIMARY KEY, Name TEXT);\nINSERT INTO Departments VALUES (1,'Ops');\nINSERT INTO Employees VALUES (1, 'Lee', 50000, 1);\n",
+    "out": "Ops|Lee|50000",
+    "sample": true,
+    "why": null
+   },
+   {
+    "in": "CREATE TABLE Employees (Id INTEGER PRIMARY KEY, Name TEXT, Salary INTEGER, DepartmentId INTEGER);\nCREATE TABLE Departments (Id INTEGER PRIMARY KEY, Name TEXT);\nINSERT INTO Departments VALUES (1,'HR'),(2,'Legal'),(3,'R&D');\nINSERT INTO Employees VALUES (1, 'Ana', 40000, 1);\nINSERT INTO Employees VALUES (2, 'Bo', 42000, 1);\nINSERT INTO Employees VALUES (3, 'Cid', 70000, 2);\nINSERT INTO Employees VALUES (4, 'Dee', 70000, 2);\nINSERT INTO Employees VALUES (5, 'Eve', 99000, 3);\n",
+    "out": "HR|Bo|42000\nLegal|Cid|70000\nLegal|Dee|70000\nR&D|Eve|99000",
+    "sample": false,
+    "why": null
+   }
+  ],
+  "starter": {
+   "sql": "-- Write a single SELECT statement. Tables are described in the problem.\nSELECT 1;\n"
+  }
+ }
+]

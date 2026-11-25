@@ -1,0 +1,251 @@
+[
+ {
+  "key": "ef-001",
+  "tech": "ef-core",
+  "category": "EF Core Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Purpose of migrations",
+  "body": "What do EF Core migrations provide?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Automatic backups",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Versioned, incremental schema changes generated from the model and applied to the database",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Data replication",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Query caching",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A versioned history of schema changes derived from the model.",
+  "explanation": "`dotnet ef migrations add Name` compares the model with the last snapshot and generates Up/Down code. Apply with `dotnet ef database update`, `Database.MigrateAsync()`, or generate idempotent SQL scripts for production pipelines.",
+  "reference": null,
+  "tags": [
+   "migrations"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ef-002",
+  "tech": "ef-core",
+  "category": "Querying & Performance",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "The N+1 query problem",
+  "body": "A page lists 50 orders and, for each one, accesses `order.Customer.Name` with lazy loading enabled. What happens?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "One query loads everything",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "1 query for the orders plus up to 50 additional queries for customers (N+1)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The code throws",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "EF caches customers automatically, so no extra queries",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "N+1 queries; fix with Include or a projection.",
+  "explanation": "Use eager loading (`Include(o => o.Customer)`) or, better, project only the needed columns: `.Select(o => new { o.Id, CustomerName = o.Customer.Name })`, which becomes a single JOIN.",
+  "reference": null,
+  "tags": [
+   "n-plus-one",
+   "performance"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "ef-003",
+  "tech": "ef-core",
+  "category": "Querying & Performance",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "AsNoTracking",
+  "body": "When should you use `AsNoTracking()`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Always, for every query",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "For read-only queries whose results will not be updated via SaveChanges",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Only for inserts",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To enable lazy loading",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "For read-only queries.",
+  "explanation": "Tracking stores snapshots for change detection, which costs memory and CPU. Read-only endpoints benefit from `AsNoTracking()` or projections to DTOs (which are never tracked).",
+  "reference": null,
+  "tags": [
+   "change-tracking"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ef-004",
+  "tech": "ef-core",
+  "category": "Querying & Performance",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Untranslatable predicates",
+  "body": "What does EF Core 3.0+ do when a `Where` predicate calls a C# method it cannot translate to SQL?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Silently loads the whole table and filters in memory",
+    "c": false,
+    "e": "That was EF Core 2.x client evaluation behaviour."
+   },
+   {
+    "t": "Throws an InvalidOperationException explaining the expression could not be translated",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Ignores the predicate",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Translates it to a stored procedure",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "It throws a translation exception.",
+  "explanation": "Since 3.0, client evaluation is only allowed in the final projection. Rewrite the predicate with translatable expressions, or explicitly switch to client evaluation with `AsEnumerable()` after reducing the data set.",
+  "reference": null,
+  "tags": [
+   "linq",
+   "translation"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "ef-005",
+  "tech": "ef-core",
+  "category": "EF Core Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "DbContext lifetime",
+  "body": "Which statement about `DbContext` in ASP.NET Core is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It is thread-safe and should be a singleton",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It is not thread-safe; register it scoped (per request) and do not run parallel operations on one instance",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It must be created with new in every method",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It can only be used synchronously",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Scoped and not thread-safe.",
+  "explanation": "`AddDbContext` registers it as scoped. Starting two queries concurrently on the same context throws. Use `IDbContextFactory` for background jobs or Blazor Server, and `AddDbContextPool` to reduce allocation overhead.",
+  "reference": null,
+  "tags": [
+   "dbcontext"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ef-006",
+  "tech": "ef-core",
+  "category": "ADO.NET",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Preventing SQL injection in ADO.NET",
+  "body": "How should user input be included in an ADO.NET `SqlCommand`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Concatenate it after escaping single quotes",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Use SqlParameter objects (e.g. @email) instead of string concatenation",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Base64-encode it",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Wrap it in square brackets",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Use parameters.",
+  "explanation": "Parameters are sent separately from the SQL text, so input is never interpreted as SQL, and plans can be reused. Dapper and EF Core parameterise automatically (EF's `FromSqlInterpolated`/`SqlQuery` convert interpolated values into parameters).",
+  "reference": null,
+  "tags": [
+   "ado-net",
+   "sql-injection"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]

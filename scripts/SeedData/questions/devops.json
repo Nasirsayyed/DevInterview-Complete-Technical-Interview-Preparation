@@ -1,0 +1,332 @@
+[
+ {
+  "key": "do-001",
+  "tech": "devops",
+  "category": "Docker",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Image vs container",
+  "body": "What is the difference between a Docker image and a container?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "They are the same",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "An image is a read-only template of layers; a container is a running (or stopped) instance of an image with its own writable layer",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Containers are stored in registries",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Images run processes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Image = template; container = instance.",
+  "explanation": "Many containers can run from one image. Container filesystem changes are lost when it is removed unless stored in volumes.",
+  "reference": null,
+  "tags": [
+   "docker"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "do-002",
+  "tech": "devops",
+  "category": "Docker",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Layer caching in Dockerfiles",
+  "body": "How should a .NET Dockerfile be ordered to maximise build cache reuse?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "COPY . . first, then dotnet restore",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Copy the project files and run dotnet restore first, then copy the remaining source and build",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Disable caching with --no-cache",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Put RUN apt-get update in the last line",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Restore dependencies in a layer that only changes when project files change.",
+  "explanation": "Docker reuses a layer when its instruction and inputs are unchanged, so dependency restores are skipped on code-only changes.",
+  "reference": null,
+  "tags": [
+   "docker",
+   "caching"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "do-003",
+  "tech": "devops",
+  "category": "Docker",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Multi-stage builds",
+  "body": "What is the main benefit of a multi-stage Docker build?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Builds run on multiple machines",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The final image contains only runtime artefacts, not the SDK and build tools, making it smaller and safer",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It enables hot reload",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It encrypts layers",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Small, minimal runtime images.",
+  "explanation": "Build with the SDK image, then `COPY --from=build` into the aspnet runtime image (or a chiseled/distroless image).",
+  "reference": null,
+  "tags": [
+   "docker"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "do-004",
+  "tech": "devops",
+  "category": "Kubernetes",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Kubernetes Services",
+  "body": "Which Kubernetes object provides a stable virtual IP and DNS name for a set of pods?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Deployment",
+    "c": false,
+    "e": "Deployments manage ReplicaSets/pods."
+   },
+   {
+    "t": "Service",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "ConfigMap",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Namespace",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A Service.",
+  "explanation": "Pods are ephemeral with changing IPs; a Service selects pods by labels and load-balances to ready endpoints. Ingress or Gateway API exposes HTTP routes externally.",
+  "reference": null,
+  "tags": [
+   "kubernetes"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "do-005",
+  "tech": "devops",
+  "category": "Kubernetes",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Readiness vs liveness probes",
+  "body": "What happens when a pod's **readiness** probe fails?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The container is restarted",
+    "c": false,
+    "e": "That happens on liveness failure."
+   },
+   {
+    "t": "The pod is removed from Service endpoints so it receives no traffic until it is ready again",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The node is drained",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Nothing",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "It stops receiving traffic.",
+  "explanation": "Liveness failures restart the container; readiness failures only take it out of rotation. Startup probes protect slow-starting apps from premature liveness kills.",
+  "reference": null,
+  "tags": [
+   "kubernetes",
+   "probes"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "do-006",
+  "tech": "devops",
+  "category": "Git",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Undoing a pushed commit",
+  "body": "A bad commit is already on the shared main branch. What is the safest way to undo it?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "git reset --hard HEAD~1 and force-push",
+    "c": false,
+    "e": "Rewrites shared history."
+   },
+   {
+    "t": "git revert <commit>, which creates a new commit that reverses the change",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Delete the repository",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "git commit --amend",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "git revert.",
+  "explanation": "Revert preserves history for everyone. Reset/rebase/amend rewrite history and are fine only on unpublished local branches.",
+  "reference": null,
+  "tags": [
+   "git"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "do-007",
+  "tech": "devops",
+  "category": "Git",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Rebase vs merge",
+  "body": "What does `git rebase main` do on a feature branch?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Deletes main",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Re-applies the feature branch's commits on top of main, rewriting them with new hashes for a linear history",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Creates a merge commit",
+    "c": false,
+    "e": "That is git merge."
+   },
+   {
+    "t": "Pushes to the remote",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Replays commits onto the new base.",
+  "explanation": "Rebase gives linear history but rewrites commits — avoid rebasing branches others have pulled.",
+  "reference": null,
+  "tags": [
+   "git"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "do-008",
+  "tech": "devops",
+  "category": "CI/CD",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Blue-green deployments",
+  "body": "How does a blue-green deployment reduce release risk?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "By deploying only on Fridays",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A new version runs alongside the current one; traffic switches once it is verified and can switch back instantly",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "By skipping tests",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "By updating servers one file at a time",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Two environments with an instant traffic switch.",
+  "explanation": "Canary releases shift a small percentage of traffic first. Database migrations must be backward compatible (expand/contract) for either strategy.",
+  "reference": null,
+  "tags": [
+   "deployment"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]

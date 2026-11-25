@@ -1,0 +1,646 @@
+[
+ {
+  "key": "re-001",
+  "tech": "react",
+  "category": "React Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Keys in lists",
+  "body": "Why does React need a stable `key` prop on list items?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "For CSS styling",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "So reconciliation can match items between renders and preserve their state and DOM nodes",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Keys are required by HTML",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To sort the list",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Keys identify items across renders.",
+  "explanation": "Use stable ids from your data. Array indexes as keys break when items are inserted, removed or reordered — state (e.g. input values) ends up attached to the wrong item.",
+  "reference": null,
+  "tags": [
+   "lists",
+   "reconciliation"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-002",
+  "tech": "react",
+  "category": "React Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Props vs state",
+  "body": "Which statement is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Components modify their own props",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Props are inputs passed by the parent and read-only for the child; state is owned and updated by the component",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "State is shared by all components automatically",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Props trigger no re-render",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Props flow down and are read-only; state is local and updated via setters.",
+  "explanation": "Lift state up to the closest common ancestor when siblings need it, or use context/a store for widely shared state.",
+  "reference": null,
+  "tags": [
+   "props",
+   "state"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "re-003",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Rules of Hooks",
+  "body": "Which is a rule of Hooks?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Hooks may be called inside loops",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Call Hooks only at the top level of React function components or custom Hooks, never conditionally",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Hooks must be called inside class components",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Each Hook can be used only once per app",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Top level only, same order every render.",
+  "explanation": "React identifies hook state by call order. A conditional hook shifts the order and corrupts state; the eslint-plugin-react-hooks rules enforce this.",
+  "reference": null,
+  "tags": [
+   "hooks"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-004",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "useEffect with an empty dependency array",
+  "body": "When does `useEffect(() => { ...; return cleanup; }, [])` run?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Before every render",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "After the first render (mount); cleanup runs on unmount",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Only when props change",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Never",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Once after mount, cleanup on unmount.",
+  "explanation": "In development StrictMode, React mounts, unmounts and remounts components once to surface missing cleanup, so effects run twice. Effects run after paint; use useLayoutEffect for synchronous DOM measurement.",
+  "reference": null,
+  "tags": [
+   "useEffect"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "re-005",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Batched state updates",
+  "body": "Starting from 0, what is `count` after one click?",
+  "code": "const [count, setCount] = useState(0);\n\nfunction handleClick() {\n  setCount(count + 1);\n  setCount(count + 1);\n  setCount(count + 1);\n}",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "3",
+    "c": false,
+    "e": "That would require functional updates."
+   },
+   {
+    "t": "1",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "0",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "1",
+  "explanation": "All three calls read the same `count` (0) from this render's closure, so each schedules `setCount(1)`; React batches them. Use the updater form `setCount(c => c + 1)` to apply each update to the latest value (result 3).",
+  "reference": null,
+  "tags": [
+   "useState",
+   "batching"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "re-006",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "useMemo vs useCallback",
+  "body": "What does `useCallback(fn, deps)` memoise?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The result of calling fn",
+    "c": false,
+    "e": "That is useMemo."
+   },
+   {
+    "t": "The function instance itself, keeping its identity stable between renders",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The component",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Network requests",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The function reference.",
+  "explanation": "`useCallback(fn, deps)` equals `useMemo(() => fn, deps)`. It matters when passing callbacks to memoised children or using them as effect dependencies; otherwise it adds overhead without benefit.",
+  "reference": null,
+  "tags": [
+   "useCallback",
+   "useMemo"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-007",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "useRef",
+  "body": "What is `useRef` commonly used for?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Triggering re-renders",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Holding a mutable value that persists across renders without causing re-renders (and referencing DOM nodes)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Fetching data",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Global state",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Persistent mutable box, no re-render on change.",
+  "explanation": "Examples: DOM refs for focus, storing interval ids, keeping the latest value for callbacks. Don't read refs during render to compute output.",
+  "reference": null,
+  "tags": [
+   "useRef"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-008",
+  "tech": "react",
+  "category": "React Hooks",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Stale closures in effects",
+  "body": "An interval created in `useEffect(() => { const id = setInterval(() => console.log(count), 1000); return () => clearInterval(id); }, [])` always logs 0. Why?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "setInterval is broken in React",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The callback closed over `count` from the first render; the effect never re-runs. Use a functional update, a ref, or add count to the dependencies",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "console.log is batched",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "StrictMode disables intervals",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Stale closure over the initial render's state.",
+  "explanation": "Each render has its own props/state snapshot. Keep dependency arrays honest; for intervals updating state, `setCount(c => c + 1)` avoids needing `count` in the closure.",
+  "reference": null,
+  "tags": [
+   "closures",
+   "useEffect"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "re-009",
+  "tech": "react",
+  "category": "State Management & Redux",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Redux reducers",
+  "body": "Which is a requirement for a Redux reducer?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It may call APIs",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It must be a pure function that computes new state from the previous state and an action without mutating it",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It must be async",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It must update the DOM",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Pure, no side effects, no mutation.",
+  "explanation": "Redux Toolkit's `createSlice` lets you write 'mutating' code because Immer produces immutable updates under the hood. Side effects belong in thunks, listeners or RTK Query.",
+  "reference": null,
+  "tags": [
+   "redux"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "re-010",
+  "tech": "react",
+  "category": "State Management & Redux",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Context and re-renders",
+  "body": "What happens when a Context provider's `value` changes?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Nothing re-renders",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Every component that consumes that context re-renders",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Only the provider re-renders",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The whole app remounts",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "All consumers re-render.",
+  "explanation": "Passing a new object literal each render (`value={{ user, setUser }}`) re-renders consumers every time; memoise the value, split contexts by update frequency, or use a store with selectors for high-frequency state.",
+  "reference": null,
+  "tags": [
+   "context"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "re-011",
+  "tech": "react",
+  "category": "React Router",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Link vs anchor",
+  "body": "Why use React Router's `<Link>` instead of `<a href>` for internal navigation?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Links are styled automatically",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It performs client-side navigation via the History API without a full page reload",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Anchors are not allowed in React",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Links work offline",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Client-side routing without reloading.",
+  "explanation": "A full reload loses in-memory state and re-downloads the app. `<NavLink>` adds active styling.",
+  "reference": null,
+  "tags": [
+   "routing"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "re-012",
+  "tech": "react",
+  "category": "React Router",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Reading route parameters",
+  "body": "With the route `/users/:userId`, how does a component read `userId`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "props.match.userId in all versions",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "const { userId } = useParams()",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "window.userId",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "useLocation().userId",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "useParams().",
+  "explanation": "`useSearchParams` reads query strings, `useNavigate` navigates programmatically, and data routers offer loaders/actions for route-level data fetching.",
+  "reference": null,
+  "tags": [
+   "routing",
+   "hooks"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "re-013",
+  "tech": "react",
+  "category": "Performance Optimization",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "React.memo",
+  "body": "What does wrapping a component in `React.memo` do?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Caches API responses",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Skips re-rendering when its props are shallowly equal to the previous props",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Makes state immutable",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Moves rendering to a worker",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Skips renders for unchanged props.",
+  "explanation": "It only helps if props are referentially stable — combine with useMemo/useCallback for object and function props, and measure with the React Profiler before optimising.",
+  "reference": null,
+  "tags": [
+   "memo",
+   "performance"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-014",
+  "tech": "react",
+  "category": "Performance Optimization",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Rendering very large lists",
+  "body": "A page must display 20,000 rows smoothly. What is the most effective technique?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Wrap each row in React.memo only",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Virtualisation/windowing: render only the rows visible in the viewport (e.g. react-window)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Use index keys",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Render everything inside useEffect",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Virtualise the list.",
+  "explanation": "Windowing keeps the DOM small regardless of data size. Combine with pagination or infinite loading for data fetching.",
+  "reference": null,
+  "tags": [
+   "virtualization",
+   "performance"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "re-015",
+  "tech": "react",
+  "category": "React Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Controlled components",
+  "body": "What makes an `<input>` a controlled component?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It has an id",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Its value is driven by React state via the value prop and updated through onChange",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It is inside a form",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It uses useRef",
+    "c": false,
+    "e": "Reading values via refs is the uncontrolled approach."
+   }
+  ],
+  "answer": "React state is the single source of truth for its value.",
+  "explanation": "Controlled inputs enable instant validation and formatting; uncontrolled inputs (refs/defaultValue) can be simpler for large forms; libraries like React Hook Form mix both.",
+  "reference": null,
+  "tags": [
+   "forms"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "re-016",
+  "tech": "react",
+  "category": "React Fundamentals",
+  "type": "WrittenAnswer",
+  "difficulty": "Intermediate",
+  "title": "How React updates the UI",
+  "body": "Explain what happens when state changes in a React component, from the state update to the DOM change.",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "React schedules a re-render, calls the component to produce new elements, reconciles them against the previous tree, and commits only the differences to the DOM.",
+  "explanation": "1. `setState` schedules an update (batched).\n2. **Render phase:** React calls the component (and children not bailed out) to get a new element tree — pure computation.\n3. **Reconciliation:** it diffs new vs previous elements by type and key; same type keeps the instance and state, different type remounts.\n4. **Commit phase:** it applies the minimal DOM mutations, then runs layout effects and, after paint, passive effects (useEffect).\nWith concurrent rendering, the render phase can be interrupted for urgent updates.",
+  "reference": "State updates are batched and schedule a render; React re-invokes components to produce a new element tree, reconciles it with the previous tree using element type and keys, then commits minimal DOM changes and runs effects. Rendering is pure and may be interrupted in concurrent mode; commits are synchronous.",
+  "tags": [
+   "reconciliation",
+   "virtual-dom"
+  ],
+  "seconds": 240,
+  "premium": false
+ }
+]

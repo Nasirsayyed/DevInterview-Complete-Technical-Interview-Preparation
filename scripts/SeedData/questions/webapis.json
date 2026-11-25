@@ -1,0 +1,272 @@
+[
+ {
+  "key": "ap-001",
+  "tech": "web-apis",
+  "category": "REST",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "RESTful resource URLs",
+  "body": "Which URL best follows REST resource-naming conventions for retrieving order 42?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "GET /getOrder?id=42",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "GET /orders/42",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "POST /orders/get/42",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "GET /order_42",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "GET /orders/42.",
+  "explanation": "Use plural nouns for collections, ids for members, and HTTP methods for actions (GET, POST, PUT, PATCH, DELETE). Nest only for true containment: /customers/7/orders.",
+  "reference": null,
+  "tags": [
+   "rest",
+   "naming"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ap-002",
+  "tech": "web-apis",
+  "category": "REST",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "401 vs 403",
+  "body": "When should an API return 403 Forbidden instead of 401 Unauthorized?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "When the token is missing or invalid",
+    "c": false,
+    "e": "That is 401."
+   },
+   {
+    "t": "When the caller is authenticated but not permitted to perform the action",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "When the resource does not exist",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "When the server is down",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "403 = authenticated but not allowed.",
+  "explanation": "401 means authentication is missing or failed (include WWW-Authenticate). Some APIs return 404 instead of 403 to avoid revealing that a resource exists.",
+  "reference": null,
+  "tags": [
+   "http-status"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "ap-003",
+  "tech": "web-apis",
+  "category": "REST",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Cursor pagination",
+  "body": "Why is cursor (keyset) pagination often preferred over offset pagination for large, frequently changing datasets?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It allows jumping to any page number",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It stays fast for deep pages and avoids skipped or duplicated items when rows are inserted between requests",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It needs no index",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It returns all rows",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Stable and efficient deep paging.",
+  "explanation": "Offset pagination must scan and discard `offset` rows and shifts when data changes. A cursor encodes the last seen sort key: `WHERE (CreatedAt, Id) < (@c, @id) ORDER BY CreatedAt DESC, Id DESC`.",
+  "reference": null,
+  "tags": [
+   "pagination"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "ap-004",
+  "tech": "web-apis",
+  "category": "REST",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Idempotency keys",
+  "body": "How can a payment POST endpoint safely handle client retries after a timeout?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Ask users not to retry",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Require an Idempotency-Key header; store the key with the result and return the stored result for repeated keys",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Use GET instead of POST",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Retry on the server automatically",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Idempotency keys.",
+  "explanation": "The key must be unique per logical operation and stored atomically with the operation's outcome (unique index), so concurrent duplicates cannot double-charge.",
+  "reference": null,
+  "tags": [
+   "idempotency"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ap-005",
+  "tech": "web-apis",
+  "category": "Microservices",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Database per service",
+  "body": "Why do microservices commonly use a database per service?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Databases are cheap",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "To keep services loosely coupled and independently deployable, with each service owning its data and schema",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "To enable cross-service joins",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It is required by Kubernetes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Data ownership and independent evolution.",
+  "explanation": "Other services access the data through APIs or events, not shared tables. The trade-off is eventual consistency and the need for patterns like sagas and the outbox.",
+  "reference": null,
+  "tags": [
+   "microservices",
+   "data"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ap-006",
+  "tech": "web-apis",
+  "category": "Microservices",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Saga pattern",
+  "body": "How does a saga maintain consistency across services without distributed transactions?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "By locking all databases",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "By executing a sequence of local transactions and running compensating actions if a later step fails",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "By using two-phase commit across HTTP",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "By sharing one database",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Local transactions + compensations.",
+  "explanation": "Sagas are orchestrated (a coordinator issues commands) or choreographed (services react to events). Compensations must be idempotent and semantically undo steps (refund, release inventory).",
+  "reference": null,
+  "tags": [
+   "saga",
+   "distributed-transactions"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "ap-007",
+  "tech": "web-apis",
+  "category": "Microservices",
+  "type": "WrittenAnswer",
+  "difficulty": "Advanced",
+  "title": "Microservices vs modular monolith",
+  "body": "Compare a modular monolith with microservices. When would you choose each for a new product?",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "Start with a modular monolith for small teams and evolving domains; adopt microservices when independent scaling/deployment and team autonomy outweigh distributed-systems costs.",
+  "explanation": "**Modular monolith:** one deployable unit with strict module boundaries (separate namespaces/projects, internal APIs, possibly separate schemas). Pros: simple deployment, local transactions, easy refactoring, low ops cost. Cons: one scaling unit and release train.\n**Microservices:** independently deployable services owning their data. Pros: team autonomy, independent scaling, fault isolation, technology freedom. Cons: network latency/failures, eventual consistency, observability and DevOps overhead.\n**Choose:** modular monolith for new products and small teams until boundaries are proven; extract services where scaling, deployment cadence or team ownership demand it.",
+  "reference": "A modular monolith keeps strong module boundaries in a single deployment: simpler operations and transactions, but shared scaling and releases. Microservices give independent deployment, scaling and team ownership at the cost of distributed systems complexity (latency, partial failure, eventual consistency, observability). Prefer a modular monolith early and extract services along proven boundaries when organisational or scaling needs justify it.",
+  "tags": [
+   "architecture",
+   "microservices"
+  ],
+  "seconds": 300,
+  "premium": true
+ }
+]

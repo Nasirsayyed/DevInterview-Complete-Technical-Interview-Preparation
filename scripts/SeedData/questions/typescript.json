@@ -1,0 +1,209 @@
+[
+ {
+  "key": "ts-001",
+  "tech": "typescript",
+  "category": "Type System",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "unknown vs any",
+  "body": "How does `unknown` differ from `any`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "They are identical",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A value of type unknown must be narrowed (e.g. with typeof) before it can be used; any disables type checking",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "unknown is only for functions",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "any is safer",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "`unknown` is the type-safe top type.",
+  "explanation": "Prefer `unknown` for values from JSON, catch clauses or external input, then narrow with type guards or a schema validator (e.g. zod).",
+  "reference": null,
+  "tags": [
+   "types"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "ts-002",
+  "tech": "typescript",
+  "category": "Type System",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "interface vs type alias",
+  "body": "Which capability is specific to `interface` declarations?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Describing object shapes",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Declaration merging: multiple declarations with the same name combine",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Union types",
+    "c": false,
+    "e": "Unions require type aliases."
+   },
+   {
+    "t": "Generics",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Declaration merging.",
+  "explanation": "Interfaces can be reopened (useful for augmenting library types); type aliases can express unions, intersections, mapped and conditional types. For plain object shapes either works.",
+  "reference": null,
+  "tags": [
+   "interfaces"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "ts-003",
+  "tech": "typescript",
+  "category": "Generics & Utility Types",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Partial<T>",
+  "body": "What does `Partial<User>` produce?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A type with all User properties required",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A type with all User properties optional",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A type with only the first property",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A readonly copy",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "All properties become optional.",
+  "explanation": "Related utilities: `Required<T>`, `Readonly<T>`, `Pick<T, K>`, `Omit<T, K>`, `Record<K, V>`. `Partial` is common for patch/update payloads.",
+  "reference": null,
+  "tags": [
+   "utility-types"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "ts-004",
+  "tech": "typescript",
+  "category": "Type System",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Discriminated unions",
+  "body": "Given `type Shape = { kind: 'circle'; r: number } | { kind: 'square'; side: number }`, how does TypeScript know `shape.r` exists inside `if (shape.kind === 'circle')`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It doesn't; you must cast",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Checking the literal discriminant property narrows the union to the matching member",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Because r is declared first",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Runtime reflection",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Narrowing on a literal discriminant.",
+  "explanation": "Add an exhaustive `switch` with a `never` check in the default branch so adding a new variant produces a compile error where it is not handled.",
+  "reference": null,
+  "tags": [
+   "narrowing",
+   "unions"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "ts-005",
+  "tech": "typescript",
+  "category": "Generics & Utility Types",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Typed property access",
+  "body": "Which signature returns the correctly typed value of a property for any object?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "function get(obj: any, key: string): any",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "function get<T, K extends keyof T>(obj: T, key: K): T[K]",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "function get<T>(obj: T, key: string): T",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "function get(obj: object, key: keyof object)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Constrain K to keyof T and return the indexed access type T[K].",
+  "explanation": "`get(user, 'age')` then has type `number`, and `get(user, 'nope')` is a compile error.",
+  "reference": null,
+  "tags": [
+   "generics",
+   "keyof"
+  ],
+  "seconds": 60,
+  "premium": false
+ }
+]

@@ -1,0 +1,814 @@
+[
+ {
+  "key": "an-001",
+  "tech": "aspnet-core",
+  "category": "Middleware",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Middleware execution order",
+  "body": "How do middleware components process a request in ASP.NET Core?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "In alphabetical order of their class names",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "In the order they are added to the pipeline; the response then flows back through them in reverse order",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "All middleware runs in parallel",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Only the last registered middleware runs",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "In registration order on the way in, reverse order on the way out.",
+  "explanation": "Each middleware receives `HttpContext` and a `next` delegate; code before `await next()` runs on the request path and code after it runs on the response path. Order is therefore significant: exception handling first, then HTTPS redirection, static files, routing, CORS, authentication, authorization and endpoints.",
+  "reference": null,
+  "tags": [
+   "middleware",
+   "pipeline"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "an-002",
+  "tech": "aspnet-core",
+  "category": "Middleware",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "app.Use vs app.Run",
+  "body": "What is the difference between `app.Use(...)` and `app.Run(...)`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "There is none",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`Run` adds terminal middleware that does not call the next delegate; `Use` can call next",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "`Use` is only for static files",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`Run` starts the web server",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "`Run` is terminal; `Use` can pass control to the next middleware.",
+  "explanation": "Middleware registered after an `app.Run` delegate is never reached. `app.Map`/`MapWhen` branch the pipeline. Short-circuiting in `Use` (not calling `next`) is valid, e.g. to return 429 early.",
+  "reference": null,
+  "tags": [
+   "middleware"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "an-003",
+  "tech": "aspnet-core",
+  "category": "Middleware",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Authentication before authorization",
+  "body": "Why must `UseAuthentication()` be placed before `UseAuthorization()`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It is just a convention with no effect",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Authorization evaluates HttpContext.User, which authentication middleware populates from the request credentials",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Authorization middleware starts the authentication handlers itself",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Because UseAuthorization registers the JWT handler",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Authorization needs the authenticated principal that authentication creates.",
+  "explanation": "Authentication answers *who are you?* and sets `HttpContext.User`. Authorization answers *are you allowed?* by evaluating policies against that principal. Placing authorization first means every user is anonymous at evaluation time.",
+  "reference": null,
+  "tags": [
+   "middleware",
+   "security"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "an-004",
+  "tech": "aspnet-core",
+  "category": "Dependency Injection",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Service lifetimes",
+  "body": "Which DI lifetime creates **one instance per HTTP request**?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Singleton",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Scoped",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Transient",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Static",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Scoped.",
+  "explanation": "Transient: a new instance every resolution. Scoped: one per scope — in ASP.NET Core, per request (DbContext is registered scoped). Singleton: one for the application lifetime; it must be thread-safe.",
+  "reference": null,
+  "tags": [
+   "dependency-injection",
+   "lifetimes"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "an-005",
+  "tech": "aspnet-core",
+  "category": "Dependency Injection",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Captive dependencies",
+  "body": "What problem occurs when a **singleton** service depends on a **scoped** service?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Nothing; DI handles it",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The scoped instance is captured and lives as long as the singleton, sharing per-request state across requests (scope validation throws in Development)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The singleton becomes scoped",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The app fails to compile",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A captive dependency: the scoped object effectively becomes a singleton.",
+  "explanation": "For example a singleton holding a `DbContext` would share one non-thread-safe context across concurrent requests. ASP.NET Core validates scopes in Development and throws at resolution time. Inject `IServiceScopeFactory` into the singleton and create a scope per unit of work instead.",
+  "reference": null,
+  "tags": [
+   "dependency-injection"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "an-006",
+  "tech": "aspnet-core",
+  "category": "Dependency Injection",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Scoped services in a BackgroundService",
+  "body": "How should a hosted `BackgroundService` use a scoped service such as a DbContext?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Inject the DbContext directly into the constructor",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Inject IServiceScopeFactory and create a scope for each unit of work",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Register the DbContext as singleton",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Use a static DbContext",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Create a scope with IServiceScopeFactory per iteration.",
+  "explanation": "Hosted services are singletons. `using var scope = _scopeFactory.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();` gives each iteration fresh scoped dependencies that are disposed afterwards.",
+  "reference": null,
+  "tags": [
+   "background-service",
+   "dependency-injection"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "an-007",
+  "tech": "aspnet-core",
+  "category": "Web API",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "[ApiController] behaviour",
+  "body": "Which behaviour does the `[ApiController]` attribute enable?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Automatic HTTP 400 responses when model validation fails",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Automatic database migrations",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Conventional routing by default",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Server-side rendering of Razor views",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Automatic 400 ProblemDetails responses for invalid models (plus binding-source inference and attribute routing requirement).",
+  "explanation": "`[ApiController]` also infers `[FromBody]` for complex parameters, requires attribute routing and returns ProblemDetails for error status codes. The automatic 400 can be customised via `ConfigureApiBehaviorOptions`.",
+  "reference": null,
+  "tags": [
+   "web-api"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "an-008",
+  "tech": "aspnet-core",
+  "category": "Web API",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Status code for created resources",
+  "body": "A POST successfully creates a new resource. Which response is most appropriate?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "200 OK with no body",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "201 Created with a Location header pointing to the new resource",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "204 No Content",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "202 Accepted",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "201 Created with a Location header.",
+  "explanation": "`CreatedAtAction`/`CreatedAtRoute` return 201 with Location. Use 202 Accepted when processing continues asynchronously and 204 for successful operations with no body (e.g. DELETE).",
+  "reference": null,
+  "tags": [
+   "http",
+   "rest"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "an-009",
+  "tech": "aspnet-core",
+  "category": "Web API",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Idempotent HTTP methods",
+  "body": "Which HTTP method is **not** idempotent by definition?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "GET",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "PUT",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "DELETE",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "POST",
+    "c": true,
+    "e": null
+   }
+  ],
+  "answer": "POST.",
+  "explanation": "An idempotent request has the same effect when repeated: GET, HEAD, PUT and DELETE are idempotent; POST is not (two POSTs may create two orders). Make retries safe for POST with idempotency keys stored server-side.",
+  "reference": null,
+  "tags": [
+   "http",
+   "idempotency"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "an-010",
+  "tech": "aspnet-core",
+  "category": "Filters",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Filter pipeline order",
+  "body": "Which MVC filter type runs **first** for a request?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Action filters",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Result filters",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Authorization filters",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Exception filters",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Authorization filters.",
+  "explanation": "Order: authorization → resource → (model binding) → action → action execution → result filters. Exception filters handle unhandled exceptions from earlier stages. Filters run inside the endpoint, after middleware.",
+  "reference": null,
+  "tags": [
+   "filters",
+   "mvc"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "an-011",
+  "tech": "aspnet-core",
+  "category": "Filters",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Exception filters vs exception middleware",
+  "body": "Why is global exception-handling **middleware** usually preferred over an MVC exception filter?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Filters are slower",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Exception filters only catch exceptions thrown inside MVC (actions/filters), while middleware also covers routing, other middleware and minimal APIs",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Middleware can change the status code but filters cannot",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Exception filters are obsolete",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Middleware sees the whole pipeline; filters see only MVC execution.",
+  "explanation": "Use `UseExceptionHandler`, `IExceptionHandler` (.NET 8) or custom middleware to map exceptions to consistent responses for every endpoint type, and log once with a correlation id.",
+  "reference": null,
+  "tags": [
+   "filters",
+   "error-handling"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "an-012",
+  "tech": "aspnet-core",
+  "category": "Authentication & Authorization",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Authentication vs authorization",
+  "body": "Which statement is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "They are synonyms",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Authentication verifies identity; authorization decides what that identity may do",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Authorization happens before authentication",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Authentication is only needed for admin users",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "AuthN = who you are; AuthZ = what you may do.",
+  "explanation": "In ASP.NET Core, authentication handlers (JWT bearer, cookies) build a `ClaimsPrincipal`; authorization policies, roles and requirements evaluate it. A failed authentication yields 401; an authenticated but forbidden request yields 403.",
+  "reference": null,
+  "tags": [
+   "security"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "an-013",
+  "tech": "aspnet-core",
+  "category": "Authentication & Authorization",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Short-lived JWTs",
+  "body": "Why should JWT access tokens usually be short-lived (minutes, not days)?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "JWTs become invalid JSON after a few minutes",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Self-contained tokens are validated without a server lookup, so they cannot easily be revoked before they expire",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Long tokens slow down HTTPS",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Browsers delete JWTs after 15 minutes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "They cannot be revoked easily; short lifetimes limit the damage of a leak.",
+  "explanation": "Pair short-lived access tokens with refresh tokens that are stored server-side (hashed), rotated on each use and revocable. Detect refresh-token reuse and revoke the token family.",
+  "reference": null,
+  "tags": [
+   "jwt",
+   "refresh-tokens"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "an-014",
+  "tech": "aspnet-core",
+  "category": "Authentication & Authorization",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Policy-based authorization",
+  "body": "How do you require that a user has **both** the `Admin` role **and** an `email_verified` claim on an endpoint?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Add [Authorize(Roles = \"Admin,email_verified\")]",
+    "c": false,
+    "e": "A comma-separated role list means any one of the roles."
+   },
+   {
+    "t": "Register a policy with RequireRole(\"Admin\") and RequireClaim(\"email_verified\") and apply [Authorize(Policy = \"...\")]",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Check the header manually in every action",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Use [AllowAnonymous]",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Define a policy combining requirements and reference it by name.",
+  "explanation": "Policies compose requirements (roles, claims, custom `IAuthorizationRequirement` handlers). Stacking two `[Authorize]` attributes also requires both, but named policies keep rules central and testable.",
+  "reference": null,
+  "tags": [
+   "authorization",
+   "policies"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "an-015",
+  "tech": "aspnet-core",
+  "category": "Minimal APIs",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Minimal API endpoints",
+  "body": "Which call maps an HTTP GET endpoint in a minimal API?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "app.UseGet(\"/todos\", ...)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "app.MapGet(\"/todos\", ...)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "app.Get(\"/todos\", ...)",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "services.AddGet(\"/todos\", ...)",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "`app.MapGet`.",
+  "explanation": "Minimal APIs use `MapGet/MapPost/MapPut/MapDelete` with lambda handlers whose parameters are bound from route, query, body and DI. `MapGroup` shares prefixes and filters; `TypedResults` improves OpenAPI metadata.",
+  "reference": null,
+  "tags": [
+   "minimal-apis"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "an-016",
+  "tech": "aspnet-core",
+  "category": "SignalR",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "SignalR transports",
+  "body": "Which transport does SignalR prefer when both client and server support it?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Long polling",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Server-Sent Events",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "WebSockets",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "gRPC",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "WebSockets, falling back to Server-Sent Events, then long polling.",
+  "explanation": "SignalR negotiates the best available transport. Scaling out across servers requires a backplane (Redis or Azure SignalR Service) or sticky sessions so that messages reach clients connected to other instances.",
+  "reference": null,
+  "tags": [
+   "signalr",
+   "realtime"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "an-017",
+  "tech": "aspnet-core",
+  "category": "Performance Optimization",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "IHttpClientFactory",
+  "body": "Why prefer `IHttpClientFactory` over creating `new HttpClient()` per request?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It makes requests run synchronously",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It pools message handlers to avoid socket exhaustion while still honouring DNS changes through handler rotation",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "HttpClient cannot send JSON",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It disables TLS",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Handler pooling avoids socket exhaustion and stale DNS.",
+  "explanation": "Disposing HttpClient per request leaves sockets in TIME_WAIT; a single static client never sees DNS changes. The factory (or a singleton with `SocketsHttpHandler.PooledConnectionLifetime`) solves both, and integrates resilience pipelines.",
+  "reference": null,
+  "tags": [
+   "httpclient",
+   "performance"
+  ],
+  "seconds": 75,
+  "premium": false
+ },
+ {
+  "key": "an-018",
+  "tech": "aspnet-core",
+  "category": "Fundamentals & Hosting",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Application startup",
+  "body": "In .NET 6+ project templates, where are services and the request pipeline configured?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Global.asax",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Program.cs using WebApplication.CreateBuilder",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "web.config",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Startup.xml",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Program.cs with the minimal hosting model.",
+  "explanation": "`WebApplication.CreateBuilder(args)` sets up configuration, logging and DI (`builder.Services`); `builder.Build()` returns the app where middleware and endpoints are mapped before `app.Run()`.",
+  "reference": null,
+  "tags": [
+   "hosting"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "an-019",
+  "tech": "aspnet-core",
+  "category": "Fundamentals & Hosting",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Configuration precedence",
+  "body": "With the default `WebApplication.CreateBuilder` configuration, a key is set in appsettings.json, appsettings.Production.json and as an environment variable. Which value wins in Production?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "appsettings.json",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "appsettings.Production.json",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The environment variable",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The first one read",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The environment variable (only command-line arguments rank higher).",
+  "explanation": "Later providers override earlier ones: appsettings.json → appsettings.{Environment}.json → user secrets (Development) → environment variables → command-line args. Use `__` for nested keys in environment variables, e.g. `Jwt__SigningKey`.",
+  "reference": null,
+  "tags": [
+   "configuration"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "an-020",
+  "tech": "aspnet-core",
+  "category": "Performance Optimization",
+  "type": "ScenarioBased",
+  "difficulty": "Advanced",
+  "title": "Investigating rising latency",
+  "body": "After a traffic increase, an ASP.NET Core API's p95 latency triples while CPU stays at 35%. How would you investigate and what are likely causes?",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "Low CPU with high latency suggests waiting: thread-pool starvation from blocking calls, slow DB queries/connection-pool exhaustion, or downstream latency. Use traces, metrics and dotnet-counters to find it.",
+  "explanation": "1. Check `dotnet-counters` for thread-pool queue length and thread count (starvation from `.Result`/`.Wait()`).\n2. Inspect DB: slow-query logs, missing indexes, connection-pool exhaustion (pool timeouts), lock waits.\n3. Distributed tracing (OpenTelemetry) to see which dependency dominates the span time.\n4. Look for synchronous I/O, large allocations/GC pauses (`gc-heap-size`, % time in GC).\n5. Fix: async all the way, caching, query tuning, bulkheads/timeouts on dependencies, then load test to confirm.",
+  "reference": "High latency with low CPU indicates threads waiting rather than computing. Measure thread-pool queue length (starvation from sync-over-async), database wait times and connection pool usage, downstream dependency latency via distributed tracing, and GC pauses. Remediate with async I/O, indexing/caching, timeouts and bulkheads, and verify with load tests.",
+  "tags": [
+   "performance",
+   "diagnostics"
+  ],
+  "seconds": 300,
+  "premium": true
+ }
+]

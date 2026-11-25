@@ -1,0 +1,597 @@
+[
+ {
+  "key": "fc-csharp-01",
+  "tech": "csharp",
+  "front": "What is the difference between a struct and a class?",
+  "back": "struct = value type (copied on assignment, usually stack/inline); class = reference type on the heap. Structs suit small immutable values.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-csharp-02",
+  "tech": "csharp",
+  "front": "What does `readonly struct` guarantee?",
+  "back": "All fields are readonly, so the compiler avoids defensive copies when calling members on `in` parameters/readonly fields.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-csharp-03",
+  "tech": "csharp",
+  "front": "What is deferred execution in LINQ?",
+  "back": "Queries run when enumerated, not when defined. Use ToList()/ToArray() to materialise once.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-04",
+  "tech": "csharp",
+  "front": "Task vs ValueTask?",
+  "back": "ValueTask avoids allocation when results are often synchronous; it must be awaited only once. Default to Task.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-csharp-05",
+  "tech": "csharp",
+  "front": "What does ConfigureAwait(false) do?",
+  "back": "Resumes the continuation without capturing the SynchronizationContext — recommended in library code.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-06",
+  "tech": "csharp",
+  "front": "What is a record in C#?",
+  "back": "A type with value-based equality, ToString, deconstruction and non-destructive mutation via `with`.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-csharp-07",
+  "tech": "csharp",
+  "front": "IEnumerable vs IQueryable?",
+  "back": "IEnumerable runs LINQ in memory; IQueryable builds expression trees translated by a provider (e.g. to SQL).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-08",
+  "tech": "csharp",
+  "front": "What are GC generations?",
+  "back": "Gen0 (new, collected often), Gen1 (buffer), Gen2 (long-lived). Most objects die young, so collecting Gen0 is cheap.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-09",
+  "tech": "csharp",
+  "front": "What is the purpose of IDisposable?",
+  "back": "Deterministic release of unmanaged resources via Dispose(), typically with `using`.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-csharp-10",
+  "tech": "csharp",
+  "front": "What does the `yield return` keyword do?",
+  "back": "Creates an iterator that produces values lazily, one per MoveNext().",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-11",
+  "tech": "csharp",
+  "front": "What is a CancellationToken for?",
+  "back": "Cooperative cancellation: pass it down async calls and check/throw when cancellation is requested.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-csharp-12",
+  "tech": "csharp",
+  "front": "Span<T> in one sentence?",
+  "back": "A stack-only view over contiguous memory that enables allocation-free slicing of arrays, strings and native memory.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-aspnet-core-01",
+  "tech": "aspnet-core",
+  "front": "Three DI lifetimes?",
+  "back": "Transient (per resolution), Scoped (per request), Singleton (per app).",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-aspnet-core-02",
+  "tech": "aspnet-core",
+  "front": "What is middleware?",
+  "back": "Components in the request pipeline that can act before/after calling the next component or short-circuit.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-aspnet-core-03",
+  "tech": "aspnet-core",
+  "front": "Where should UseAuthentication go?",
+  "back": "Before UseAuthorization, after routing/CORS, so authorization sees the authenticated user.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-aspnet-core-04",
+  "tech": "aspnet-core",
+  "front": "What is the Options pattern?",
+  "back": "Binding configuration sections to strongly typed classes via IOptions<T>/IOptionsSnapshot<T>/IOptionsMonitor<T>.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-aspnet-core-05",
+  "tech": "aspnet-core",
+  "front": "What does [ApiController] add?",
+  "back": "Automatic 400 for invalid models, binding-source inference, ProblemDetails and attribute routing requirement.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-aspnet-core-06",
+  "tech": "aspnet-core",
+  "front": "What problem does IHttpClientFactory solve?",
+  "back": "Socket exhaustion and stale DNS by pooling and rotating HttpMessageHandlers.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-aspnet-core-07",
+  "tech": "aspnet-core",
+  "front": "Rate limiting in .NET 7+?",
+  "back": "AddRateLimiter with fixed/sliding window, token bucket or concurrency policies and UseRateLimiter().",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-aspnet-core-08",
+  "tech": "aspnet-core",
+  "front": "Health checks endpoint?",
+  "back": "AddHealthChecks().AddDbContextCheck<T>() and MapHealthChecks(\"/health\") for liveness/readiness probes.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-sql-server-01",
+  "tech": "sql-server",
+  "front": "Clustered vs nonclustered index?",
+  "back": "Clustered = table data ordered by key (one per table). Nonclustered = separate structure with keys + row locator.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-sql-server-02",
+  "tech": "sql-server",
+  "front": "What makes a predicate SARGable?",
+  "back": "The indexed column is compared directly, without functions or conversions, enabling an index seek.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-sql-server-03",
+  "tech": "sql-server",
+  "front": "ROW_NUMBER vs RANK vs DENSE_RANK?",
+  "back": "ROW_NUMBER: unique. RANK: ties share rank with gaps. DENSE_RANK: ties share rank without gaps.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-sql-server-04",
+  "tech": "sql-server",
+  "front": "Logical query processing order?",
+  "back": "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY (TOP/OFFSET last).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-sql-server-05",
+  "tech": "sql-server",
+  "front": "Default isolation level in SQL Server?",
+  "back": "READ COMMITTED (locking, unless READ_COMMITTED_SNAPSHOT is on).",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-sql-server-06",
+  "tech": "sql-server",
+  "front": "What is a covering index?",
+  "back": "An index containing every column a query needs (key + INCLUDE), avoiding lookups.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-sql-server-07",
+  "tech": "sql-server",
+  "front": "NOT IN vs NOT EXISTS?",
+  "back": "NOT IN returns nothing if the subquery yields a NULL; NOT EXISTS is NULL-safe.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-sql-server-08",
+  "tech": "sql-server",
+  "front": "What is parameter sniffing?",
+  "back": "A cached plan compiled for the first parameter values is reused for very different values.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-sql-server-09",
+  "tech": "sql-server",
+  "front": "What is a CTE?",
+  "back": "A named, statement-scoped query expression (WITH ...), inlined by the optimiser; supports recursion.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-sql-server-10",
+  "tech": "sql-server",
+  "front": "ACID stands for?",
+  "back": "Atomicity, Consistency, Isolation, Durability.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-javascript-01",
+  "tech": "javascript",
+  "front": "What is a closure?",
+  "back": "A function plus the variables of the scope where it was created, kept alive after that scope returns.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-javascript-02",
+  "tech": "javascript",
+  "front": "Microtask vs macrotask?",
+  "back": "Microtasks (promise callbacks) run after the current task before the next macrotask (setTimeout, events).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-javascript-03",
+  "tech": "javascript",
+  "front": "let vs var?",
+  "back": "let is block-scoped with a temporal dead zone; var is function-scoped and hoisted as undefined.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-javascript-04",
+  "tech": "javascript",
+  "front": "What does `this` refer to in an arrow function?",
+  "back": "The `this` of the enclosing lexical scope; arrows don't bind their own.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-javascript-05",
+  "tech": "javascript",
+  "front": "Promise.all vs Promise.allSettled?",
+  "back": "all rejects on the first rejection; allSettled waits for every promise and reports each outcome.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-javascript-06",
+  "tech": "javascript",
+  "front": "What is event delegation?",
+  "back": "One listener on an ancestor handles events from descendants via bubbling and event.target.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-javascript-07",
+  "tech": "javascript",
+  "front": "== vs ===?",
+  "back": "=== compares without type coercion; prefer it.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-javascript-08",
+  "tech": "javascript",
+  "front": "What is hoisting?",
+  "back": "Declarations are processed before execution: functions fully, var as undefined, let/const uninitialised (TDZ).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-react-01",
+  "tech": "react",
+  "front": "Why are keys needed in lists?",
+  "back": "So reconciliation can match elements between renders; use stable ids, not indexes.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-react-02",
+  "tech": "react",
+  "front": "Rules of Hooks?",
+  "back": "Call hooks at the top level of components/custom hooks only, never conditionally or in loops.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-react-03",
+  "tech": "react",
+  "front": "useMemo vs useCallback?",
+  "back": "useMemo memoises a computed value; useCallback memoises a function identity.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-react-04",
+  "tech": "react",
+  "front": "When does useEffect run?",
+  "back": "After render commits; dependencies control re-runs; cleanup runs before the next run and on unmount.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-react-05",
+  "tech": "react",
+  "front": "What does React.memo do?",
+  "back": "Skips re-rendering when props are shallowly equal.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-react-06",
+  "tech": "react",
+  "front": "Controlled vs uncontrolled inputs?",
+  "back": "Controlled: value from React state + onChange. Uncontrolled: DOM keeps value, read via refs.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-react-07",
+  "tech": "react",
+  "front": "What causes a re-render?",
+  "back": "State change, parent re-render, or a consumed context value change.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-react-08",
+  "tech": "react",
+  "front": "What is prop drilling and a fix?",
+  "back": "Passing props through many layers; fix with composition, context or a state store.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-dsa-01",
+  "tech": "dsa",
+  "front": "Binary search requirement and complexity?",
+  "back": "Sorted, random-access data; O(log n).",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-dsa-02",
+  "tech": "dsa",
+  "front": "BFS vs DFS data structures?",
+  "back": "BFS uses a queue (level order, shortest unweighted path); DFS uses a stack/recursion.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-dsa-03",
+  "tech": "dsa",
+  "front": "Which sorts are stable?",
+  "back": "Merge sort, insertion sort, Timsort. Quicksort and heap sort are typically not.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-dsa-04",
+  "tech": "dsa",
+  "front": "Two conditions for dynamic programming?",
+  "back": "Overlapping subproblems and optimal substructure.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-dsa-05",
+  "tech": "dsa",
+  "front": "Heap operations complexity?",
+  "back": "Peek O(1), push/pop O(log n), heapify O(n).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-dsa-06",
+  "tech": "dsa",
+  "front": "Detect a cycle in a linked list?",
+  "back": "Floyd's tortoise and hare: slow +1, fast +2; they meet if a cycle exists.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-dsa-07",
+  "tech": "dsa",
+  "front": "Hash table average and worst case?",
+  "back": "Average O(1); worst O(n) with heavy collisions.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-dsa-08",
+  "tech": "dsa",
+  "front": "Dijkstra limitation?",
+  "back": "Requires non-negative edge weights; use Bellman–Ford otherwise.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-dsa-09",
+  "tech": "dsa",
+  "front": "Sliding window technique?",
+  "back": "Maintain a window over a sequence, expanding/shrinking pointers to reach O(n) for subarray problems.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-dsa-10",
+  "tech": "dsa",
+  "front": "Topological sort applies to?",
+  "back": "Directed acyclic graphs; Kahn's algorithm uses in-degrees.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-system-design-01",
+  "tech": "system-design",
+  "front": "Horizontal vs vertical scaling?",
+  "back": "Horizontal adds machines; vertical adds resources to one machine.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-system-design-02",
+  "tech": "system-design",
+  "front": "Cache-aside on a write?",
+  "back": "Update the database, then invalidate the cache entry.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-system-design-03",
+  "tech": "system-design",
+  "front": "CAP theorem?",
+  "back": "Under a network partition a system must choose consistency or availability.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-system-design-04",
+  "tech": "system-design",
+  "front": "Why idempotent consumers?",
+  "back": "At-least-once delivery may redeliver messages.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-system-design-05",
+  "tech": "system-design",
+  "front": "What is a circuit breaker?",
+  "back": "Stops calling a failing dependency for a while, failing fast, then probes in half-open state.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-system-design-06",
+  "tech": "system-design",
+  "front": "Consistent hashing benefit?",
+  "back": "Only ~1/n keys move when nodes are added or removed.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-system-design-07",
+  "tech": "system-design",
+  "front": "What is the outbox pattern?",
+  "back": "Write events to an outbox table in the same DB transaction, then publish them reliably.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-system-design-08",
+  "tech": "system-design",
+  "front": "Read replica pitfall?",
+  "back": "Replication lag breaks read-your-writes consistency.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-oop-design-01",
+  "tech": "oop-design",
+  "front": "SOLID acronym?",
+  "back": "Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-oop-design-02",
+  "tech": "oop-design",
+  "front": "Strategy pattern?",
+  "back": "Encapsulates interchangeable algorithms behind one interface, chosen at runtime.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-oop-design-03",
+  "tech": "oop-design",
+  "front": "Decorator pattern?",
+  "back": "Wraps an object with the same interface to add behaviour (e.g. caching, logging).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-oop-design-04",
+  "tech": "oop-design",
+  "front": "Composition vs inheritance?",
+  "back": "Prefer composing collaborators for flexibility; use inheritance for true is-a relationships.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-oop-design-05",
+  "tech": "oop-design",
+  "front": "Liskov substitution in one line?",
+  "back": "Subtypes must be usable wherever the base type is expected without surprises.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-oop-design-06",
+  "tech": "oop-design",
+  "front": "Dependency inversion vs dependency injection?",
+  "back": "DIP is the principle (depend on abstractions); DI is a technique to supply implementations.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-html-01",
+  "tech": "html",
+  "front": "Why use semantic HTML?",
+  "back": "Accessibility landmarks, SEO and clearer structure (nav, main, article, header, footer).",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-html-02",
+  "tech": "html",
+  "front": "defer vs async?",
+  "back": "defer: executes in order after parsing. async: executes when downloaded, unordered.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-html-03",
+  "tech": "html",
+  "front": "Decorative image alt text?",
+  "back": "alt=\"\" so screen readers skip it.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-css-01",
+  "tech": "css",
+  "front": "Specificity order?",
+  "back": "Inline > IDs > classes/attributes/pseudo-classes > elements; !important overrides.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-css-02",
+  "tech": "css",
+  "front": "Flexbox vs Grid?",
+  "back": "Flexbox: one-dimensional. Grid: two-dimensional rows and columns.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-css-03",
+  "tech": "css",
+  "front": "rem vs em?",
+  "back": "rem: relative to root font size. em: relative to the element's/parent's font size.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-css-04",
+  "tech": "css",
+  "front": "What creates a stacking context?",
+  "back": "Positioned elements with z-index, opacity < 1, transform, filter, isolation: isolate, etc.",
+  "difficulty": "Advanced"
+ },
+ {
+  "key": "fc-devops-01",
+  "tech": "devops",
+  "front": "Docker image vs container?",
+  "back": "Image: read-only layered template. Container: running instance with a writable layer.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-devops-02",
+  "tech": "devops",
+  "front": "Readiness vs liveness probe?",
+  "back": "Readiness failure removes the pod from traffic; liveness failure restarts it.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-devops-03",
+  "tech": "devops",
+  "front": "git revert vs git reset?",
+  "back": "revert adds an inverse commit (safe for shared history); reset moves the branch pointer (rewrites history).",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-devops-04",
+  "tech": "devops",
+  "front": "Blue-green deployment?",
+  "back": "Run old and new versions side by side and switch traffic once verified.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-security-01",
+  "tech": "security",
+  "front": "Primary SQL injection defence?",
+  "back": "Parameterised queries.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-security-02",
+  "tech": "security",
+  "front": "How to store passwords?",
+  "back": "Slow salted hashes: PBKDF2, bcrypt, Argon2.",
+  "difficulty": "Beginner"
+ },
+ {
+  "key": "fc-security-03",
+  "tech": "security",
+  "front": "XSS defences?",
+  "back": "Output encoding, avoiding raw HTML sinks, Content Security Policy, HttpOnly cookies.",
+  "difficulty": "Intermediate"
+ },
+ {
+  "key": "fc-security-04",
+  "tech": "security",
+  "front": "Refresh token rotation?",
+  "back": "Issue a new refresh token on each use and revoke the family if an old one is reused.",
+  "difficulty": "Advanced"
+ }
+]

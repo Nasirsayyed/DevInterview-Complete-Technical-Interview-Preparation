@@ -1,0 +1,519 @@
+[
+ {
+  "key": "sd-001",
+  "tech": "system-design",
+  "category": "Scalability",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Horizontal vs vertical scaling",
+  "body": "What is horizontal scaling?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Adding more CPU and RAM to one server",
+    "c": false,
+    "e": "That is vertical scaling."
+   },
+   {
+    "t": "Adding more server instances and distributing load across them",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Making the UI wider",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Compressing data",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Scale out by adding instances.",
+  "explanation": "Horizontal scaling improves availability and has no single-machine ceiling, but needs load balancing and stateless or shared-state services.",
+  "reference": null,
+  "tags": [
+   "scalability"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "sd-002",
+  "tech": "system-design",
+  "category": "Scalability",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Stateless services",
+  "body": "Why do stateless application servers make horizontal scaling easier?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "They need no database",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Any instance can handle any request, so load balancers can route freely and instances can be added or removed safely",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "They use less CPU",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "They never fail",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "No session affinity required.",
+  "explanation": "Move session/state to a shared store (Redis, database) or into signed tokens. Sticky sessions are a workaround that hurts balancing and failover.",
+  "reference": null,
+  "tags": [
+   "stateless"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "sd-003",
+  "tech": "system-design",
+  "category": "Caching",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Cache-aside",
+  "body": "In the cache-aside pattern, what happens on a cache miss?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The cache loads data from the database by itself",
+    "c": false,
+    "e": "That is read-through."
+   },
+   {
+    "t": "The application reads from the database, then writes the result into the cache",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The request fails",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The database pushes data to the cache",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "The application loads from the source and populates the cache.",
+  "explanation": "On writes, update the database then invalidate (delete) the cache entry. Combine with TTLs to bound staleness.",
+  "reference": null,
+  "tags": [
+   "caching",
+   "patterns"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "sd-004",
+  "tech": "system-design",
+  "category": "Caching",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Write-through caching",
+  "body": "What characterises a write-through cache?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Writes go only to the cache and are flushed later",
+    "c": false,
+    "e": "That is write-behind/write-back."
+   },
+   {
+    "t": "Each write updates the cache and the backing store synchronously",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The cache is never written",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Writes bypass the cache entirely",
+    "c": false,
+    "e": "That is write-around."
+   }
+  ],
+  "answer": "Synchronous writes to both cache and store.",
+  "explanation": "Write-through keeps the cache fresh at the cost of write latency; write-behind is faster but risks data loss if the cache fails before flushing.",
+  "reference": null,
+  "tags": [
+   "caching"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "sd-005",
+  "tech": "system-design",
+  "category": "Caching",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Cache stampede",
+  "body": "A hot cache key expires and thousands of concurrent requests hit the database at once. Which mitigation helps most directly?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Disable caching",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Request coalescing / single-flight locking so one request rebuilds the value while others wait or serve stale data",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Add more web servers",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Use shorter TTLs",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Coalesce rebuilds (and/or serve stale while revalidating, add TTL jitter).",
+  "explanation": "Other tools: probabilistic early expiration, background refresh of hot keys, and jittered TTLs to avoid synchronised expirations.",
+  "reference": null,
+  "tags": [
+   "caching",
+   "thundering-herd"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "sd-006",
+  "tech": "system-design",
+  "category": "Data & Storage",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "CAP theorem",
+  "body": "According to the CAP theorem, what must a distributed data store choose during a network partition?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Between latency and throughput",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Between consistency and availability",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Between SQL and NoSQL",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Between reads and writes",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Consistency vs availability under partition.",
+  "explanation": "Partitions are unavoidable, so the real choice is CP (refuse some requests to stay consistent) or AP (answer with possibly stale data). PACELC adds the latency/consistency trade-off when there is no partition.",
+  "reference": null,
+  "tags": [
+   "cap-theorem",
+   "consistency"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "sd-007",
+  "tech": "system-design",
+  "category": "Data & Storage",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Sharding hotspots",
+  "body": "What is a common risk of sharding data by a monotonically increasing key such as a timestamp?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Data becomes unsortable",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "All new writes land on the same shard, creating a hotspot",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Joins become faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "No risk",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Write hotspots on the newest shard.",
+  "explanation": "Prefer hashed keys or composite keys (tenant + time) for even distribution; use range sharding only when range scans dominate and load is known.",
+  "reference": null,
+  "tags": [
+   "sharding"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "sd-008",
+  "tech": "system-design",
+  "category": "Data & Storage",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Read replicas",
+  "body": "A user updates their profile and immediately reloads it from a read replica, seeing old data. Why?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Replicas never update",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Asynchronous replication lag: the replica has not applied the write yet",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Browser caching only",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Index corruption",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Replication lag (eventual consistency).",
+  "explanation": "Provide read-your-writes consistency by routing a user's reads to the primary for a short window after writes, or by tracking replication position.",
+  "reference": null,
+  "tags": [
+   "replication",
+   "consistency"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "sd-009",
+  "tech": "system-design",
+  "category": "Messaging & Async",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "At-least-once delivery",
+  "body": "A message queue guarantees at-least-once delivery. What must consumers do?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Nothing",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Be idempotent, because the same message may be delivered more than once",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Process messages in parallel only",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Delete the queue",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Make consumers idempotent.",
+  "explanation": "Deduplicate with message ids stored alongside the effect (or idempotent upserts). Use dead-letter queues for poison messages and the outbox pattern to publish reliably with database changes.",
+  "reference": null,
+  "tags": [
+   "queues",
+   "idempotency"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "sd-010",
+  "tech": "system-design",
+  "category": "Reliability",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Circuit breaker",
+  "body": "What does the circuit breaker pattern do?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Retries forever",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Stops calling a failing dependency for a period after repeated failures, failing fast and allowing it to recover",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Encrypts traffic",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Balances load",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Fail fast after repeated failures, then probe (half-open).",
+  "explanation": "States: closed → open (fail fast) → half-open (trial calls). Combine with timeouts, retries with exponential backoff + jitter, and fallbacks.",
+  "reference": null,
+  "tags": [
+   "resilience"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "sd-011",
+  "tech": "system-design",
+  "category": "Reliability",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Token bucket rate limiting",
+  "body": "How does a token bucket rate limiter work?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It rejects every request after the first",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Tokens are added at a fixed rate up to a capacity; each request consumes a token, so short bursts are allowed while the average rate is capped",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It queues requests forever",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It counts requests per day only",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Refill at rate r, burst up to capacity b.",
+  "explanation": "Return HTTP 429 with Retry-After when empty. In a distributed system keep counters in a shared store (e.g. Redis) or enforce limits at the API gateway.",
+  "reference": null,
+  "tags": [
+   "rate-limiting"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "sd-012",
+  "tech": "system-design",
+  "category": "Data & Storage",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Consistent hashing",
+  "body": "Why is consistent hashing used for distributing keys across cache nodes?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It encrypts keys",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "When a node is added or removed only about 1/n of keys move, instead of almost all keys with hash mod n",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It guarantees strong consistency",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It sorts keys",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Minimal key remapping on membership changes.",
+  "explanation": "Virtual nodes smooth the distribution across physical servers. Used by Dynamo-style stores, distributed caches and load balancers.",
+  "reference": null,
+  "tags": [
+   "consistent-hashing"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "sd-013",
+  "tech": "system-design",
+  "category": "Scalability",
+  "type": "ScenarioBased",
+  "difficulty": "Advanced",
+  "title": "Design a URL shortener",
+  "body": "Design a URL shortener handling 100M new links per month and 10:1 read/write ratio. Cover the API, ID generation, storage, caching and scaling.",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "POST /links returns a short code; GET /{code} redirects (301/302). Generate base62 codes from a distributed ID or random 7-char codes with collision checks, store in a key-value store, cache hot codes, and scale reads with CDN/cache.",
+  "explanation": "**Scale:** ~40 writes/s, ~400 reads/s average (plan for 10× peaks); 100M × 12 × ~500 bytes ≈ 600 GB/year.\n**API:** `POST /api/links {url, customAlias?, expiresAt?}` → `{code}`; `GET /{code}` → 301 (cacheable) or 302 (to count clicks).\n**IDs:** base62 of a 64-bit unique id (Snowflake-style or pre-allocated ranges per server) gives 7–8 chars without collisions; random codes need a uniqueness check.\n**Storage:** key-value or document store keyed by code (partition by code hash); replicate for availability.\n**Caching:** Redis/CDN for hot codes (reads dominate).\n**Analytics:** emit click events to a queue and aggregate asynchronously so redirects stay fast.\n**Abuse:** rate limiting, malicious URL scanning, expiration.",
+  "reference": "Estimate load and storage; define create/redirect APIs; generate collision-free short codes (base62 of unique ids or random with checks); store mappings in a partitioned, replicated key-value store; cache hot mappings and use 301/302 deliberately; process analytics asynchronously; add rate limiting, abuse detection and expiry.",
+  "tags": [
+   "design-problem"
+  ],
+  "seconds": 900,
+  "premium": true
+ }
+]

@@ -1,0 +1,728 @@
+[
+ {
+  "key": "js-001",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "typeof null",
+  "body": "What does `console.log(typeof null)` print?",
+  "code": "console.log(typeof null);",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "\"null\"",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "\"object\"",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "\"undefined\"",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws a TypeError",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "\"object\" — a long-standing quirk of the language.",
+  "explanation": "`typeof null === 'object'` dates back to the first JavaScript implementation and was kept for compatibility. Check for null with `value === null`.",
+  "reference": null,
+  "tags": [
+   "types"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "js-002",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "== vs ===",
+  "body": "What is the difference between `==` and `===`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "No difference",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`===` compares without type coercion; `==` converts operands to a common type first",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "`==` is faster and preferred",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "`===` compares only references",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Strict equality skips type coercion.",
+  "explanation": "`0 == ''` and `null == undefined` are true, but `0 === ''` is false. Prefer `===`; `== null` is an accepted idiom for checking both null and undefined.",
+  "reference": null,
+  "tags": [
+   "equality"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "js-003",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Floating-point comparison",
+  "body": "What does `console.log(0.1 + 0.2 === 0.3)` print?",
+  "code": "console.log(0.1 + 0.2 === 0.3);",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "true",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "false",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "NaN",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "false — 0.1 + 0.2 is 0.30000000000000004.",
+  "explanation": "Numbers are IEEE-754 doubles, and many decimal fractions are not exactly representable. Compare with a tolerance (`Math.abs(a - b) < Number.EPSILON`) or use integer cents / decimal libraries for money.",
+  "reference": null,
+  "tags": [
+   "numbers"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "js-004",
+  "tech": "javascript",
+  "category": "Closures & Scope",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "var in loops with setTimeout",
+  "body": "What does this print?",
+  "code": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "0 1 2",
+    "c": false,
+    "e": "That is the output with let."
+   },
+   {
+    "t": "3 3 3",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "undefined ×3",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "2 2 2",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "3 3 3",
+  "explanation": "`var` is function-scoped, so all three callbacks close over the **same** `i`, which is 3 when they run. `let` creates a new binding per iteration, printing 0 1 2.",
+  "reference": null,
+  "tags": [
+   "closures",
+   "var-let"
+  ],
+  "seconds": 50,
+  "premium": false
+ },
+ {
+  "key": "js-005",
+  "tech": "javascript",
+  "category": "Closures & Scope",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "What is a closure?",
+  "body": "Which statement best describes a closure?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "A function that has finished executing",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A function bundled with references to the variables of the scope in which it was created, usable after that scope returns",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A private class field",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A way to close browser windows",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A function plus its captured lexical environment.",
+  "explanation": "Closures enable data privacy (module pattern), function factories, memoisation and callbacks that remember state. They keep captured variables alive, which can retain memory unintentionally.",
+  "reference": null,
+  "tags": [
+   "closures"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-006",
+  "tech": "javascript",
+  "category": "Closures & Scope",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Temporal dead zone",
+  "body": "What happens when code reads a `let` variable before its declaration in the same scope?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It returns undefined",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It throws a ReferenceError (temporal dead zone)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It returns null",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It reads the global variable",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "ReferenceError.",
+  "explanation": "`let`, `const` and `class` declarations are hoisted but uninitialised until their declaration runs; access in between throws. `var` is hoisted and initialised to undefined.",
+  "reference": null,
+  "tags": [
+   "hoisting",
+   "tdz"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-007",
+  "tech": "javascript",
+  "category": "Asynchronous JavaScript",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Microtasks vs macrotasks",
+  "body": "What is the output order?",
+  "code": "console.log('A');\nsetTimeout(() => console.log('B'), 0);\nPromise.resolve().then(() => console.log('C'));\nconsole.log('D');",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "A B C D",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A D C B",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A C D B",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A D B C",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A D C B",
+  "explanation": "Synchronous code runs first (A, D). Then the microtask queue (promise callbacks) is drained (C) before the next macrotask (the setTimeout callback, B).",
+  "reference": null,
+  "tags": [
+   "event-loop",
+   "promises"
+  ],
+  "seconds": 60,
+  "premium": false
+ },
+ {
+  "key": "js-008",
+  "tech": "javascript",
+  "category": "Asynchronous JavaScript",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Promise combinators",
+  "body": "Which combinator waits for **all** promises and never rejects?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Promise.all",
+    "c": false,
+    "e": "Rejects as soon as one promise rejects."
+   },
+   {
+    "t": "Promise.race",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Promise.allSettled",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Promise.any",
+    "c": false,
+    "e": "Rejects only if all reject, but resolves on the first success."
+   }
+  ],
+  "answer": "Promise.allSettled.",
+  "explanation": "`allSettled` resolves with `{status: 'fulfilled', value}` / `{status: 'rejected', reason}` objects for each input — ideal when partial failure is acceptable.",
+  "reference": null,
+  "tags": [
+   "promises"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "js-009",
+  "tech": "javascript",
+  "category": "Asynchronous JavaScript",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Return value of async functions",
+  "body": "An `async` function executes `return 5`. What does calling it return?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The number 5",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A Promise that resolves to 5",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "undefined",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A generator",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "A Promise resolved with 5.",
+  "explanation": "Async functions always return promises; thrown errors become rejections. Use `await fn()` or `fn().then(...)` to get the value.",
+  "reference": null,
+  "tags": [
+   "async-await"
+  ],
+  "seconds": 30,
+  "premium": false
+ },
+ {
+  "key": "js-010",
+  "tech": "javascript",
+  "category": "Prototypes & this",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Arrow functions and this",
+  "body": "Which statement about arrow functions is true?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "They create their own `this` based on how they are called",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "They do not have their own `this`; they capture `this` lexically from the enclosing scope",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "`bind` changes an arrow function's `this`",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "They can be used as constructors with new",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Arrow functions use lexical `this`.",
+  "explanation": "That makes them ideal for callbacks inside methods, but unsuitable as object methods that need the receiver, and they have no `arguments` object or `prototype`.",
+  "reference": null,
+  "tags": [
+   "this",
+   "arrow-functions"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "js-011",
+  "tech": "javascript",
+  "category": "Prototypes & this",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Prototype chain lookup",
+  "body": "How does JavaScript resolve `obj.method()` when `method` is not an own property of `obj`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "It throws immediately",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It walks up the prototype chain (`Object.getPrototypeOf`) until it finds the property or reaches null",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It searches the global scope",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "It calls the constructor again",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Prototype chain lookup.",
+  "explanation": "`class` syntax is sugar over prototypes: methods live on `Class.prototype`, shared by all instances. Missing properties resolve to undefined after reaching `Object.prototype`.",
+  "reference": null,
+  "tags": [
+   "prototypes"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-012",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "const objects",
+  "body": "What does `const` guarantee for `const user = { name: 'Ann' }`?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The object can never be changed",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "The binding cannot be reassigned, but the object's properties can still be mutated",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The object is deep-frozen",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Nothing",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "No reassignment; mutation is still allowed.",
+  "explanation": "Use `Object.freeze` for shallow immutability, or immutable update patterns (`{...user, name: 'Bob'}`) as React state requires.",
+  "reference": null,
+  "tags": [
+   "const",
+   "immutability"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "js-013",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Default sort order",
+  "body": "What does `console.log([10, 1, 3].sort())` print?",
+  "code": "console.log([10, 1, 3].sort());",
+  "lang": "javascript",
+  "options": [
+   {
+    "t": "[1, 3, 10]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "[1, 10, 3]",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "[10, 3, 1]",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "[3, 1, 10]",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "[1, 10, 3] — the default sort compares strings.",
+  "explanation": "Without a comparator, elements are converted to strings and compared by UTF-16 code units. Use `arr.sort((a, b) => a - b)` for numbers. `sort` mutates the array; `toSorted()` returns a new one.",
+  "reference": null,
+  "tags": [
+   "arrays",
+   "sorting"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-014",
+  "tech": "javascript",
+  "category": "Browser Internals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Event delegation",
+  "body": "What is event delegation?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Removing all event listeners",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Attaching one listener to a common ancestor and using event bubbling plus event.target to handle events from many children",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Dispatching events to a web worker",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Using setTimeout for events",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "One listener on a parent handles events bubbling from children.",
+  "explanation": "It reduces the number of listeners and automatically covers elements added later. Use `event.target.closest('li')` to find the relevant element.",
+  "reference": null,
+  "tags": [
+   "dom",
+   "events"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-015",
+  "tech": "javascript",
+  "category": "Browser Internals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Reflow vs repaint",
+  "body": "Which style change typically triggers **layout (reflow)** rather than only a repaint?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "color",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "background-color",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "width",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "outline-color",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Changing width changes geometry, forcing layout.",
+  "explanation": "Geometry changes (width, height, margins, font-size, adding DOM nodes) trigger layout, then paint and composite. `transform` and `opacity` can often be handled by the compositor alone, which is why they are preferred for animations.",
+  "reference": null,
+  "tags": [
+   "rendering",
+   "performance"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "js-016",
+  "tech": "javascript",
+  "category": "Browser Internals",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Cookies vs Web Storage",
+  "body": "Which browser storage mechanism is automatically sent to the server with matching HTTP requests?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "localStorage",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "sessionStorage",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Cookies",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "IndexedDB",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Cookies.",
+  "explanation": "Cookies travel with every matching request (keep them small; use HttpOnly, Secure and SameSite for session cookies). localStorage/sessionStorage are only readable by JavaScript and vulnerable to theft via XSS, so avoid storing tokens there.",
+  "reference": null,
+  "tags": [
+   "storage",
+   "cookies"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "js-017",
+  "tech": "javascript",
+  "category": "JavaScript Fundamentals",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Debounce vs throttle",
+  "body": "Which describes **debouncing** an input handler?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Run the handler at most once every N ms",
+    "c": false,
+    "e": "That is throttling."
+   },
+   {
+    "t": "Delay the handler until N ms have passed without another event",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Run the handler twice",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Cancel the event",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Debounce waits for a pause; throttle limits frequency.",
+  "explanation": "Debounce suits search-as-you-type (fire after the user stops typing). Throttle suits scroll/resize handlers that should run periodically during continuous events.",
+  "reference": null,
+  "tags": [
+   "performance"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "js-018",
+  "tech": "javascript",
+  "category": "Asynchronous JavaScript",
+  "type": "WrittenAnswer",
+  "difficulty": "Intermediate",
+  "title": "Explain the event loop",
+  "body": "Explain how the JavaScript event loop works, including the call stack, the task (macrotask) queue and the microtask queue.",
+  "code": null,
+  "lang": null,
+  "options": [],
+  "answer": "Synchronous code runs on the call stack; when it empties, all microtasks run, then one macrotask, repeating (with rendering between tasks in browsers).",
+  "explanation": "JavaScript runs on a single thread with a **call stack**. Async APIs (timers, network, DOM events) are handled by the host and queue callbacks when ready. When the stack is empty the event loop: (1) drains the **microtask queue** (promise reactions, `queueMicrotask`, MutationObserver) completely; (2) the browser may render; (3) takes the next **macrotask** (setTimeout, I/O, UI events) and repeats. Long synchronous work blocks rendering and input — split it up or move it to a Web Worker.",
+  "reference": "The call stack executes synchronous code; asynchronous host APIs enqueue callbacks. When the stack is empty the event loop drains all microtasks (promise callbacks), allows rendering, then processes one macrotask (timers, I/O, events) and repeats. Microtasks run before the next macrotask, so promise callbacks run before setTimeout(0). Blocking the stack freezes the UI.",
+  "tags": [
+   "event-loop"
+  ],
+  "seconds": 240,
+  "premium": false
+ }
+]

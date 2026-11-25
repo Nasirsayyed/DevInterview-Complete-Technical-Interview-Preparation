@@ -1,0 +1,293 @@
+[
+ {
+  "key": "os-001",
+  "tech": "cs-fundamentals",
+  "category": "Operating Systems",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "Processes vs threads",
+  "body": "Which statement about processes and threads is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Threads have separate address spaces",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Threads of the same process share its address space and resources; processes are isolated from each other",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Processes are lighter than threads",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "A process can have only one thread",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Threads share memory within a process.",
+  "explanation": "Shared memory makes inter-thread communication cheap but requires synchronisation; processes communicate via IPC and offer stronger isolation.",
+  "reference": null,
+  "tags": [
+   "processes",
+   "threads"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "os-002",
+  "tech": "cs-fundamentals",
+  "category": "Operating Systems",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Deadlock conditions",
+  "body": "Which is **not** one of the four necessary (Coffman) conditions for deadlock?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Mutual exclusion",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Hold and wait",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Circular wait",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Starvation",
+    "c": true,
+    "e": null
+   }
+  ],
+  "answer": "Starvation.",
+  "explanation": "The four conditions are mutual exclusion, hold and wait, no preemption and circular wait. Preventing any one (e.g. acquiring locks in a global order to avoid circular wait) prevents deadlock.",
+  "reference": null,
+  "tags": [
+   "deadlock"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "os-003",
+  "tech": "cs-fundamentals",
+  "category": "Operating Systems",
+  "type": "MultipleChoice",
+  "difficulty": "Advanced",
+  "title": "Page faults",
+  "body": "What triggers a page fault in a virtual memory system?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Writing to disk",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Accessing a virtual page that is not currently mapped to a physical frame (e.g. not yet loaded or swapped out)",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "A CPU cache miss",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Deleting a file",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Accessing an unmapped page.",
+  "explanation": "The OS handles it by loading the page (minor faults need no disk I/O). Excessive major faults cause thrashing.",
+  "reference": null,
+  "tags": [
+   "virtual-memory"
+  ],
+  "seconds": 45,
+  "premium": false
+ },
+ {
+  "key": "nw-001",
+  "tech": "cs-fundamentals",
+  "category": "Computer Networks",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "TCP vs UDP",
+  "body": "Which statement about TCP and UDP is correct?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "UDP guarantees ordered delivery",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "TCP is connection-oriented with reliable, ordered delivery and flow control; UDP is connectionless with no delivery guarantees",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "TCP is always faster",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "UDP requires a handshake",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "TCP = reliable stream; UDP = best-effort datagrams.",
+  "explanation": "UDP suits latency-sensitive traffic (games, voice, DNS); QUIC (HTTP/3) builds reliability and encryption on top of UDP.",
+  "reference": null,
+  "tags": [
+   "tcp",
+   "udp"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "nw-002",
+  "tech": "cs-fundamentals",
+  "category": "Computer Networks",
+  "type": "MultipleChoice",
+  "difficulty": "Beginner",
+  "title": "First step loading a website",
+  "body": "When a browser loads `https://example.com` for the first time, what must happen before a TCP connection can be opened?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "The TLS handshake",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "DNS resolution of example.com to an IP address",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "The HTTP response",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Rendering the page",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "DNS lookup.",
+  "explanation": "Order: DNS → TCP handshake → TLS handshake → HTTP request/response → parsing and rendering (plus caching at each step).",
+  "reference": null,
+  "tags": [
+   "dns",
+   "http"
+  ],
+  "seconds": 35,
+  "premium": false
+ },
+ {
+  "key": "nw-003",
+  "tech": "cs-fundamentals",
+  "category": "Computer Networks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "Purpose of the TLS handshake",
+  "body": "What does the TLS handshake accomplish?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Compresses the page",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Authenticates the server via its certificate and establishes shared session keys for encryption",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "Resolves DNS",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Caches cookies",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Authentication + key agreement.",
+  "explanation": "Certificates are validated against trusted CAs and the hostname. TLS 1.3 completes in one round trip and supports 0-RTT resumption.",
+  "reference": null,
+  "tags": [
+   "tls",
+   "https"
+  ],
+  "seconds": 40,
+  "premium": false
+ },
+ {
+  "key": "nw-004",
+  "tech": "cs-fundamentals",
+  "category": "Computer Networks",
+  "type": "MultipleChoice",
+  "difficulty": "Intermediate",
+  "title": "HTTP/2 multiplexing",
+  "body": "What is a key improvement of HTTP/2 over HTTP/1.1?",
+  "code": null,
+  "lang": null,
+  "options": [
+   {
+    "t": "Plain-text headers",
+    "c": false,
+    "e": null
+   },
+   {
+    "t": "Multiplexing many concurrent requests over one connection, reducing head-of-line blocking at the HTTP layer",
+    "c": true,
+    "e": null
+   },
+   {
+    "t": "It removes TCP",
+    "c": false,
+    "e": "HTTP/3 uses QUIC over UDP."
+   },
+   {
+    "t": "It disables caching",
+    "c": false,
+    "e": null
+   }
+  ],
+  "answer": "Multiplexed streams over a single connection (plus header compression).",
+  "explanation": "TCP-level head-of-line blocking remains, which HTTP/3 addresses with QUIC.",
+  "reference": null,
+  "tags": [
+   "http2"
+  ],
+  "seconds": 40,
+  "premium": false
+ }
+]
