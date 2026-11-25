@@ -21,5 +21,10 @@ dependencyResolutionManagement {
 rootProject.name = "DevInterview"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":core:common", ":core:designsystem", ":core:network", ":core:database", ":core:datastore", ":core:navigation", ":core:testing")
-include(":domain", ":data")
+include(":app")
+include(":core:common", ":core:designsystem", ":core:network", ":core:database", ":core:datastore", ":core:navigation")
+include(":domain", ":data", ":core:testing")
+include(
+    ":feature:auth", ":feature:dashboard", ":feature:questions", ":feature:quiz", ":feature:coding", ":feature:mockinterview",
+    ":feature:learning", ":feature:flashcards", ":feature:analytics", ":feature:profile", ":feature:settings"
+)

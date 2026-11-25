@@ -368,11 +368,15 @@ fun Refreshable(refreshing: Boolean, onRefresh: () -> Unit, modifier: Modifier =
     PullToRefreshBox(isRefreshing = refreshing, onRefresh = onRefresh, modifier = modifier, content = content)
 }
 
+/** Base URL of the API, used to resolve server-relative media paths such as uploaded profile photos. */
+val LocalApiBaseUrl = androidx.compose.runtime.staticCompositionLocalOf { "" }
+
 @Composable
 fun Avatar(name: String, photoUrl: String?, modifier: Modifier = Modifier, size: Dp = 44.dp) {
     if (!photoUrl.isNullOrBlank()) {
+        val base = LocalApiBaseUrl.current
         coil3.compose.AsyncImage(
-            model = photoUrl, contentDescription = "Profile photo of $name",
+            model = if (photoUrl.startsWith("/")) base.trimEnd('/') + photoUrl else photoUrl, contentDescription = "Profile photo of $name",
             modifier = modifier.size(size).clip(CircleShape), contentScale = androidx.compose.ui.layout.ContentScale.Crop,
         )
     } else {

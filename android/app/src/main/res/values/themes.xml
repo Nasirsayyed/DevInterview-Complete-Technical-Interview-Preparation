@@ -1,0 +1,12 @@
+<resources>
+    <style name="Theme.DevInterview" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+    <style name="Theme.DevInterview.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/brand</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.DevInterview</item>
+    </style>
+</resources>

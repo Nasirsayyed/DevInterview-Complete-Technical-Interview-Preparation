@@ -12,7 +12,7 @@ namespace DevInterview.Application.Features.Subscriptions;
 
 public sealed record VerifiedPurchase(
     string ProductId, string? BasePlanId, SubscriptionStatus Status, DateTime StartsAt, DateTime ExpiresAt, bool AutoRenewing,
-    string? OrderId, bool NeedsAcknowledgement);
+    string? OrderId, bool NeedsAcknowledgement, string? ObfuscatedAccountId = null);
 
 /// <summary>Server-side purchase verification (e.g. Google Play Developer API). Never trusts client claims.</summary>
 public interface IPurchaseVerifier
@@ -90,6 +90,10 @@ public sealed class SubscriptionService : ISubscriptionService
         var plan = await _db.SubscriptionPlans.FirstOrDefaultAsync(p => p.GooglePlayProductId == verified.ProductId &&
                        (verified.BasePlanId == null || p.GooglePlayBasePlanId == null || p.GooglePlayBasePlanId == verified.BasePlanId), ct)
                    ?? throw new ValidationAppException("This product is not a DevInterview plan.");
+
+        // The app launches checkout with the user's id as the obfuscated account id; a token bought by another account is rejected.
+        if (verified.ObfuscatedAccountId is { Length: > 0 } owner && !string.Equals(owner, userId.ToString(), StringComparison.OrdinalIgnoreCase))
+            throw new ConflictException("This purchase belongs to a different DevInterview account.");
 
         var hash = _hasher.HashToken(request.PurchaseToken);
         var existing = await _db.UserSubscriptions.FirstOrDefaultAsync(s => s.PurchaseTokenHash == hash, ct);

@@ -128,12 +128,15 @@ class SettingsStore @Inject constructor(@Named("settings") private val dataStore
     val notificationsEnabled: Flow<Boolean> = dataStore.data.map { it[NOTIFICATIONS] ?: true }
     val lastSyncedAt: Flow<Long?> = dataStore.data.map { it[LAST_SYNC] }
     val lastPullCursor: Flow<String?> = dataStore.data.map { it[PULL_CURSOR] }
+    /** Id of the account whose data is cached locally; used to wipe the cache when a different account signs in. */
+    val cachedUserId: Flow<String?> = dataStore.data.map { it[CACHED_USER] }
 
     suspend fun setTheme(mode: String) = dataStore.edit { it[THEME] = mode }
     suspend fun setOnboardingCompleted() = dataStore.edit { it[ONBOARDING] = true }
     suspend fun setNotificationsEnabled(enabled: Boolean) = dataStore.edit { it[NOTIFICATIONS] = enabled }
     suspend fun setSynced(at: Long, cursor: String) = dataStore.edit { it[LAST_SYNC] = at; it[PULL_CURSOR] = cursor }
     suspend fun clearSync() = dataStore.edit { it.remove(LAST_SYNC); it.remove(PULL_CURSOR) }
+    suspend fun setCachedUserId(id: String?) = dataStore.edit { if (id == null) it.remove(CACHED_USER) else it[CACHED_USER] = id }
 
     private companion object {
         val THEME = stringPreferencesKey("theme")
@@ -141,6 +144,7 @@ class SettingsStore @Inject constructor(@Named("settings") private val dataStore
         val NOTIFICATIONS = booleanPreferencesKey("notifications_enabled")
         val LAST_SYNC = longPreferencesKey("last_sync")
         val PULL_CURSOR = stringPreferencesKey("pull_cursor")
+        val CACHED_USER = stringPreferencesKey("cached_user_id")
     }
 }
 

@@ -70,7 +70,8 @@ public sealed class GooglePlayPurchaseVerifier : IPurchaseVerifier
         };
         return new VerifiedPurchase(line.ProductId, line.OfferDetails?.BasePlanId, status, starts, expires,
             line.AutoRenewingPlan?.AutoRenewEnabled ?? false, line.LatestSuccessfulOrderId,
-            purchase.AcknowledgementState == "ACKNOWLEDGEMENT_STATE_PENDING");
+            purchase.AcknowledgementState == "ACKNOWLEDGEMENT_STATE_PENDING",
+            purchase.ExternalAccountIdentifiers?.ObfuscatedExternalAccountId);
     }
 
     public async Task AcknowledgeAsync(string productId, string purchaseToken, CancellationToken ct)

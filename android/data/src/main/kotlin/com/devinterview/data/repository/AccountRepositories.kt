@@ -6,7 +6,12 @@ import com.devinterview.core.datastore.SettingsStore
 import com.devinterview.core.network.*
 import com.devinterview.domain.model.*
 import com.devinterview.domain.repository.*
+import com.devinterview.core.common.IoDispatcher
+import com.devinterview.core.database.DevInterviewDatabase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonElement
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -21,14 +26,29 @@ class AuthRepositoryImpl @Inject constructor(
     private val users: UserApi,
     private val engagement: EngagementApi,
     private val settings: SettingsStore,
+    private val database: DevInterviewDatabase,
+    @IoDispatcher private val io: CoroutineDispatcher,
 ) : AuthRepository {
     private val device = "${Build.MANUFACTURER} ${Build.MODEL}".take(100)
 
     override val currentUser: Flow<UserSummary?> = session.user
 
     private suspend fun store(result: AppResult<AuthSession>): AppResult<UserSummary> = when (result) {
-        is AppResult.Success -> { session.save(result.data); AppResult.Success(result.data.user) }
+        is AppResult.Success -> { onSignedIn(result.data); AppResult.Success(result.data.user) }
         is AppResult.Failure -> result
+    }
+
+    /** Offline data belongs to one account: wipe it if a different account signs in on this device. */
+    private suspend fun onSignedIn(auth: AuthSession) {
+        val previous = settings.cachedUserId.first()
+        if (previous != null && previous != auth.user.id) clearLocalData()
+        session.save(auth)
+        settings.setCachedUserId(auth.user.id)
+    }
+
+    private suspend fun clearLocalData() {
+        withContext(io) { database.clearAllTables() }
+        settings.clearSync()
     }
 
     override suspend fun login(email: String, password: String) = store(apiCall { api.login(LoginBody(email.trim(), password, device)) })
@@ -36,7 +56,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun register(form: RegistrationForm): AppResult<RegisterResult> {
         val result = apiCall { api.register(form.copy(email = form.email.trim())) }
-        if (result is AppResult.Success) result.data.tokens?.let { session.save(it) }
+        if (result is AppResult.Success) result.data.tokens?.let { onSignedIn(it) }
         return result
     }
 
@@ -55,7 +75,8 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout(allDevices: Boolean) {
         session.current()?.let { apiUnit { api.logout(LogoutBody(it.refreshToken, allDevices)) } }
         session.clear()
-        settings.clearSync()
+        clearLocalData()
+        settings.setCachedUserId(null)
     }
 
     override suspend fun refreshUser(): AppResult<UserSummary> {

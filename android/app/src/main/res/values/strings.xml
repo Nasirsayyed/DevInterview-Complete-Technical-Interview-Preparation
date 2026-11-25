@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DevInterview</string>
+    <string name="notification_channel_reminders">Practice &amp; interview reminders</string>
+    <string name="notification_channel_reminders_description">Daily practice, streak and upcoming interview reminders</string>
+</resources>
