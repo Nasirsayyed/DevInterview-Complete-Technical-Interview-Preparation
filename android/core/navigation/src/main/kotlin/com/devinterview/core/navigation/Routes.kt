@@ -86,9 +86,12 @@ object Routes {
     @Serializable data object Help
 }
 
-/** Navigates to a top-level destination clearing intermediate history. */
+/**
+ * Navigates to a top-level tab, keeping one entry per tab. History is anchored at Home (the root after sign-in), not at
+ * the graph's start destination, because Splash/Login are removed from the back stack once the user is signed in.
+ */
 fun NavController.navigateTopLevel(route: Any) = navigate(route) {
-    popUpTo(graph.startDestinationId) { saveState = true }
+    popUpTo<Routes.Home> { saveState = true }
     launchSingleTop = true
     restoreState = true
 }
