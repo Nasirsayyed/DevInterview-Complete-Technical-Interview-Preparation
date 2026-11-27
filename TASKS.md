@@ -62,6 +62,8 @@ Status legend: `[ ]` not started · `[~]` in progress / partially verified · `[
 - [x] Docs: Architecture, DatabaseDesign, API_Documentation (generated endpoint inventory), SetupGuide, DeploymentGuide, UserGuide
 - [x] Scripts: DatabaseSetup (local SQL Server, migrations, idempotent script), SeedData generators + packs, smoke test
 - [x] GitHub Actions CI (backend with SQL Server service, Android, admin)
+- [x] Android ↔ API contract checks: all 98 client routes exist, 34 request bodies match field-for-field, 50 captured live responses decode (`ApiContractTest`)
+- [x] Android release build with R8 minification (unsigned APK) builds
 - [~] Container images: API build stage verified; API runtime layer (deb.debian.org blocked by network policy) and admin image (Docker Hub 429) not built here
 - [~] Android instrumented/device testing — not run (no emulator here); JVM + Robolectric tests pass
 
