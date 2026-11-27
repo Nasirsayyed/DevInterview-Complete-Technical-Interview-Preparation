@@ -28,6 +28,9 @@ public static class DependencyInjection
 
         var databaseProvider = configuration["Database:Provider"] ?? "SqlServer";
         var connectionString = configuration.GetConnectionString("Default");
+        if (string.IsNullOrWhiteSpace(connectionString))
+            throw new InvalidOperationException(
+                "ConnectionStrings:Default is not set. Use user-secrets locally (see docs/SetupGuide.md) or the ConnectionStrings__Default environment variable.");
         services.AddDbContext<AppDbContext>(options =>
         {
             if (databaseProvider.Equals("Sqlite", StringComparison.OrdinalIgnoreCase))
